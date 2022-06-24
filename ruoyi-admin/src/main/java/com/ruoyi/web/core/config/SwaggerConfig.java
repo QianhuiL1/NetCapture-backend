@@ -24,7 +24,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * Swagger2的接口配置
- * 
+ *
  * @author ruoyi
  */
 @Configuration
@@ -39,8 +39,8 @@ public class SwaggerConfig
     private boolean enabled;
 
     /** 设置请求的统一前缀 */
-    @Value("${swagger.pathMapping}")
-    private String pathMapping;
+    //@Value("${swagger.pathMapping}")
+    //private String pathMapping;
 
     /**
      * 创建API
@@ -64,9 +64,10 @@ public class SwaggerConfig
                 .build()
                 /* 设置安全模式，swagger可以设置访问token */
                 .securitySchemes(securitySchemes())
-                .securityContexts(securityContexts())
-                .pathMapping(pathMapping);
+                .securityContexts(securityContexts());
+                //.pathMapping(pathMapping);
     }
+
 
     /**
      * 安全模式，这里指定token通过Authorization头请求头传递
@@ -115,11 +116,12 @@ public class SwaggerConfig
                 // 设置标题
                 .title("标题：若依管理系统_接口文档")
                 // 描述
-                .description("描述：用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...")
+                .description("描述：idfs项目开发")
                 // 作者信息
                 .contact(new Contact(ruoyiConfig.getName(), null, null))
                 // 版本
                 .version("版本号:" + ruoyiConfig.getVersion())
                 .build();
     }
+
 }
