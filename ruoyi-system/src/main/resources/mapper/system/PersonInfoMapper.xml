@@ -30,6 +30,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
 
+    <select id="selectPersonInfoListByStatus" parameterType="String" resultMap="PersonInfoResult">
+        <include refid="selectPersonInfoVo"/>
+        where status = #{status}
+    </select>
+
     <select id="selectPersonInfoByPeopleId" parameterType="String" resultMap="PersonInfoResult">
         <include refid="selectPersonInfoVo"/>
         where people_id = #{peopleId}

@@ -43,6 +43,12 @@ public class PersonInfoServiceImpl implements IPersonInfoService
         return personInfoMapper.selectPersonInfoList(personInfo);
     }
 
+    @Override
+    public List<PersonInfo> selectPersonInfoListByStatus(String status)
+    {
+        return personInfoMapper.selectPersonInfoListByStatus(status);
+    }
+
     /**
      * 新增存储普通人员的相关信息
      * 

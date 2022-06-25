@@ -28,6 +28,13 @@ public interface IPersonInfoService
     public List<PersonInfo> selectPersonInfoList(PersonInfo personInfo);
 
     /**
+     * 根据某一特定健康类型查询存储普通人员的相关信息列表
+     *
+     * @param status
+     * @return 某一状态的储普通人员的相关信息集合
+     */
+    public List<PersonInfo> selectPersonInfoListByStatus(String status);
+    /**
      * 新增存储普通人员的相关信息
      * 
      * @param personInfo 存储普通人员的相关信息

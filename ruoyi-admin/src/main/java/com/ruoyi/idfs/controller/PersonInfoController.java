@@ -77,6 +77,18 @@ public class PersonInfoController extends BaseController
     }
 
     /**
+     * 获取某一状态的相关人员信息列表
+     */
+    @ApiOperation("获取某一状态的相关人员信息列表")
+    @PreAuthorize("@ss.hasPermi('idfs:personInfo:statuslist')")
+    @GetMapping(value = "/statuslist/{status}")
+    public TableDataInfo statuslist(@PathVariable("status") String status)
+    {
+        startPage();
+        return getDataTable(personInfoService.selectPersonInfoListByStatus(status));
+    }
+
+    /**
      * 新增存储普通人员的相关信息
      */
     @ApiOperation("新增存储普通人员的相关信息")
