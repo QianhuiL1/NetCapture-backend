@@ -1,11 +1,11 @@
-package com.ruoyi.idfs.service.impl;
+package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.idfs.mapper.PositiveTravelMapper;
-import com.ruoyi.idfs.domain.PositiveTravel;
-import com.ruoyi.idfs.service.IPositiveTravelService;
+import com.ruoyi.system.mapper.PositiveTravelMapper;
+import com.ruoyi.system.domain.PositiveTravel;
+import com.ruoyi.system.service.IPositiveTravelService;
 
 /**
  * 阳性人员途径地址信息Service业务层处理

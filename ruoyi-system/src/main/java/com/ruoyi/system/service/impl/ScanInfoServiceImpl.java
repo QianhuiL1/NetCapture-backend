@@ -1,11 +1,11 @@
-package com.ruoyi.idfs.service.impl;
+package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.idfs.mapper.ScanInfoMapper;
-import com.ruoyi.idfs.domain.ScanInfo;
-import com.ruoyi.idfs.service.IScanInfoService;
+import com.ruoyi.system.mapper.ScanInfoMapper;
+import com.ruoyi.system.domain.ScanInfo;
+import com.ruoyi.system.service.IScanInfoService;
 
 /**
  * 扫码记录Service业务层处理

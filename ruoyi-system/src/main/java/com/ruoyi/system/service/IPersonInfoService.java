@@ -1,7 +1,7 @@
-package com.ruoyi.idfs.service;
+package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.idfs.domain.PersonInfo;
+import com.ruoyi.system.domain.PersonInfo;
 
 /**
  * 存储普通人员的相关信息Service接口

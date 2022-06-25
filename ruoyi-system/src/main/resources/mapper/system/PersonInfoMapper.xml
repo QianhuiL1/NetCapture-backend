@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.idfs.mapper.PersonInfoMapper">
+<mapper namespace="com.ruoyi.system.mapper.PersonInfoMapper">
     
     <resultMap type="PersonInfo" id="PersonInfoResult">
         <result property="peopleId"    column="people_id"    />
@@ -29,11 +29,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="address != null  and address != ''"> and address = #{address}</if>
         </where>
     </select>
-    
+
     <select id="selectPersonInfoByPeopleId" parameterType="String" resultMap="PersonInfoResult">
         <include refid="selectPersonInfoVo"/>
         where people_id = #{peopleId}
     </select>
+
         
     <insert id="insertPersonInfo" parameterType="PersonInfo">
         insert into people_table
