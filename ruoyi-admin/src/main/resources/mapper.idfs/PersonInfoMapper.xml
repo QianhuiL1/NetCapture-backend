@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.idfs.mapper.PeopleTableMapper">
-
-    <resultMap type="PeopleTable" id="PeopleTableResult">
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.idfs.mapper.PersonInfoMapper">
+    
+    <resultMap type="PersonInfo" id="PersonInfoResult">
         <result property="peopleId"    column="people_id"    />
         <result property="name"    column="name"    />
         <result property="sex"    column="sex"    />
@@ -14,13 +14,13 @@
         <result property="address"    column="address"    />
     </resultMap>
 
-    <sql id="selectPeopleTableVo">
+    <sql id="selectPersonInfoVo">
         select people_id, name, sex, phonenumber, status, ancestors, address from people_table
     </sql>
 
-    <select id="selectPeopleTableList" parameterType="PeopleTable" resultMap="PeopleTableResult">
-        <include refid="selectPeopleTableVo"/>
-        <where>
+    <select id="selectPersonInfoList" parameterType="PersonInfo" resultMap="PersonInfoResult">
+        <include refid="selectPersonInfoVo"/>
+        <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
             <if test="phonenumber != null  and phonenumber != ''"> and phonenumber = #{phonenumber}</if>
@@ -29,13 +29,13 @@
             <if test="address != null  and address != ''"> and address = #{address}</if>
         </where>
     </select>
-
-    <select id="selectPeopleTableByPeopleId" parameterType="String" resultMap="PeopleTableResult">
-        <include refid="selectPeopleTableVo"/>
+    
+    <select id="selectPersonInfoByPeopleId" parameterType="String" resultMap="PersonInfoResult">
+        <include refid="selectPersonInfoVo"/>
         where people_id = #{peopleId}
     </select>
-
-    <insert id="insertPeopleTable" parameterType="PeopleTable">
+        
+    <insert id="insertPersonInfo" parameterType="PersonInfo">
         insert into people_table
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="peopleId != null">people_id,</if>
@@ -45,7 +45,7 @@
             <if test="status != null">status,</if>
             <if test="ancestors != null and ancestors != ''">ancestors,</if>
             <if test="address != null">address,</if>
-        </trim>
+         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="peopleId != null">#{peopleId},</if>
             <if test="name != null and name != ''">#{name},</if>
@@ -54,10 +54,10 @@
             <if test="status != null">#{status},</if>
             <if test="ancestors != null and ancestors != ''">#{ancestors},</if>
             <if test="address != null">#{address},</if>
-        </trim>
+         </trim>
     </insert>
 
-    <update id="updatePeopleTable" parameterType="PeopleTable">
+    <update id="updatePersonInfo" parameterType="PersonInfo">
         update people_table
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null and name != ''">name = #{name},</if>
@@ -70,12 +70,12 @@
         where people_id = #{peopleId}
     </update>
 
-    <delete id="deletePeopleTableByPeopleId" parameterType="String">
+    <delete id="deletePersonInfoByPeopleId" parameterType="String">
         delete from people_table where people_id = #{peopleId}
     </delete>
 
-    <delete id="deletePeopleTableByPeopleIds" parameterType="String">
-        delete from people_table where people_id in
+    <delete id="deletePersonInfoByPeopleIds" parameterType="String">
+        delete from people_table where people_id in 
         <foreach item="peopleId" collection="array" open="(" separator="," close=")">
             #{peopleId}
         </foreach>

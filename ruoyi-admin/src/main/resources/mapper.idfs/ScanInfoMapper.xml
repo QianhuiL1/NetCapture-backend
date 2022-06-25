@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.idfs.mapper.ScanInfoMapper">
+    
+    <resultMap type="ScanInfo" id="ScanInfoResult">
+        <result property="scanId"    column="scan_id"    />
+        <result property="peopleId"    column="people_id"    />
+        <result property="time"    column="time"    />
+        <result property="address"    column="address"    />
+    </resultMap>
+
+    <sql id="selectScanInfoVo">
+        select scan_id, people_id, time, address from scan_table
+    </sql>
+
+    <select id="selectScanInfoList" parameterType="ScanInfo" resultMap="ScanInfoResult">
+        <include refid="selectScanInfoVo"/>
+        <where>  
+            <if test="peopleId != null  and peopleId != ''"> and people_id = #{peopleId}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+        </where>
+    </select>
+    
+    <select id="selectScanInfoByScanId" parameterType="Long" resultMap="ScanInfoResult">
+        <include refid="selectScanInfoVo"/>
+        where scan_id = #{scanId}
+    </select>
+        
+    <insert id="insertScanInfo" parameterType="ScanInfo" useGeneratedKeys="true" keyProperty="scanId">
+        insert into scan_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="peopleId != null and peopleId != ''">people_id,</if>
+            <if test="time != null">time,</if>
+            <if test="address != null and address != ''">address,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="peopleId != null and peopleId != ''">#{peopleId},</if>
+            <if test="time != null">#{time},</if>
+            <if test="address != null and address != ''">#{address},</if>
+         </trim>
+    </insert>
+
+    <update id="updateScanInfo" parameterType="ScanInfo">
+        update scan_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="peopleId != null and peopleId != ''">people_id = #{peopleId},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+        </trim>
+        where scan_id = #{scanId}
+    </update>
+
+    <delete id="deleteScanInfoByScanId" parameterType="Long">
+        delete from scan_table where scan_id = #{scanId}
+    </delete>
+
+    <delete id="deleteScanInfoByScanIds" parameterType="String">
+        delete from scan_table where scan_id in 
+        <foreach item="scanId" collection="array" open="(" separator="," close=")">
+            #{scanId}
+        </foreach>
+    </delete>
+</mapper>

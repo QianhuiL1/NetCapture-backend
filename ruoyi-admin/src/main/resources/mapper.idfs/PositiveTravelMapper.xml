@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.idfs.mapper.PositiveTravelMapper">
+    
+    <resultMap type="PositiveTravel" id="PositiveTravelResult">
+        <result property="travelId"    column="travel_id"    />
+        <result property="recordId"    column="record_id"    />
+        <result property="arriveTime"    column="arrive_time"    />
+        <result property="leftTime"    column="left_time"    />
+        <result property="address"    column="address"    />
+    </resultMap>
+
+    <sql id="selectPositiveTravelVo">
+        select travel_id, record_id, arrive_time, left_time, address from positive_travel
+    </sql>
+
+    <select id="selectPositiveTravelList" parameterType="PositiveTravel" resultMap="PositiveTravelResult">
+        <include refid="selectPositiveTravelVo"/>
+        <where>  
+            <if test="recordId != null "> and record_id = #{recordId}</if>
+            <if test="arriveTime != null "> and arrive_time = #{arriveTime}</if>
+            <if test="leftTime != null "> and left_time = #{leftTime}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+        </where>
+    </select>
+    
+    <select id="selectPositiveTravelByTravelId" parameterType="Long" resultMap="PositiveTravelResult">
+        <include refid="selectPositiveTravelVo"/>
+        where travel_id = #{travelId}
+    </select>
+        
+    <insert id="insertPositiveTravel" parameterType="PositiveTravel" useGeneratedKeys="true" keyProperty="travelId">
+        insert into positive_travel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">record_id,</if>
+            <if test="arriveTime != null">arrive_time,</if>
+            <if test="leftTime != null">left_time,</if>
+            <if test="address != null and address != ''">address,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">#{recordId},</if>
+            <if test="arriveTime != null">#{arriveTime},</if>
+            <if test="leftTime != null">#{leftTime},</if>
+            <if test="address != null and address != ''">#{address},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePositiveTravel" parameterType="PositiveTravel">
+        update positive_travel
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recordId != null">record_id = #{recordId},</if>
+            <if test="arriveTime != null">arrive_time = #{arriveTime},</if>
+            <if test="leftTime != null">left_time = #{leftTime},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+        </trim>
+        where travel_id = #{travelId}
+    </update>
+
+    <delete id="deletePositiveTravelByTravelId" parameterType="Long">
+        delete from positive_travel where travel_id = #{travelId}
+    </delete>
+
+    <delete id="deletePositiveTravelByTravelIds" parameterType="String">
+        delete from positive_travel where travel_id in 
+        <foreach item="travelId" collection="array" open="(" separator="," close=")">
+            #{travelId}
+        </foreach>
+    </delete>
+</mapper>
