@@ -7,7 +7,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 存储普通人员的相关信息对象 people_table
- * 
+ *
  * @author SoLam
  * @date 2022-06-25
  */
@@ -22,10 +22,8 @@ public class PersonInfo extends BaseEntity
     @Excel(name = "姓名")
     private String name;
 
-    /** 0:女
-1：男 */
-    @Excel(name = "0:女
-1：男")
+    /** 0:女1：男 */
+    @Excel(name = "0:女 1：男")
     private String sex;
 
     /** 手机号码 */
@@ -33,13 +31,10 @@ public class PersonInfo extends BaseEntity
     private String phonenumber;
 
     /** 0：健康
-1：次密接
-2：密接
-3：阳性 */
-    @Excel(name = "0：健康
-1：次密接
-2：密接
-3：阳性")
+        1：次密接
+        2：密接
+        3：阳性 */
+    @Excel(name = "0：健康 1：次密接 2：密接 3：阳性")
     private String status;
 
     /** 祖级列表 */
@@ -50,66 +45,66 @@ public class PersonInfo extends BaseEntity
     @Excel(name = "详细地址")
     private String address;
 
-    public void setPeopleId(String peopleId) 
+    public void setPeopleId(String peopleId)
     {
         this.peopleId = peopleId;
     }
 
-    public String getPeopleId() 
+    public String getPeopleId()
     {
         return peopleId;
     }
-    public void setName(String name) 
+    public void setName(String name)
     {
         this.name = name;
     }
 
-    public String getName() 
+    public String getName()
     {
         return name;
     }
-    public void setSex(String sex) 
+    public void setSex(String sex)
     {
         this.sex = sex;
     }
 
-    public String getSex() 
+    public String getSex()
     {
         return sex;
     }
-    public void setPhonenumber(String phonenumber) 
+    public void setPhonenumber(String phonenumber)
     {
         this.phonenumber = phonenumber;
     }
 
-    public String getPhonenumber() 
+    public String getPhonenumber()
     {
         return phonenumber;
     }
-    public void setStatus(String status) 
+    public void setStatus(String status)
     {
         this.status = status;
     }
 
-    public String getStatus() 
+    public String getStatus()
     {
         return status;
     }
-    public void setAncestors(String ancestors) 
+    public void setAncestors(String ancestors)
     {
         this.ancestors = ancestors;
     }
 
-    public String getAncestors() 
+    public String getAncestors()
     {
         return ancestors;
     }
-    public void setAddress(String address) 
+    public void setAddress(String address)
     {
         this.address = address;
     }
 
-    public String getAddress() 
+    public String getAddress()
     {
         return address;
     }
