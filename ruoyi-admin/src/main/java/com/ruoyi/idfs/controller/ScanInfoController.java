@@ -2,6 +2,9 @@ package com.ruoyi.idfs.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +26,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 扫码记录Controller
- * 
+ *
  * @author SoLam
  * @date 2022-06-25
  */
 @RestController
 @RequestMapping("/idfs/scanInfo")
+@Api(tags = "扫码记录")
 public class ScanInfoController extends BaseController
 {
     @Autowired
@@ -37,6 +41,7 @@ public class ScanInfoController extends BaseController
     /**
      * 查询扫码记录列表
      */
+    @ApiOperation("查询扫码记录列表")
     @PreAuthorize("@ss.hasPermi('idfs:scanInfo:list')")
     @GetMapping("/list")
     public TableDataInfo list(ScanInfo scanInfo)
@@ -49,6 +54,7 @@ public class ScanInfoController extends BaseController
     /**
      * 导出扫码记录列表
      */
+    @ApiOperation("导出扫码记录列表")
     @PreAuthorize("@ss.hasPermi('idfs:scanInfo:export')")
     @Log(title = "扫码记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
@@ -62,6 +68,7 @@ public class ScanInfoController extends BaseController
     /**
      * 获取扫码记录详细信息
      */
+    @ApiOperation("获取扫码记录详细信息")
     @PreAuthorize("@ss.hasPermi('idfs:scanInfo:query')")
     @GetMapping(value = "/{scanId}")
     public AjaxResult getInfo(@PathVariable("scanId") Long scanId)
@@ -72,6 +79,7 @@ public class ScanInfoController extends BaseController
     /**
      * 新增扫码记录
      */
+    @ApiOperation("新增扫码记录")
     @PreAuthorize("@ss.hasPermi('idfs:scanInfo:add')")
     @Log(title = "扫码记录", businessType = BusinessType.INSERT)
     @PostMapping
@@ -83,6 +91,7 @@ public class ScanInfoController extends BaseController
     /**
      * 修改扫码记录
      */
+    @ApiOperation("修改扫码记录")
     @PreAuthorize("@ss.hasPermi('idfs:scanInfo:edit')")
     @Log(title = "扫码记录", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -94,6 +103,7 @@ public class ScanInfoController extends BaseController
     /**
      * 删除扫码记录
      */
+    @ApiOperation("删除扫码记录")
     @PreAuthorize("@ss.hasPermi('idfs:scanInfo:remove')")
     @Log(title = "扫码记录", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{scanIds}")

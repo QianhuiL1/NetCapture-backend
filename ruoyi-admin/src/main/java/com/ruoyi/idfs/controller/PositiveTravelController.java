@@ -1,7 +1,10 @@
 package com.ruoyi.idfs.controller;
 
 import java.util.List;
+import io.swagger.annotations.Api;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +26,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 阳性人员途径地址信息Controller
- * 
+ *
  * @author SoLam
  * @date 2022-06-25
  */
 @RestController
 @RequestMapping("/idfs/positiveTravel")
+@Api(tags = "阳性人员途径地址信息")
 public class PositiveTravelController extends BaseController
 {
     @Autowired
@@ -37,6 +41,7 @@ public class PositiveTravelController extends BaseController
     /**
      * 查询阳性人员途径地址信息列表
      */
+    @ApiOperation("查询阳性人员途径地址信息列表")
     @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:list')")
     @GetMapping("/list")
     public TableDataInfo list(PositiveTravel positiveTravel)
@@ -49,6 +54,7 @@ public class PositiveTravelController extends BaseController
     /**
      * 导出阳性人员途径地址信息列表
      */
+    @ApiOperation("导出阳性人员途径地址信息列表")
     @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:export')")
     @Log(title = "阳性人员途径地址信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
@@ -62,6 +68,7 @@ public class PositiveTravelController extends BaseController
     /**
      * 获取阳性人员途径地址信息详细信息
      */
+    @ApiOperation("获取阳性人员途径地址信息详细信息")
     @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:query')")
     @GetMapping(value = "/{travelId}")
     public AjaxResult getInfo(@PathVariable("travelId") Long travelId)
@@ -72,6 +79,7 @@ public class PositiveTravelController extends BaseController
     /**
      * 新增阳性人员途径地址信息
      */
+    @ApiOperation("新增阳性人员途径地址信息")
     @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:add')")
     @Log(title = "阳性人员途径地址信息", businessType = BusinessType.INSERT)
     @PostMapping
@@ -83,6 +91,7 @@ public class PositiveTravelController extends BaseController
     /**
      * 修改阳性人员途径地址信息
      */
+    @ApiOperation("修改阳性人员途径地址信息")
     @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:edit')")
     @Log(title = "阳性人员途径地址信息", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -94,6 +103,7 @@ public class PositiveTravelController extends BaseController
     /**
      * 删除阳性人员途径地址信息
      */
+    @ApiOperation("删除阳性人员途径地址信息")
     @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:remove')")
     @Log(title = "阳性人员途径地址信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{travelIds}")

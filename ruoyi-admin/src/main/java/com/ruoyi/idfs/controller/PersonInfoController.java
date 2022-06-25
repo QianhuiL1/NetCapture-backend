@@ -2,6 +2,9 @@ package com.ruoyi.idfs.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +26,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 存储普通人员的相关信息Controller
- * 
+ *
  * @author SoLam
  * @date 2022-06-25
  */
 @RestController
 @RequestMapping("/idfs/personInfo")
+@Api(tags = "存储普通人员的相关信息")
 public class PersonInfoController extends BaseController
 {
     @Autowired
@@ -37,6 +41,7 @@ public class PersonInfoController extends BaseController
     /**
      * 查询存储普通人员的相关信息列表
      */
+    @ApiOperation("查询存储普通人员的相关信息列表")
     @PreAuthorize("@ss.hasPermi('idfs:personInfo:list')")
     @GetMapping("/list")
     public TableDataInfo list(PersonInfo personInfo)
@@ -49,6 +54,7 @@ public class PersonInfoController extends BaseController
     /**
      * 导出存储普通人员的相关信息列表
      */
+    @ApiOperation("导出存储普通人员的相关信息列表")
     @PreAuthorize("@ss.hasPermi('idfs:personInfo:export')")
     @Log(title = "存储普通人员的相关信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
@@ -62,6 +68,7 @@ public class PersonInfoController extends BaseController
     /**
      * 获取存储普通人员的相关信息详细信息
      */
+    @ApiOperation("获取存储普通人员的相关信息详细信息")
     @PreAuthorize("@ss.hasPermi('idfs:personInfo:query')")
     @GetMapping(value = "/{peopleId}")
     public AjaxResult getInfo(@PathVariable("peopleId") String peopleId)
@@ -72,6 +79,7 @@ public class PersonInfoController extends BaseController
     /**
      * 新增存储普通人员的相关信息
      */
+    @ApiOperation("新增存储普通人员的相关信息")
     @PreAuthorize("@ss.hasPermi('idfs:personInfo:add')")
     @Log(title = "存储普通人员的相关信息", businessType = BusinessType.INSERT)
     @PostMapping
@@ -83,6 +91,7 @@ public class PersonInfoController extends BaseController
     /**
      * 修改存储普通人员的相关信息
      */
+    @ApiOperation("修改存储普通人员的相关信息")
     @PreAuthorize("@ss.hasPermi('idfs:personInfo:edit')")
     @Log(title = "存储普通人员的相关信息", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -94,6 +103,7 @@ public class PersonInfoController extends BaseController
     /**
      * 删除存储普通人员的相关信息
      */
+    @ApiOperation("删除存储普通人员的相关信息")
     @PreAuthorize("@ss.hasPermi('idfs:personInfo:remove')")
     @Log(title = "存储普通人员的相关信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{peopleIds}")
