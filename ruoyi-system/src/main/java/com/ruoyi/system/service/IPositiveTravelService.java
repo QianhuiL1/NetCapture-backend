@@ -1,7 +1,7 @@
-package com.ruoyi.idfs.service;
+package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.idfs.domain.PositiveTravel;
+import com.ruoyi.system.domain.PositiveTravel;
 
 /**
  * 阳性人员途径地址信息Service接口

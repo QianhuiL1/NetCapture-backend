@@ -1,7 +1,7 @@
-package com.ruoyi.idfs.service;
+package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.idfs.domain.ScanInfo;
+import com.ruoyi.system.domain.ScanInfo;
 
 /**
  * 扫码记录Service接口

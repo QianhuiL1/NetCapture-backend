@@ -1,7 +1,8 @@
-package com.ruoyi.idfs.mapper;
+package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.idfs.domain.PersonInfo;
+import com.ruoyi.system.domain.PersonInfo;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 存储普通人员的相关信息Mapper接口
@@ -9,6 +10,7 @@ import com.ruoyi.idfs.domain.PersonInfo;
  * @author SoLam
  * @date 2022-06-25
  */
+@Mapper
 public interface PersonInfoMapper 
 {
     /**
@@ -19,6 +21,7 @@ public interface PersonInfoMapper
      */
     public PersonInfo selectPersonInfoByPeopleId(String peopleId);
 
+
     /**
      * 查询存储普通人员的相关信息列表
      * 
@@ -26,6 +29,14 @@ public interface PersonInfoMapper
      * @return 存储普通人员的相关信息集合
      */
     public List<PersonInfo> selectPersonInfoList(PersonInfo personInfo);
+
+    /**
+     * 根据某一特定健康类型查询存储普通人员的相关信息列表
+     *
+     * @param status
+     * @return 某一状态的储普通人员的相关信息集合
+     */
+    public List<PersonInfo> selectPersonInfoListByStatus(String status);
 
     /**
      * 新增存储普通人员的相关信息

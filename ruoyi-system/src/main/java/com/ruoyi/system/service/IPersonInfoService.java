@@ -1,7 +1,7 @@
-package com.ruoyi.idfs.service;
+package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.idfs.domain.PersonInfo;
+import com.ruoyi.system.domain.PersonInfo;
 
 /**
  * 存储普通人员的相关信息Service接口
@@ -27,6 +27,13 @@ public interface IPersonInfoService
      */
     public List<PersonInfo> selectPersonInfoList(PersonInfo personInfo);
 
+    /**
+     * 根据某一特定健康类型查询存储普通人员的相关信息列表
+     *
+     * @param status
+     * @return 某一状态的储普通人员的相关信息集合
+     */
+    public List<PersonInfo> selectPersonInfoListByStatus(String status);
     /**
      * 新增存储普通人员的相关信息
      * 

@@ -1,11 +1,11 @@
-package com.ruoyi.idfs.service.impl;
+package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.idfs.mapper.PersonInfoMapper;
-import com.ruoyi.idfs.domain.PersonInfo;
-import com.ruoyi.idfs.service.IPersonInfoService;
+import com.ruoyi.system.mapper.PersonInfoMapper;
+import com.ruoyi.system.domain.PersonInfo;
+import com.ruoyi.system.service.IPersonInfoService;
 
 /**
  * 存储普通人员的相关信息Service业务层处理
@@ -41,6 +41,12 @@ public class PersonInfoServiceImpl implements IPersonInfoService
     public List<PersonInfo> selectPersonInfoList(PersonInfo personInfo)
     {
         return personInfoMapper.selectPersonInfoList(personInfo);
+    }
+
+    @Override
+    public List<PersonInfo> selectPersonInfoListByStatus(String status)
+    {
+        return personInfoMapper.selectPersonInfoListByStatus(status);
     }
 
     /**

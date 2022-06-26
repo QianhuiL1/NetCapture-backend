@@ -1,7 +1,8 @@
-package com.ruoyi.idfs.mapper;
+package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.idfs.domain.PositiveTravel;
+import com.ruoyi.system.domain.PositiveTravel;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 阳性人员途径地址信息Mapper接口
@@ -9,6 +10,7 @@ import com.ruoyi.idfs.domain.PositiveTravel;
  * @author SoLam
  * @date 2022-06-25
  */
+@Mapper
 public interface PositiveTravelMapper 
 {
     /**

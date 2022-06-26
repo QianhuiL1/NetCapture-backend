@@ -1,7 +1,7 @@
-package com.ruoyi.idfs.mapper;
+package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.idfs.domain.ScanInfo;
+import com.ruoyi.system.domain.ScanInfo;
 
 /**
  * 扫码记录Mapper接口
