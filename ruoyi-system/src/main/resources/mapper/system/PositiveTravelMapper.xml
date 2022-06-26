@@ -40,6 +40,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by scan_table.time desc
     </select>
 
+    <update id="updateContactStatusByPositiveTravel" parameterType= "String">
+        update people_table set status = 2
+        where people_id in (select distinct scan_table.people_id from scan_table,positive_travel
+                                where positive_travel.record_id = #{recordId} and
+                                scan_table.address = positive_travel.address)
+            and status != 3
+    </update>
     <select id="selectPositiveTravelByTravelId" parameterType="Long" resultMap="PositiveTravelResult">
         <include refid="selectPositiveTravelVo"/>
         where travel_id = #{travelId}

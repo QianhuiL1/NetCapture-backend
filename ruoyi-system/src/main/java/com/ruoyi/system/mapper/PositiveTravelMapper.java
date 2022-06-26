@@ -37,6 +37,15 @@ public interface PositiveTravelMapper
      * @return 某人次阳性人员扫码记录列表
      */
     public List<ScanInfo> selectPositiveScanListByRecordId(String recordId);
+
+    /**
+     * 根据recordId更新数据库中密切接触者的状态
+     *
+     * @param recordId 某人次记录id
+     * @return 结果
+     */
+    public int updateContactStatusByPositiveTravel(String recordId);
+
     /**
      * 新增阳性人员途径地址信息
      * 

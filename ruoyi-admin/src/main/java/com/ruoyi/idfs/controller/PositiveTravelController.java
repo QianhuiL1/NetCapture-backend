@@ -106,6 +106,17 @@ public class PositiveTravelController extends BaseController
     }
 
     /**
+     * 根据阳性人员途径地址信息更新密切接触者人员状态信息
+     */
+    @ApiOperation("根据阳性人员途径地址信息更新密切接触者人员状态信息")
+    @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:edit')")
+    @Log(title = "人员表", businessType = BusinessType.UPDATE)
+    @PutMapping("updateContact/{recordId}")
+    public AjaxResult updateContactStatusByPositiveTravel(@PathVariable String recordId)
+    {
+        return toAjax(positiveTravelService.updateContactStatusByPositiveTravel(recordId));
+    }
+    /**
      * 修改阳性人员途径地址信息
      */
     @ApiOperation("修改阳性人员途径地址信息")
