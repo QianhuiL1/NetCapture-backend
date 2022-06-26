@@ -31,7 +31,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2022-06-25
  */
 @RestController
-@RequestMapping("/idfs/personInfo")
+@RequestMapping("/personInfo")
 @Api(tags = "存储普通人员的相关信息")
 public class PersonInfoController extends BaseController
 {

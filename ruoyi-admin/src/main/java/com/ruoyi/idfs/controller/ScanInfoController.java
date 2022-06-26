@@ -31,7 +31,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2022-06-25
  */
 @RestController
-@RequestMapping("/idfs/scanInfo")
+@RequestMapping("/scanInfo")
 @Api(tags = "扫码记录")
 public class ScanInfoController extends BaseController
 {

@@ -31,7 +31,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2022-06-25
  */
 @RestController
-@RequestMapping("/idfs/positiveTravel")
+@RequestMapping("/positiveTravel")
 @Api(tags = "阳性人员途径地址信息")
 public class PositiveTravelController extends BaseController
 {
