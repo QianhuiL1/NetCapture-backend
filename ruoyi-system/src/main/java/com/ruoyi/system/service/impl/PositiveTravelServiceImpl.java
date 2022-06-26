@@ -1,6 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.system.domain.ScanInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.PositiveTravelMapper;
@@ -41,6 +43,17 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
     public List<PositiveTravel> selectPositiveTravelList(PositiveTravel positiveTravel)
     {
         return positiveTravelMapper.selectPositiveTravelList(positiveTravel);
+    }
+
+    /**
+     * 查询某人次阳性人员扫码记录列表
+     *
+     * @param recordId 某人次记录id
+     * @return 某人次阳性人员扫码记录列表
+     */
+    @Override
+    public List<ScanInfo> selectPositiveScanListByRecordId(String recordId) {
+        return positiveTravelMapper.selectPositiveScanListByRecordId(recordId);
     }
 
     /**

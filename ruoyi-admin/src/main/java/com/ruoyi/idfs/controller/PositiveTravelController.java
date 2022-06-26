@@ -1,6 +1,8 @@
 package com.ruoyi.idfs.controller;
 
 import java.util.List;
+
+import com.ruoyi.system.domain.ScanInfo;
 import io.swagger.annotations.Api;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,6 +39,21 @@ public class PositiveTravelController extends BaseController
 {
     @Autowired
     private IPositiveTravelService positiveTravelService;
+
+
+    /**
+     * 根据某个record_id查询出所有密切接触者的人员信息
+     */
+    @ApiOperation("根据某个record_id查询出所有密切接触者的人员信息")
+    @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:list')")
+    @GetMapping("/positiveScanList/{recordId}")
+    public TableDataInfo positiveScanList(@PathVariable("recordId") String recordId)
+    {
+        startPage();
+        List<ScanInfo> list = positiveTravelService.selectPositiveScanListByRecordId(recordId);
+        return getDataTable(list);
+    }
+
 
     /**
      * 查询阳性人员途径地址信息列表
@@ -111,4 +128,5 @@ public class PositiveTravelController extends BaseController
     {
         return toAjax(positiveTravelService.deletePositiveTravelByTravelIds(travelIds));
     }
+
 }

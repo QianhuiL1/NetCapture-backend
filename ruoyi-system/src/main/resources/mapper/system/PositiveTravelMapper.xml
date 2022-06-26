@@ -12,6 +12,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="address"    column="address"    />
     </resultMap>
 
+    <resultMap type="ScanInfo" id="ScanInfoResult">
+        <result property="scanId"    column="scan_id"    />
+        <result property="peopleId"    column="people_id"    />
+        <result property="time"    column="time"    />
+        <result property="address"    column="address"    />
+    </resultMap>
+
     <sql id="selectPositiveTravelVo">
         select travel_id, record_id, arrive_time, left_time, address from positive_travel
     </sql>
@@ -25,7 +32,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="address != null  and address != ''"> and address = #{address}</if>
         </where>
     </select>
-    
+
+    <select id="selectPositiveScanListByRecordId" parameterType="String" resultMap="ScanInfoResult">
+        select scan_table.scan_id,scan_table.people_id,scan_table.time,scan_table.address from scan_table,positive_travel
+        where positive_travel.record_id = #{recordId} and
+              positive_travel.peple_id = scan_table.people_id
+        order by scan_table.time desc
+    </select>
+
     <select id="selectPositiveTravelByTravelId" parameterType="Long" resultMap="PositiveTravelResult">
         <include refid="selectPositiveTravelVo"/>
         where travel_id = #{travelId}

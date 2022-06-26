@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.PositiveTravel;
+import com.ruoyi.system.domain.ScanInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -29,6 +30,13 @@ public interface PositiveTravelMapper
      */
     public List<PositiveTravel> selectPositiveTravelList(PositiveTravel positiveTravel);
 
+    /**
+     * 查询某人次阳性人员扫码记录列表
+     *
+     * @param recordId 某人次记录id
+     * @return 某人次阳性人员扫码记录列表
+     */
+    public List<ScanInfo> selectPositiveScanListByRecordId(String recordId);
     /**
      * 新增阳性人员途径地址信息
      * 

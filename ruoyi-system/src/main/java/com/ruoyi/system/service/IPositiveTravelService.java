@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.PositiveTravel;
+import com.ruoyi.system.domain.ScanInfo;
 
 /**
  * 阳性人员途径地址信息Service接口
@@ -26,6 +27,14 @@ public interface IPositiveTravelService
      * @return 阳性人员途径地址信息集合
      */
     public List<PositiveTravel> selectPositiveTravelList(PositiveTravel positiveTravel);
+
+    /**
+     * 查询某人次阳性人员扫码记录列表
+     *
+     * @param recordId 某人次记录id
+     * @return 某人次阳性人员扫码记录列表
+     */
+    public List<ScanInfo> selectPositiveScanListByRecordId(String recordId);
 
     /**
      * 新增阳性人员途径地址信息
