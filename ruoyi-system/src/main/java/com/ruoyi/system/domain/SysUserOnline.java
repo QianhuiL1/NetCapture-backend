@@ -2,7 +2,7 @@ package com.ruoyi.system.domain;
 
 /**
  * 当前在线会话
- * 
+ *
  * @author ruoyi
  */
 public class SysUserOnline
@@ -38,6 +38,7 @@ public class SysUserOnline
 
     public void setTokenId(String tokenId)
     {
+        System.out.println("token: " + tokenId);
         this.tokenId = tokenId;
     }
 
