@@ -42,6 +42,14 @@ public interface IPersonInfoService
      */
     public int insertPersonInfo(PersonInfo personInfo);
 
+
+    /**
+     * 根据address更新数据库中次密接的健康状态
+     * @param address 家庭住址
+     * @return 结果
+     */
+    public int updateSecondContactStatusByContact(String address);
+
     /**
      * 修改存储普通人员的相关信息
      * 

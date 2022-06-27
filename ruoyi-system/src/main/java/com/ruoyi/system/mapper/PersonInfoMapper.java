@@ -3,6 +3,7 @@ package com.ruoyi.system.mapper;
 import java.util.List;
 import com.ruoyi.system.domain.PersonInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * 存储普通人员的相关信息Mapper接口
@@ -10,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @author SoLam
  * @date 2022-06-25
  */
-@Mapper
+@Repository
 public interface PersonInfoMapper 
 {
     /**
@@ -55,6 +56,14 @@ public interface PersonInfoMapper
     public int updatePersonInfo(PersonInfo personInfo);
 
     /**
+     * 根据recordId更新数据库中密切接触者的状态
+     *
+     * @param address 某人次记录id
+     * @return 结果
+     */
+    public int updateSecondContactStatusByContact(String address);
+
+    /**
      * 删除存储普通人员的相关信息
      * 
      * @param peopleId 存储普通人员的相关信息主键
@@ -69,4 +78,6 @@ public interface PersonInfoMapper
      * @return 结果
      */
     public int deletePersonInfoByPeopleIds(String[] peopleIds);
+
+
 }

@@ -47,8 +47,7 @@ public interface IPositiveTravelService
     /**
      * 根据recordId更新数据库中密切接触者的状态
      *
-     * @param recordId 某人次记录id
-     * @return 结果
+     *
      */
     public int updateContactStatusByPositiveTravel(String recordId);
 

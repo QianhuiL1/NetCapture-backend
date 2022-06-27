@@ -40,6 +40,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where people_id = #{peopleId}
     </select>
 
+    <update id="updateSecondContactStatusByContact" parameterType= "String">
+        update people_table set status = 3
+        where people_id in (select distinct t1.people_id from people_table t1,people_table t2
+                                where t2.status = 2 and
+                                t1.address = t2.address)
+    </update>
+
         
     <insert id="insertPersonInfo" parameterType="PersonInfo">
         insert into people_table

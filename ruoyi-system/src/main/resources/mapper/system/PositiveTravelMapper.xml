@@ -46,9 +46,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update people_table set status = 2
         where people_id in (select distinct scan_table.people_id from scan_table,positive_travel
                                 where positive_travel.record_id = #{recordId} and
-                                scan_table.address = positive_travel.address)
+                                scan_table.address = positive_travel.address and
+                                scan_table.time between positive_travel.arrive_time and positive_travel.left_time
+                                )
             and status != 3
     </update>
+
     <select id="selectPositiveTravelByTravelId" parameterType="Long" resultMap="PositiveTravelResult">
         <include refid="selectPositiveTravelVo"/>
         where travel_id = #{travelId}
@@ -61,14 +64,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="arriveTime != null">arrive_time,</if>
             <if test="leftTime != null">left_time,</if>
             <if test="address != null and address != ''">address,</if>
-            <if test="pepleId != null">peple_id,</if>
+            <if test="peopleId != null">peple_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="recordId != null">#{recordId},</if>
             <if test="arriveTime != null">#{arriveTime},</if>
             <if test="leftTime != null">#{leftTime},</if>
             <if test="address != null and address != ''">#{address},</if>
-            <if test="pepleId != null">#{pepleId},</if>
+            <if test="peopleId != null">#{pepleId},</if>
          </trim>
     </insert>
 
@@ -79,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="arriveTime != null">arrive_time = #{arriveTime},</if>
             <if test="leftTime != null">left_time = #{leftTime},</if>
             <if test="address != null and address != ''">address = #{address},</if>
-            <if test="pepleId != null">peple_id = #{pepleId},</if>
+            <if test="peopleId != null">peple_id = #{pepleId},</if>
         </trim>
         where travel_id = #{travelId}
     </update>

@@ -38,6 +38,8 @@ public class PersonInfoController extends BaseController
     @Autowired
     private IPersonInfoService personInfoService;
 
+
+
     /**
      * 查询存储普通人员的相关信息列表
      */
@@ -98,6 +100,18 @@ public class PersonInfoController extends BaseController
     public AjaxResult add(@RequestBody PersonInfo personInfo)
     {
         return toAjax(personInfoService.insertPersonInfo(personInfo));
+    }
+
+    /**
+     * 根据密接人员家庭地址修改次密接人员健康状态
+     */
+    @ApiOperation("根据密切接触者人员家庭住址信息更新次密切接触者人员状态信息")
+    @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:edit')")
+    @Log(title = "人员表", businessType = BusinessType.UPDATE)
+    @PutMapping("updateSecondContact/{address}")
+    public AjaxResult updateSecondContactStatusByContact(@PathVariable String address)
+    {
+        return toAjax(personInfoService.updateSecondContactStatusByContact(address));
     }
 
     /**

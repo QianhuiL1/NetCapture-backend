@@ -4,6 +4,7 @@ import java.util.List;
 import com.ruoyi.system.domain.PositiveTravel;
 import com.ruoyi.system.domain.ScanInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * 阳性人员途径地址信息Mapper接口
@@ -11,6 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @author SoLam
  * @date 2022-06-27
  */
+@Repository
 public interface PositiveTravelMapper
 {
     /**

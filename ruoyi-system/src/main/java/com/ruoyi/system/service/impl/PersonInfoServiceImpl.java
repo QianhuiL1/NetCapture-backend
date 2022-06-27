@@ -61,6 +61,11 @@ public class PersonInfoServiceImpl implements IPersonInfoService
         return personInfoMapper.insertPersonInfo(personInfo);
     }
 
+    @Override
+    public int updateSecondContactStatusByContact(String address) {
+        return personInfoMapper.updateSecondContactStatusByContact(address);
+    }
+
     /**
      * 修改存储普通人员的相关信息
      * 
