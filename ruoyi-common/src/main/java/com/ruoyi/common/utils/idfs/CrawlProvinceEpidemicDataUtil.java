@@ -5,13 +5,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class CatchDataUtil {
+public class CrawlProvinceEpidemicData {
 
-    private String data;
-
-    public void catchData(){
+    public void crawlDataSavedAsCSV(){
         try{
-            File directory = new File("ruoyi-admin/src/java/resources/python/test.py");
+            File directory = new File("ruoyi-admin/src/main/resources/python/CrawlProvinceEpidemicData.py");
             //获取py文件路径
             String reportPath = directory.getCanonicalPath();
             //设置参数
@@ -33,13 +31,10 @@ public class CatchDataUtil {
         }
     }
 
-    public String getData() {
-        return data;
-    }
 
     public static void main(String args[]){
-        CatchDataUtil catcher = new CatchDataUtil();
-        catcher.catchData();
+        CrawlProvinceEpidemicData catcher = new CrawlProvinceEpidemicData();
+        catcher.crawlDataSavedAsCSV();
     }
 
 }
