@@ -2,15 +2,13 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.PositiveTravel;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 阳性人员途径地址信息Mapper接口
  * 
  * @author SoLam
- * @date 2022-06-25
+ * @date 2022-06-27
  */
-@Mapper
 public interface PositiveTravelMapper 
 {
     /**

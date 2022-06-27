@@ -11,7 +11,7 @@ import com.ruoyi.system.service.IPositiveTravelService;
  * 阳性人员途径地址信息Service业务层处理
  * 
  * @author SoLam
- * @date 2022-06-25
+ * @date 2022-06-27
  */
 @Service
 public class PositiveTravelServiceImpl implements IPositiveTravelService 

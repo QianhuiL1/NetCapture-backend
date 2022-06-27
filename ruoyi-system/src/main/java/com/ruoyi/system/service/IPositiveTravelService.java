@@ -7,7 +7,7 @@ import com.ruoyi.system.domain.PositiveTravel;
  * 阳性人员途径地址信息Service接口
  * 
  * @author SoLam
- * @date 2022-06-25
+ * @date 2022-06-27
  */
 public interface IPositiveTravelService 
 {

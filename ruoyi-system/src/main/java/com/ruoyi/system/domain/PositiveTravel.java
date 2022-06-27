@@ -11,13 +11,13 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 阳性人员途径地址信息对象 positive_travel
  * 
  * @author SoLam
- * @date 2022-06-25
+ * @date 2022-06-27
  */
 public class PositiveTravel extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 途径轨迹识别序号 */
+    /** 阳性轨迹识别序号 */
     private Long travelId;
 
     /** 一次阳性人员轨迹记录对应同一个id */
@@ -34,9 +34,13 @@ public class PositiveTravel extends BaseEntity
     @Excel(name = "离开时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date leftTime;
 
-    /** 途经地址 */
-    @Excel(name = "途经地址")
+    /** 途径地址 */
+    @Excel(name = "途径地址")
     private String address;
+
+    /** 身份证号 */
+    @Excel(name = "身份证号")
+    private Long pepleId;
 
     public void setTravelId(Long travelId) 
     {
@@ -83,6 +87,15 @@ public class PositiveTravel extends BaseEntity
     {
         return address;
     }
+    public void setPepleId(Long pepleId) 
+    {
+        this.pepleId = pepleId;
+    }
+
+    public Long getPepleId() 
+    {
+        return pepleId;
+    }
 
     @Override
     public String toString() {
@@ -92,6 +105,7 @@ public class PositiveTravel extends BaseEntity
             .append("arriveTime", getArriveTime())
             .append("leftTime", getLeftTime())
             .append("address", getAddress())
+            .append("pepleId", getPepleId())
             .toString();
     }
 }

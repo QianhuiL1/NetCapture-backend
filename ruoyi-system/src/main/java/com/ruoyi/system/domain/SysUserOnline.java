@@ -36,11 +36,7 @@ public class SysUserOnline
         return tokenId;
     }
 
-    public void setTokenId(String tokenId)
-    {
-        System.out.println("token: " + tokenId);
-        this.tokenId = tokenId;
-    }
+    public void setTokenId(String tokenId) { this.tokenId = tokenId; }
 
     public String getDeptName()
     {
