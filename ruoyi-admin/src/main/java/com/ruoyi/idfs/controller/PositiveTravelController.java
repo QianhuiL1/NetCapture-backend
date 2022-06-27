@@ -1,6 +1,12 @@
 package com.ruoyi.idfs.controller;
 
 import java.util.List;
+<<<<<<< HEAD
+=======
+
+import com.ruoyi.system.domain.ScanInfo;
+import io.swagger.annotations.Api;
+>>>>>>> 17774e60e993b55dc31549665c56a13ab2fd2f3b
 import javax.servlet.http.HttpServletResponse;
 
 import io.swagger.annotations.Api;
@@ -37,6 +43,21 @@ public class PositiveTravelController extends BaseController
 {
     @Autowired
     private IPositiveTravelService positiveTravelService;
+
+
+    /**
+     * 根据某个record_id查询出所有密切接触者的人员信息
+     */
+    @ApiOperation("根据某个record_id查询出所有密切接触者的人员信息")
+    @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:list')")
+    @GetMapping("/positiveScanList/{recordId}")
+    public TableDataInfo positiveScanList(@PathVariable("recordId") String recordId)
+    {
+        startPage();
+        List<ScanInfo> list = positiveTravelService.selectPositiveScanListByRecordId(recordId);
+        return getDataTable(list);
+    }
+
 
     /**
      * 查询阳性人员途径地址信息列表
@@ -89,6 +110,17 @@ public class PositiveTravelController extends BaseController
     }
 
     /**
+     * 根据阳性人员途径地址信息更新密切接触者人员状态信息
+     */
+    @ApiOperation("根据阳性人员途径地址信息更新密切接触者人员状态信息")
+    @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:edit')")
+    @Log(title = "人员表", businessType = BusinessType.UPDATE)
+    @PutMapping("updateContact/{recordId}")
+    public AjaxResult updateContactStatusByPositiveTravel(@PathVariable String recordId)
+    {
+        return toAjax(positiveTravelService.updateContactStatusByPositiveTravel(recordId));
+    }
+    /**
      * 修改阳性人员途径地址信息
      */
     @PreAuthorize("@ss.hasPermi('system:positiveTravel:edit')")
@@ -111,4 +143,5 @@ public class PositiveTravelController extends BaseController
     {
         return toAjax(positiveTravelService.deletePositiveTravelByTravelIds(travelIds));
     }
+
 }

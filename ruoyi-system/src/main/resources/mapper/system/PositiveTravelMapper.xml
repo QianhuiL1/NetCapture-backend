@@ -13,6 +13,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="pepleId"    column="peple_id"    />
     </resultMap>
 
+    <resultMap type="ScanInfo" id="ScanInfoResult">
+        <result property="scanId"    column="scan_id"    />
+        <result property="peopleId"    column="people_id"    />
+        <result property="time"    column="time"    />
+        <result property="address"    column="address"    />
+    </resultMap>
+
     <sql id="selectPositiveTravelVo">
         select travel_id, record_id, arrive_time, left_time, address, peple_id from positive_travel
     </sql>
@@ -27,7 +34,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="pepleId != null "> and peple_id = #{pepleId}</if>
         </where>
     </select>
-    
+
+    <select id="selectPositiveScanListByRecordId" parameterType="String" resultMap="ScanInfoResult">
+        select scan_table.scan_id,scan_table.people_id,scan_table.time,scan_table.address from scan_table,positive_travel
+        where positive_travel.record_id = #{recordId} and
+              positive_travel.peple_id = scan_table.people_id
+        order by scan_table.time desc
+    </select>
+
+    <update id="updateContactStatusByPositiveTravel" parameterType= "String">
+        update people_table set status = 2
+        where people_id in (select distinct scan_table.people_id from scan_table,positive_travel
+                                where positive_travel.record_id = #{recordId} and
+                                scan_table.address = positive_travel.address)
+            and status != 3
+    </update>
     <select id="selectPositiveTravelByTravelId" parameterType="Long" resultMap="PositiveTravelResult">
         <include refid="selectPositiveTravelVo"/>
         where travel_id = #{travelId}

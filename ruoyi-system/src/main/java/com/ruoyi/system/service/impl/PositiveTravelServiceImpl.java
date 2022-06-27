@@ -1,6 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.system.domain.ScanInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.PositiveTravelMapper;
@@ -44,6 +46,17 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
     }
 
     /**
+     * 查询某人次阳性人员扫码记录列表
+     *
+     * @param recordId 某人次记录id
+     * @return 某人次阳性人员扫码记录列表
+     */
+    @Override
+    public List<ScanInfo> selectPositiveScanListByRecordId(String recordId) {
+        return positiveTravelMapper.selectPositiveScanListByRecordId(recordId);
+    }
+
+    /**
      * 新增阳性人员途径地址信息
      * 
      * @param positiveTravel 阳性人员途径地址信息
@@ -53,6 +66,17 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
     public int insertPositiveTravel(PositiveTravel positiveTravel)
     {
         return positiveTravelMapper.insertPositiveTravel(positiveTravel);
+    }
+
+    /**
+     * 根据recordId更新数据库中密切接触者的状态
+     *
+     * @param recordId 某人次记录id
+     * @return 结果
+     */
+    public int updateContactStatusByPositiveTravel(String recordId)
+    {
+        return positiveTravelMapper.updateContactStatusByPositiveTravel(recordId);
     }
 
     /**

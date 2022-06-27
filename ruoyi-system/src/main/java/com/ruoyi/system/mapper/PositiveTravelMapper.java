@@ -2,6 +2,11 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.PositiveTravel;
+<<<<<<< HEAD
+=======
+import com.ruoyi.system.domain.ScanInfo;
+import org.apache.ibatis.annotations.Mapper;
+>>>>>>> 17774e60e993b55dc31549665c56a13ab2fd2f3b
 
 /**
  * 阳性人员途径地址信息Mapper接口
@@ -26,6 +31,22 @@ public interface PositiveTravelMapper
      * @return 阳性人员途径地址信息集合
      */
     public List<PositiveTravel> selectPositiveTravelList(PositiveTravel positiveTravel);
+
+    /**
+     * 查询某人次阳性人员扫码记录列表
+     *
+     * @param recordId 某人次记录id
+     * @return 某人次阳性人员扫码记录列表
+     */
+    public List<ScanInfo> selectPositiveScanListByRecordId(String recordId);
+
+    /**
+     * 根据recordId更新数据库中密切接触者的状态
+     *
+     * @param recordId 某人次记录id
+     * @return 结果
+     */
+    public int updateContactStatusByPositiveTravel(String recordId);
 
     /**
      * 新增阳性人员途径地址信息
