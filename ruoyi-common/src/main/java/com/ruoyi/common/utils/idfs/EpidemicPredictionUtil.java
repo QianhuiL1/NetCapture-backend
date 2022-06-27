@@ -124,9 +124,4 @@ public class EpidemicPredictionUtil {
         }
     }
 
-    public static void main(String args[]){
-        EpidemicPredictionUtil predicter = new EpidemicPredictionUtil();
-        predicter.predicEpidemic();
-    }
-
 }
