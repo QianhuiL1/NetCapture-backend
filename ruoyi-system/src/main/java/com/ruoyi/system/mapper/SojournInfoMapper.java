@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.SojournInfo;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 旅居信息登记表Mapper接口
@@ -9,6 +10,7 @@ import com.ruoyi.system.domain.SojournInfo;
  * @author ruoyi
  * @date 2022-06-27
  */
+@Mapper
 public interface SojournInfoMapper
 {
     /**
@@ -26,6 +28,14 @@ public interface SojournInfoMapper
      * @return 旅居信息登记表集合
      */
     public List<SojournInfo> selectSojournInfoList(SojournInfo sojournInfo);
+
+    /**
+     * 根据身份证号查询旅居信息登记表列表
+     *
+     * @param peopleId 旅居信息登记表
+     * @return 旅居信息登记表集合
+     */
+    public List<SojournInfo> selectSojournInfoListByPeopleId(String peopleId);
 
     /**
      * 新增旅居信息登记表

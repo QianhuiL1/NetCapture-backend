@@ -44,6 +44,18 @@ public class SojournInfoServiceImpl implements ISojournInfoService
     }
 
     /**
+     * 根据身份证号查询旅居信息登记表列表
+     *
+     * @param peopleId 旅居信息登记表
+     * @return 旅居信息登记表
+     */
+    @Override
+    public List<SojournInfo> selectSojournInfoListByPeopleId(String peopleId)
+    {
+        return sojournInfoMapper.selectSojournInfoListByPeopleId(peopleId);
+    }
+
+    /**
      * 新增旅居信息登记表
      *
      * @param sojournInfo 旅居信息登记表

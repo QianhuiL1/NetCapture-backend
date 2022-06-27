@@ -26,6 +26,11 @@
         </where>
     </select>
 
+    <select id="selectSojournInfoListByPeopleId" parameterType="String" resultMap="SojournInfoResult">
+        <include refid="selectSojournInfoVo"/>
+        where people_id = #{peopleId}
+    </select>
+
     <select id="selectSojournInfoBySourjornId" parameterType="Long" resultMap="SojournInfoResult">
         <include refid="selectSojournInfoVo"/>
         where sourjorn_id = #{sourjornId}
