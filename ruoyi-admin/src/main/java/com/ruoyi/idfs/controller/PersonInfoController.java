@@ -142,8 +142,8 @@ public class PersonInfoController extends BaseController
     @ApiOperation(value = "根据密切接触者人员家庭住址信息更新次密切接触者人员状态信息")
     @PreAuthorize("@ss.hasPermi('idfs:personInfo:edit')")
     @Log(title = "人员表", businessType = BusinessType.UPDATE)
-    @PutMapping("/updateSecondContact/{address}")
-    public AjaxResult updateSecondContactStatusByContact(@PathVariable String address)
+    @RequestMapping("/updateSecondContact/{address}")
+    public AjaxResult updateSecondContactStatus(@PathVariable String address)
     {
         return toAjax(personInfoService.updateSecondContactStatusByContact(address));
     }
