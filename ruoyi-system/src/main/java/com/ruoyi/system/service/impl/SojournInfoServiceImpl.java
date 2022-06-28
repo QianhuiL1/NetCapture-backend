@@ -1,6 +1,9 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.system.domain.PersonInfo;
+import com.ruoyi.system.mapper.PersonInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.SojournInfoMapper;
@@ -18,6 +21,9 @@ public class SojournInfoServiceImpl implements ISojournInfoService
 {
     @Autowired
     private SojournInfoMapper sojournInfoMapper;
+
+    @Autowired
+    private PersonInfoMapper personInfoMapper;
 
     /**
      * 查询旅居信息登记表
@@ -64,6 +70,7 @@ public class SojournInfoServiceImpl implements ISojournInfoService
     @Override
     public int insertSojournInfo(SojournInfo sojournInfo)
     {
+
         return sojournInfoMapper.insertSojournInfo(sojournInfo);
     }
 

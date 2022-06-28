@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class CrawlProvinceEpidemicData {
+public class CrawlProvinceEpidemicDataUtil {
 
     public void crawlDataSavedAsCSV(){
         try{
@@ -33,7 +33,7 @@ public class CrawlProvinceEpidemicData {
 
 
     public static void main(String args[]){
-        CrawlProvinceEpidemicData catcher = new CrawlProvinceEpidemicData();
+        CrawlProvinceEpidemicDataUtil catcher = new CrawlProvinceEpidemicDataUtil();
         catcher.crawlDataSavedAsCSV();
     }
 

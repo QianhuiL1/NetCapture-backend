@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectPositiveTravelVo">
-        select travel_id, record_id, arrive_time, left_time, address, peple_id from positive_travel
+        select travel_id, record_id, arrive_time, left_time, address, people_id from positive_travel
     </sql>
 
     <select id="selectPositiveTravelList" parameterType="PositiveTravel" resultMap="PositiveTravelResult">
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectPositiveScanListByRecordId" parameterType="String" resultMap="ScanInfoResult">
         select scan_table.scan_id,scan_table.people_id,scan_table.time,scan_table.address from scan_table,positive_travel
         where positive_travel.record_id = #{recordId} and
-              positive_travel.peple_id = scan_table.people_id
+              positive_travel.people_id = scan_table.people_id
         order by scan_table.time desc
     </select>
 
