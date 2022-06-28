@@ -70,7 +70,11 @@ public class SojournInfoServiceImpl implements ISojournInfoService
     @Override
     public int insertSojournInfo(SojournInfo sojournInfo)
     {
-
+        PersonInfo personInfo = new PersonInfo();
+        personInfo.setAddress(sojournInfo.getToAddress());
+        personInfo.setAncestors(sojournInfo.getToAncestors());
+        personInfo.setPeopleId(sojournInfo.getPeopleId());
+        personInfoMapper.updatePersonInfo(personInfo);
         return sojournInfoMapper.insertSojournInfo(sojournInfo);
     }
 

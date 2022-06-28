@@ -32,10 +32,16 @@ public class SojournInfo extends BaseEntity
     @Excel(name = "目的地行政编码")
     private String toAncestors;
 
+
     /** 登记时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "登记时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date recordTime;
+
+
+    /** 目的地详细地址 */
+    @Excel(name = "目的地详细地址")
+    private String toAddress;
 
     public void setSourjornId(Long sourjornId)
     {
@@ -83,6 +89,16 @@ public class SojournInfo extends BaseEntity
         return recordTime;
     }
 
+    public void setToAddress(String toAddress)
+    {
+        this.toAddress = toAddress;
+    }
+
+    public String getToAddress()
+    {
+        return toAddress;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -91,6 +107,7 @@ public class SojournInfo extends BaseEntity
                 .append("fromAncestors", getFromAncestors())
                 .append("toAncestors", getToAncestors())
                 .append("recordTime", getRecordTime())
+                .append("toAddress", getToAddress())
                 .toString();
     }
 }
