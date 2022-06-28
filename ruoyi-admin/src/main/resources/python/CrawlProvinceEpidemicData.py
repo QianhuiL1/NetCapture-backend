@@ -1,8 +1,11 @@
+from asyncio.windows_events import NULL
 import json
 import time
 import os
+from xml.dom.pulldom import PROCESSING_INSTRUCTION
 import requests
 import pandas as pd
+import pymysql
 
 
 def get_html(Url, header):
@@ -12,7 +15,7 @@ def get_html(Url, header):
         status = r.status_code
         # 将原始数据类型转换为json类型，方便处理
         data_json = json.loads(r.text)
-        #print(status)
+        print(status)
         return data_json
     except:
         print("爬取失败")
@@ -39,7 +42,8 @@ def get_data(data, info_list):
 def save_data(data, name):
     """定义保存数据的函数"""
     # 保存的文件名名称
-    file_name = name + "_" + time.strftime("%Y_%m_%d", time.localtime(time.time())) + ".csv"
+    file_name = name + "_" + \
+        time.strftime("%Y_%m_%d", time.localtime(time.time())) + ".csv"
 
     data.to_csv(file_name, index=None, encoding="utf_8_sig")
 
@@ -49,6 +53,83 @@ def save_data(data, name):
     else:
         print('保存失败')
 
+def getEpidemicData(dict,isChild):
+    #初始化数据
+    data = EpidemicData()
+    data.Children = EpidemicData()
+    data.total = TotalEpidemic()
+    data.today = TodayEpidemic()
+    #添加数据
+    data.today = getToday(dict["today"])
+    data.total = getTotal(dict["total"], isChild)
+    data.name = dict["name"]
+    data.lastUpdateTime = dict["lastUpdateTime"]
+    #递归入口
+    if dict["children"] != []:
+        for i in dict["children"]:
+            data.Children = getEpidemicData(i,1)
+    #递归出口
+    return data
+
+def getEpidemicDataList(dict):
+    dataArr = []
+    for i in dict:
+        dataArr.append(getEpidemicData(i,0))
+    return dataArr
+
+
+def getToday(dict):
+    today = TodayEpidemic()
+    today.confirm = dict["confirm"]
+    today.dead = dict["dead"]
+    today.heal = dict["heal"]
+    today.storeConfirm = dict["storeConfirm"]
+    return today
+
+def getTotal(dict,isChild):
+    total = TotalEpidemic()
+    total.confirm = dict["confirm"]
+    total.dead = dict["dead"]
+    total.heal = dict["heal"]
+    if isChild == 0:
+        total.input = dict["input"]
+    return total
+
+def saveDataToDB(data_province):
+    dataObjectList = getEpidemicDataList(data_province)
+    for i in dataObjectList:
+        print(i)
+#     connect = pymysql.connect(host='122.112.140.161', port=3306, user='root', password='dozen233', db='idfs')  # 服务器名,账户,密码，数据库名称
+#     cur = connect.cursor()
+
+
+class Children:
+    pass
+
+class today:
+    pass
+
+class total:
+    pass
+
+class EpidemicData:
+    today = today()
+    total = total()
+    Children = Children()
+    name = ""
+    lastUpdateTime = ""
+
+class TodayEpidemic:
+    confirm = ""
+    storeConfirm = ""
+    heal = ""
+    dead = ""
+
+class TotalEpidemic:
+    confirm = ""
+    heal = ""
+    dead = ""
+    input = ""
 
 if __name__ == "__main__":
     # 访问网易实时疫情播报平台网址
@@ -67,10 +148,11 @@ if __name__ == "__main__":
     # 2.找到储存中国34省的数据所在
     data_province = datas["data"]["areaTree"][2]["children"]
 
-    print(data_province)
     # 3.提取34个省数据
     #all_data = get_data(data_province, ["id", "name", "lastUpdateTime"])
 
     # 4.持久化保存数据
     #save_data(all_data, "today_province")
+
+    saveDataToDB(data_province)
 
