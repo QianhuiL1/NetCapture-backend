@@ -2,6 +2,9 @@ package com.ruoyi.idfs.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +31,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2022-06-28
  */
 @RestController
+@Api(tags = "行政区划代码与风险等级")
 @RequestMapping("/system/ancestor")
 public class AncestorsInfoController extends BaseController
 {
@@ -37,6 +41,7 @@ public class AncestorsInfoController extends BaseController
     /**
      * 查询行政区域列表
      */
+    @ApiOperation("查询行政区域列表")
     @PreAuthorize("@ss.hasPermi('system:ancestor:list')")
     @GetMapping("/list")
     public TableDataInfo list(AncestorsInfo ancestorsInfo)
@@ -49,6 +54,7 @@ public class AncestorsInfoController extends BaseController
     /**
      * 导出行政区域列表
      */
+    @ApiOperation("导出行政区域列表")
     @PreAuthorize("@ss.hasPermi('system:ancestor:export')")
     @Log(title = "行政区域", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
@@ -62,6 +68,7 @@ public class AncestorsInfoController extends BaseController
     /**
      * 获取行政区域详细信息
      */
+    @ApiOperation("获取行政区域详细信息")
     @PreAuthorize("@ss.hasPermi('system:ancestor:query')")
     @GetMapping(value = "/{ancestorId}")
     public AjaxResult getInfo(@PathVariable("ancestorId") String ancestorId)
@@ -72,6 +79,7 @@ public class AncestorsInfoController extends BaseController
     /**
      * 新增行政区域
      */
+    @ApiOperation("新增行政区域")
     @PreAuthorize("@ss.hasPermi('system:ancestor:add')")
     @Log(title = "行政区域", businessType = BusinessType.INSERT)
     @PostMapping
@@ -83,6 +91,7 @@ public class AncestorsInfoController extends BaseController
     /**
      * 修改行政区域
      */
+    @ApiOperation("修改行政区域")
     @PreAuthorize("@ss.hasPermi('system:ancestor:edit')")
     @Log(title = "行政区域", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -94,6 +103,7 @@ public class AncestorsInfoController extends BaseController
     /**
      * 删除行政区域
      */
+    @ApiOperation("删除行政区域")
     @PreAuthorize("@ss.hasPermi('system:ancestor:remove')")
     @Log(title = "行政区域", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ancestorIds}")

@@ -35,17 +35,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where status = #{status}
     </select>
 
-    <select id="selectPersonInfoByPeopleId" parameterType="String" resultMap="PersonInfoResult">
-        <include refid="selectPersonInfoVo"/>
-        where people_id = #{peopleId}
-    </select>
-
-    <select id="selectPersonInfoByAncestors" parameterType="String" >
-        select people_table.ancestors,people_table.people_id,people_table.name,people_table.status,people_table.address,people_table.phonenumber
-        from people_table
-        where people_table.status = 1 or people_table.status = 2 or people_table.statsu = 3 and
-        ancestors = #{ancestors}
-    </select>
 
     <update id="updateSecondContactStatusByContact" parameterType= "String">
         update people_table set status = 3

@@ -34,6 +34,8 @@ public interface IPersonInfoService
      * @return 某一状态的储普通人员的相关信息集合
      */
     public List<PersonInfo> selectPersonInfoListByStatus(String status);
+
+
     /**
      * 新增存储普通人员的相关信息
      * 
@@ -49,13 +51,6 @@ public interface IPersonInfoService
      * @return 结果
      */
     public int updateSecondContactStatusByContact(String address);
-
-    /**
-     * 根据status及ancestors查询该社区重点人员
-     * @param  ancestors 社区号
-     * @return 结果
-     */
-    public List<PersonInfo> selectPersonInfoByAncestors(String ancestors);
 
 
     /**

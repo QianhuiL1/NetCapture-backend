@@ -52,7 +52,39 @@ public class PersonInfoController extends BaseController
         List<PersonInfo> list = personInfoService.selectPersonInfoList(personInfo);
         return getDataTable(list);
     }
-
+    @ApiOperation("根据地址查询存储普通人员的相关信息列表")
+    @PreAuthorize("@ss.hasPermi('idfs:personInfo:list')")
+    @GetMapping("/listByAddress/{address}")
+    public TableDataInfo listByAddress(@PathVariable("address") String address)
+    {
+        startPage();
+        PersonInfo personInfo = new PersonInfo();
+        personInfo.setAddress(address);
+        List<PersonInfo> list = personInfoService.selectPersonInfoList(personInfo);
+        return getDataTable(list);
+    }
+    @ApiOperation("根据姓名查询存储普通人员的相关信息列表")
+    @PreAuthorize("@ss.hasPermi('idfs:personInfo:list')")
+    @GetMapping("/listByName/{name}")
+    public TableDataInfo listByName(@PathVariable("name") String name)
+    {
+        startPage();
+        PersonInfo personInfo = new PersonInfo();
+        personInfo.setName(name);
+        List<PersonInfo> list = personInfoService.selectPersonInfoList(personInfo);
+        return getDataTable(list);
+    }
+    @ApiOperation("根据区号查询存储普通人员的相关信息列表")
+    @PreAuthorize("@ss.hasPermi('idfs:personInfo:list')")
+    @GetMapping("/listByAncestors/{ancestors}")
+    public TableDataInfo listByAncestors(@PathVariable("ancestors") String ancestors)
+    {
+        startPage();
+        PersonInfo personInfo = new PersonInfo();
+        personInfo.setAncestors(ancestors);
+        List<PersonInfo> list = personInfoService.selectPersonInfoList(personInfo);
+        return getDataTable(list);
+    }
     /**
      * 导出存储普通人员的相关信息列表
      */
@@ -100,17 +132,6 @@ public class PersonInfoController extends BaseController
     public AjaxResult add(@RequestBody PersonInfo personInfo)
     {
         return toAjax(personInfoService.insertPersonInfo(personInfo));
-    }
-
-    /**
-     * 获取本社区阳性、密接、次密接人员的信息
-     */
-    @ApiOperation("本社区重点人员列表查询")
-    @PreAuthorize("@ss.hasPermi('idfs:personInfo:query')")
-    @GetMapping(value = "/ancestors/{ancestors}")
-    public AjaxResult getCommunityInfo(@PathVariable("ancestors") String ancestors)
-    {
-        return AjaxResult.success(personInfoService.selectPersonInfoByAncestors(ancestors));
     }
 
 
