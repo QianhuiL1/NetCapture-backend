@@ -1,13 +1,17 @@
 package com.ruoyi;
 
+import com.ruoyi.framework.web.domain.server.Sys;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
+
+import com.ruoyi.common.utils.idfs.CrawlProvinceEpidemicDataUtil;
+import com.ruoyi.system.domain.ProvinceEpidemicData;
 /**
  * 启动程序
- * 
+ *
  * @author ruoyi
  */
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class})
