@@ -140,7 +140,7 @@ public class PersonInfoController extends BaseController
      * 根据密接人员家庭地址修改次密接人员健康状态
      */
     @ApiOperation(value = "根据密切接触者人员家庭住址信息更新次密切接触者人员状态信息")
-    @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:edit')")
+    @PreAuthorize("@ss.hasPermi('idfs:personInfo:edit')")
     @Log(title = "人员表", businessType = BusinessType.UPDATE)
     @PutMapping("/updateSecondContact/{address}")
     public AjaxResult updateSecondContactStatusByContact(@PathVariable String address)
