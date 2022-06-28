@@ -40,11 +40,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where people_id = #{peopleId}
     </select>
 
+    <select id="selectPersonInfoByAncestors" parameterType="String" >
+        select people_table.ancestors,people_table.people_id,people_table.name,people_table.status,people_table.address,people_table.phonenumber
+        from people_table
+        where people_table.status = 1 or people_table.status = 2 or people_table.statsu = 3 and
+        ancestors = #{ancestors}
+    </select>
+
     <update id="updateSecondContactStatusByContact" parameterType= "String">
         update people_table set status = 3
         where people_id in (select distinct t1.people_id from people_table t1,people_table t2
                                 where t2.status = 2 and
-                                t1.address = t2.address)
+                                t1.address = t2.address and
+                                t1.status != 2 and t1.status !=1
+                                )
     </update>
 
         

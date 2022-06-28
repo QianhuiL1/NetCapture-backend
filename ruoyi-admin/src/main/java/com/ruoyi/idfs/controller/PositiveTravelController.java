@@ -115,6 +115,7 @@ public class PositiveTravelController extends BaseController
     {
         return toAjax(positiveTravelService.updateContactStatusByPositiveTravel(recordId));
     }
+
     /**
      * 修改阳性人员途径地址信息
      */

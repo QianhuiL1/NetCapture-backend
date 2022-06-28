@@ -61,9 +61,24 @@ public class PersonInfoServiceImpl implements IPersonInfoService
         return personInfoMapper.insertPersonInfo(personInfo);
     }
 
+    /**
+     * 根据密接人员家庭地址更改次密接人员健康状况
+     * @param address 家庭住址
+     * @return
+     */
     @Override
     public int updateSecondContactStatusByContact(String address) {
         return personInfoMapper.updateSecondContactStatusByContact(address);
+    }
+
+    /**
+     * 根据社区号查询该社区重点人员列表
+     * @param  ancestors 社区号
+     * @return
+     */
+    @Override
+    public List<PersonInfo> selectPersonInfoByAncestors(String ancestors) {
+        return personInfoMapper.selectPersonInfoByAncestors(ancestors);
     }
 
     /**

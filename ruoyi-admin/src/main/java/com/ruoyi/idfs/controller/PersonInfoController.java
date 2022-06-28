@@ -103,9 +103,22 @@ public class PersonInfoController extends BaseController
     }
 
     /**
+     * 获取本社区阳性、密接、次密接人员的信息
+     */
+    @ApiOperation("本社区重点人员列表查询")
+    @PreAuthorize("@ss.hasPermi('idfs:personInfo:query')")
+    @GetMapping(value = "/ancestors/{ancestors}")
+    public AjaxResult getCommunityInfo(@PathVariable("ancestors") String ancestors)
+    {
+        return AjaxResult.success(personInfoService.selectPersonInfoByAncestors(ancestors));
+    }
+
+
+
+    /**
      * 根据密接人员家庭地址修改次密接人员健康状态
      */
-    @ApiOperation("根据密切接触者人员家庭住址信息更新次密切接触者人员状态信息")
+    @ApiOperation(value = "根据密切接触者人员家庭住址信息更新次密切接触者人员状态信息")
     @PreAuthorize("@ss.hasPermi('idfs:positiveTravel:edit')")
     @Log(title = "人员表", businessType = BusinessType.UPDATE)
     @PutMapping("updateSecondContact/{address}")

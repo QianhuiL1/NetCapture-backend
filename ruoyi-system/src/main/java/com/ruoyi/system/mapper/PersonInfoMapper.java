@@ -40,6 +40,15 @@ public interface PersonInfoMapper
     public List<PersonInfo> selectPersonInfoListByStatus(String status);
 
     /**
+     * 根据status及ancestors查询该社区重点人员
+     *
+     * @param  ancestors 社区号
+     * @return 结果
+     */
+    public List<PersonInfo> selectPersonInfoByAncestors(String ancestors);
+
+
+    /**
      * 新增存储普通人员的相关信息
      * 
      * @param personInfo 存储普通人员的相关信息
