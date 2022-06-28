@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.AncestorsInfoMapper">
+
+    <resultMap type="AncestorsInfo" id="AncestorsInfoResult">
+        <result property="ancestorId"    column="ancestor_id"    />
+        <result property="name"    column="name"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectAncestorsInfoVo">
+        select ancestor_id, name, status from ancestors_table
+    </sql>
+
+    <select id="selectAncestorsInfoList" parameterType="AncestorsInfo" resultMap="AncestorsInfoResult">
+        <include refid="selectAncestorsInfoVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectAncestorsInfoByAncestorId" parameterType="String" resultMap="AncestorsInfoResult">
+        <include refid="selectAncestorsInfoVo"/>
+        where ancestor_id = #{ancestorId}
+    </select>
+
+    <insert id="insertAncestorsInfo" parameterType="AncestorsInfo">
+        insert into ancestors_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ancestorId != null">ancestor_id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="status != null">status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ancestorId != null">#{ancestorId},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="status != null">#{status},</if>
+        </trim>
+    </insert>
+
+    <update id="updateAncestorsInfo" parameterType="AncestorsInfo">
+        update ancestors_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where ancestor_id = #{ancestorId}
+    </update>
+
+    <delete id="deleteAncestorsInfoByAncestorId" parameterType="String">
+        delete from ancestors_table where ancestor_id = #{ancestorId}
+    </delete>
+
+    <delete id="deleteAncestorsInfoByAncestorIds" parameterType="String">
+        delete from ancestors_table where ancestor_id in
+        <foreach item="ancestorId" collection="array" open="(" separator="," close=")">
+            #{ancestorId}
+        </foreach>
+    </delete>
+</mapper>
