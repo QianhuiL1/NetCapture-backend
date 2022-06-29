@@ -40,7 +40,7 @@ public class PositiveTravel extends BaseEntity
 
     /** 身份证号 */
     @Excel(name = "身份证号")
-    private Long pepleId;
+    private String peopleId;
 
     public void setTravelId(Long travelId) 
     {
@@ -87,14 +87,14 @@ public class PositiveTravel extends BaseEntity
     {
         return address;
     }
-    public void setPepleId(Long pepleId) 
+    public void setPeopleId(String peopleId)
     {
-        this.pepleId = pepleId;
+        this.peopleId = peopleId;
     }
 
-    public Long getPepleId() 
+    public String getPeopleId()
     {
-        return pepleId;
+        return peopleId;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class PositiveTravel extends BaseEntity
             .append("arriveTime", getArriveTime())
             .append("leftTime", getLeftTime())
             .append("address", getAddress())
-            .append("pepleId", getPepleId())
+            .append("peopleId", getPeopleId())
             .toString();
     }
 }

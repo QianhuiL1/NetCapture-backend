@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.Literal;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.PersonInfoMapper;
 import com.ruoyi.system.domain.PersonInfo;
@@ -81,6 +82,17 @@ public class PersonInfoServiceImpl implements IPersonInfoService
     @Override
     public int updatePersonInfo(PersonInfo personInfo)
     {
+        if(personInfo.getStatus().equals("3"))
+        {
+            PersonInfo personInfoTemp = new PersonInfo();
+            personInfoTemp.setAddress(personInfo.getAddress());
+            List<PersonInfo> personInfo1 = personInfoMapper.selectPersonInfoList(personInfoTemp);
+            for(PersonInfo pi:personInfo1)
+            {
+                pi.setStatus("2");
+                personInfoMapper.updatePersonInfo(pi);
+            }
+        }
         return personInfoMapper.updatePersonInfo(personInfo);
     }
 
