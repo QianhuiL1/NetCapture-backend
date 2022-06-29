@@ -111,21 +111,6 @@ def get_data(data, info_list):
     return pd.concat([info, today_data, total_data], axis=1)
 
 
-def save_data(data, name):
-    """定义保存数据的函数"""
-    # 保存的文件名名称
-    file_name = name + "_" + \
-                time.strftime("%Y_%m_%d", time.localtime(time.time())) + ".csv"
-
-    data.to_csv(file_name, index=None, encoding="utf_8_sig")
-
-    # 检查是否保存成功，并打印提示文本
-    if os.path.exists(file_name):
-        print(file_name + " 保存成功")
-    else:
-        print('保存失败')
-
-
 def getToday(dict):
     today = TodayEpidemic()
     today.confirm = dict["confirm"]

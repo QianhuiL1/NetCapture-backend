@@ -1,26 +1,20 @@
-package com.ruoyi.common.utils.idfs;
+package com.ruoyi.web.core.config;
 
-
+import com.ruoyi.common.utils.idfs.CrawlProvinceEpidemicDataUtil;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.annotation.SchedulingConfigurer;
-import org.springframework.scheduling.config.ScheduledTaskRegistrar;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Configuration
 @EnableScheduling
-public class CrawlListenerUtil {
+public class CrawlListenerConfig {
 
-
-    //3.添加定时任务
-    @Scheduled(cron = "0 31 15 * * ?")
     //每天凌晨两点更新数据
+    @Scheduled(cron = "0 00 02 * * ?")
     private void configureTasks() {
+        System.out.println("[CrawlListenerUtil " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "]" + "自动更新数据");
         CrawlProvinceEpidemicDataUtil.crawlDataSavedIntoDB();
     }
-
 }

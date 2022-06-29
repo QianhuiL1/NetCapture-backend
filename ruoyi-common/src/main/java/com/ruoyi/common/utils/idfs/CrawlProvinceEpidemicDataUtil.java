@@ -8,9 +8,9 @@ import java.io.InputStreamReader;
 
 public class CrawlProvinceEpidemicDataUtil {
 
-    public static void crawlDataSavedIntoDB(){
+    public static boolean crawlDataSavedIntoDB(){
         try{
-            System.out.println("--------------自动更新数据--------------");
+            System.out.println("---------------更新数据----------------");
             File directory = new File("ruoyi-admin/src/main/resources/python/CrawlProvinceEpidemicData.py");
             //获取py文件路径
             String reportPath = directory.getCanonicalPath();
@@ -27,10 +27,13 @@ public class CrawlProvinceEpidemicDataUtil {
             in.close();
             proc.waitFor();
             System.out.println("---------------更新完毕----------------");
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         } catch (InterruptedException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }
