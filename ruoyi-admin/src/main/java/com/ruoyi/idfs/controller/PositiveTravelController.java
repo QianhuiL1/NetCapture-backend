@@ -66,6 +66,20 @@ public class PositiveTravelController extends BaseController
         List<PositiveTravel> list = positiveTravelService.selectPositiveTravelList(positiveTravel);
         return getDataTable(list);
     }
+    /**
+     * 根据身份证号查询阳性人员途径地址信息列表
+     */
+    @PreAuthorize("@ss.hasPermi('system:positiveTravel:list')")
+    @GetMapping("/list/listByPeopleId/{peopleId}")
+    @ApiOperation("查询阳性人员途径地址信息列表")
+    public TableDataInfo listByPeopleId(@PathVariable("peopleId")String peopleId)
+    {
+        PositiveTravel positiveTravel = new PositiveTravel();
+        positiveTravel.setPeopleId(peopleId);
+        startPage();
+        List<PositiveTravel> list = positiveTravelService.selectPositiveTravelList(positiveTravel);
+        return getDataTable(list);
+    }
 
     /**
      * 导出阳性人员途径地址信息列表

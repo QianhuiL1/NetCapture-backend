@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="arriveTime"    column="arrive_time"    />
         <result property="leftTime"    column="left_time"    />
         <result property="address"    column="address"    />
-        <result property="pepleId"    column="peple_id"    />
+        <result property="peopleId"    column="people_id"    />
     </resultMap>
 
     <resultMap type="ScanInfo" id="ScanInfoResult">
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="arriveTime != null "> and arrive_time = #{arriveTime}</if>
             <if test="leftTime != null "> and left_time = #{leftTime}</if>
             <if test="address != null  and address != ''"> and address = #{address}</if>
-            <if test="pepleId != null "> and peple_id = #{pepleId}</if>
+            <if test="peopleId != null "> and people_id = #{peopleId}</if>
         </where>
     </select>
 
