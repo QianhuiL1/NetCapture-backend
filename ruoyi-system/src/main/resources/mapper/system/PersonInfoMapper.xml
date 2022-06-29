@@ -37,7 +37,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectPersonInfoByPeopleId" parameterType="String" resultMap="PersonInfoResult">
         <include refid="selectPersonInfoVo"/>
+<<<<<<< HEAD
         where people_id = #{people_id}
+=======
+        where people_id = #{peopleId}
+>>>>>>> 2124a8152bd040c3e4f6c94b502369f265141d68
     </select>
 
 

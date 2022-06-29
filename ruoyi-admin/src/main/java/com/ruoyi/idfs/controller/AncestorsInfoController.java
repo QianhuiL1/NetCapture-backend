@@ -51,6 +51,18 @@ public class AncestorsInfoController extends BaseController
         return getDataTable(list);
     }
 
+    @ApiOperation("按地区名查询行政区域列表")
+    @PreAuthorize("@ss.hasPermi('system:ancestor:list')")
+    @GetMapping("/list/listByName/{name}")
+    public TableDataInfo listByName(@PathVariable("name") String name)
+    {
+        AncestorsInfo ancestorsInfo = new AncestorsInfo();
+        ancestorsInfo.setName(name);
+        startPage();
+        List<AncestorsInfo> list = ancestorsInfoService.selectAncestorsInfoList(ancestorsInfo);
+        return getDataTable(list);
+    }
+
     /**
      * 导出行政区域列表
      */
