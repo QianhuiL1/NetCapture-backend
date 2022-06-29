@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.TotalEpidemicInfoMapper">
-    
+
     <resultMap type="TotalEpidemicInfo" id="TotalEpidemicInfoResult">
         <result property="province"    column="province"    />
         <result property="area"    column="area"    />
@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectTotalEpidemicInfoList" parameterType="TotalEpidemicInfo" resultMap="TotalEpidemicInfoResult">
         <include refid="selectTotalEpidemicInfoVo"/>
-        <where>  
+        <where>
             <if test="province != null  and province != ''"> and province = #{province}</if>
             <if test="area != null  and area != ''"> and area = #{area}</if>
             <if test="confirm != null "> and confirm = #{confirm}</if>
@@ -31,12 +31,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lastupdatetime != null "> and lastUpdateTime = #{lastupdatetime}</if>
         </where>
     </select>
-    
+
+    <select id="selectTotalProvinceEpidemicInfoList" resultMap="TotalEpidemicInfoResult">
+        select province, confirm, heal, dead, input, lastUpdateTime, totalEpidemicID
+        from totalEpidemic_table
+        where isNull(area)
+    </select>
+
     <select id="selectTotalEpidemicInfoByTotalepidemicid" parameterType="Long" resultMap="TotalEpidemicInfoResult">
         <include refid="selectTotalEpidemicInfoVo"/>
         where totalEpidemicID = #{totalepidemicid}
     </select>
-        
+
     <insert id="insertTotalEpidemicInfo" parameterType="TotalEpidemicInfo" useGeneratedKeys="true" keyProperty="totalepidemicid">
         insert into totalEpidemic_table
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -78,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteTotalEpidemicInfoByTotalepidemicids" parameterType="String">
-        delete from totalEpidemic_table where totalEpidemicID in 
+        delete from totalEpidemic_table where totalEpidemicID in
         <foreach item="totalepidemicid" collection="array" open="(" separator="," close=")">
             #{totalepidemicid}
         </foreach>

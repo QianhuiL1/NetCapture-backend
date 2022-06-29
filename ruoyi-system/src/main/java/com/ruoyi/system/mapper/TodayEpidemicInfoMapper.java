@@ -5,15 +5,15 @@ import com.ruoyi.system.domain.TodayEpidemicInfo;
 
 /**
  * 当天疫情Mapper接口
- * 
+ *
  * @author SoLam
  * @date 2022-06-29
  */
-public interface TodayEpidemicInfoMapper 
+public interface TodayEpidemicInfoMapper
 {
     /**
      * 查询当天疫情
-     * 
+     *
      * @param todayepidemicid 当天疫情主键
      * @return 当天疫情
      */
@@ -21,7 +21,7 @@ public interface TodayEpidemicInfoMapper
 
     /**
      * 查询当天疫情列表
-     * 
+     *
      * @param todayEpidemicInfo 当天疫情
      * @return 当天疫情集合
      */
@@ -29,7 +29,7 @@ public interface TodayEpidemicInfoMapper
 
     /**
      * 新增当天疫情
-     * 
+     *
      * @param todayEpidemicInfo 当天疫情
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface TodayEpidemicInfoMapper
 
     /**
      * 修改当天疫情
-     * 
+     *
      * @param todayEpidemicInfo 当天疫情
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface TodayEpidemicInfoMapper
 
     /**
      * 删除当天疫情
-     * 
+     *
      * @param todayepidemicid 当天疫情主键
      * @return 结果
      */
@@ -53,9 +53,12 @@ public interface TodayEpidemicInfoMapper
 
     /**
      * 批量删除当天疫情
-     * 
+     *
      * @param todayepidemicids 需要删除的数据主键集合
      * @return 结果
      */
     public int deleteTodayEpidemicInfoByTodayepidemicids(Long[] todayepidemicids);
+
+    //获取当天省份疫情信息
+    public List<TodayEpidemicInfo> selectTodayProvinceEpidemicInfoList();
 }

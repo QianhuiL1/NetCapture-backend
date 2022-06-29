@@ -3,6 +3,7 @@ package com.ruoyi.idfs.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.system.domain.TodayEpidemicInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -111,4 +112,18 @@ public class TotalEpidemicInfoController extends BaseController
     {
         return toAjax(totalEpidemicInfoService.deleteTotalEpidemicInfoByTotalepidemicids(totalepidemicids));
     }
+
+    /**
+     * 查询整体省份疫情列表
+     */
+    @PreAuthorize("@ss.hasPermi('system:todayEpidemic:provinceList')")
+    @GetMapping("/provinceList")
+    @ApiOperation("查询整体省份疫情列表")
+    public TableDataInfo provinceList()
+    {
+        startPage();
+        List<TotalEpidemicInfo> list = totalEpidemicInfoService.selectTotalProvinceEpidemicInfoList();
+        return getDataTable(list);
+    }
+
 }

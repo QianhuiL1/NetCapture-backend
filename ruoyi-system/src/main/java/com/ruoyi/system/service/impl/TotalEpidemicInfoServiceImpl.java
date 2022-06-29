@@ -1,6 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.system.domain.TodayEpidemicInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.TotalEpidemicInfoMapper;
@@ -9,19 +11,19 @@ import com.ruoyi.system.service.ITotalEpidemicInfoService;
 
 /**
  * 整体疫情Service业务层处理
- * 
+ *
  * @author SoLam
  * @date 2022-06-29
  */
 @Service
-public class TotalEpidemicInfoServiceImpl implements ITotalEpidemicInfoService 
+public class TotalEpidemicInfoServiceImpl implements ITotalEpidemicInfoService
 {
     @Autowired
     private TotalEpidemicInfoMapper totalEpidemicInfoMapper;
 
     /**
      * 查询整体疫情
-     * 
+     *
      * @param totalepidemicid 整体疫情主键
      * @return 整体疫情
      */
@@ -33,7 +35,7 @@ public class TotalEpidemicInfoServiceImpl implements ITotalEpidemicInfoService
 
     /**
      * 查询整体疫情列表
-     * 
+     *
      * @param totalEpidemicInfo 整体疫情
      * @return 整体疫情
      */
@@ -45,7 +47,7 @@ public class TotalEpidemicInfoServiceImpl implements ITotalEpidemicInfoService
 
     /**
      * 新增整体疫情
-     * 
+     *
      * @param totalEpidemicInfo 整体疫情
      * @return 结果
      */
@@ -57,7 +59,7 @@ public class TotalEpidemicInfoServiceImpl implements ITotalEpidemicInfoService
 
     /**
      * 修改整体疫情
-     * 
+     *
      * @param totalEpidemicInfo 整体疫情
      * @return 结果
      */
@@ -69,7 +71,7 @@ public class TotalEpidemicInfoServiceImpl implements ITotalEpidemicInfoService
 
     /**
      * 批量删除整体疫情
-     * 
+     *
      * @param totalepidemicids 需要删除的整体疫情主键
      * @return 结果
      */
@@ -81,7 +83,7 @@ public class TotalEpidemicInfoServiceImpl implements ITotalEpidemicInfoService
 
     /**
      * 删除整体疫情信息
-     * 
+     *
      * @param totalepidemicid 整体疫情主键
      * @return 结果
      */
@@ -89,5 +91,9 @@ public class TotalEpidemicInfoServiceImpl implements ITotalEpidemicInfoService
     public int deleteTotalEpidemicInfoByTotalepidemicid(Long totalepidemicid)
     {
         return totalEpidemicInfoMapper.deleteTotalEpidemicInfoByTotalepidemicid(totalepidemicid);
+    }
+    @Override
+    public List<TotalEpidemicInfo> selectTotalProvinceEpidemicInfoList() {
+        return totalEpidemicInfoMapper.selectTotalProvinceEpidemicInfoList();
     }
 }

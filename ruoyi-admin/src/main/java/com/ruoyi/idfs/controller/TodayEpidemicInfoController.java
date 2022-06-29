@@ -111,4 +111,17 @@ public class TodayEpidemicInfoController extends BaseController
     {
         return toAjax(todayEpidemicInfoService.deleteTodayEpidemicInfoByTodayepidemicids(todayepidemicids));
     }
+
+    /**
+     * 查询当天省份疫情列表
+     */
+    @PreAuthorize("@ss.hasPermi('system:todayEpidemic:provinceList')")
+    @GetMapping("/provinceList")
+    @ApiOperation("查询当天省份疫情列表")
+    public TableDataInfo provinceList()
+    {
+        startPage();
+        List<TodayEpidemicInfo> list = todayEpidemicInfoService.selectTodayProvinceEpidemicInfoList();
+        return getDataTable(list);
+    }
 }

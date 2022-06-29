@@ -9,19 +9,19 @@ import com.ruoyi.system.service.ITodayEpidemicInfoService;
 
 /**
  * 当天疫情Service业务层处理
- * 
+ *
  * @author SoLam
  * @date 2022-06-29
  */
 @Service
-public class TodayEpidemicInfoServiceImpl implements ITodayEpidemicInfoService 
+public class TodayEpidemicInfoServiceImpl implements ITodayEpidemicInfoService
 {
     @Autowired
     private TodayEpidemicInfoMapper todayEpidemicInfoMapper;
 
     /**
      * 查询当天疫情
-     * 
+     *
      * @param todayepidemicid 当天疫情主键
      * @return 当天疫情
      */
@@ -33,7 +33,7 @@ public class TodayEpidemicInfoServiceImpl implements ITodayEpidemicInfoService
 
     /**
      * 查询当天疫情列表
-     * 
+     *
      * @param todayEpidemicInfo 当天疫情
      * @return 当天疫情
      */
@@ -45,7 +45,7 @@ public class TodayEpidemicInfoServiceImpl implements ITodayEpidemicInfoService
 
     /**
      * 新增当天疫情
-     * 
+     *
      * @param todayEpidemicInfo 当天疫情
      * @return 结果
      */
@@ -57,7 +57,7 @@ public class TodayEpidemicInfoServiceImpl implements ITodayEpidemicInfoService
 
     /**
      * 修改当天疫情
-     * 
+     *
      * @param todayEpidemicInfo 当天疫情
      * @return 结果
      */
@@ -69,7 +69,7 @@ public class TodayEpidemicInfoServiceImpl implements ITodayEpidemicInfoService
 
     /**
      * 批量删除当天疫情
-     * 
+     *
      * @param todayepidemicids 需要删除的当天疫情主键
      * @return 结果
      */
@@ -81,7 +81,7 @@ public class TodayEpidemicInfoServiceImpl implements ITodayEpidemicInfoService
 
     /**
      * 删除当天疫情信息
-     * 
+     *
      * @param todayepidemicid 当天疫情主键
      * @return 结果
      */
@@ -89,5 +89,10 @@ public class TodayEpidemicInfoServiceImpl implements ITodayEpidemicInfoService
     public int deleteTodayEpidemicInfoByTodayepidemicid(Long todayepidemicid)
     {
         return todayEpidemicInfoMapper.deleteTodayEpidemicInfoByTodayepidemicid(todayepidemicid);
+    }
+
+    @Override
+    public List<TodayEpidemicInfo> selectTodayProvinceEpidemicInfoList() {
+        return todayEpidemicInfoMapper.selectTodayProvinceEpidemicInfoList();
     }
 }

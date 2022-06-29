@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.TodayEpidemicInfoMapper">
-    
+
     <resultMap type="TodayEpidemicInfo" id="TodayEpidemicInfoResult">
         <result property="province"    column="province"    />
         <result property="area"    column="area"    />
@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectTodayEpidemicInfoList" parameterType="TodayEpidemicInfo" resultMap="TodayEpidemicInfoResult">
         <include refid="selectTodayEpidemicInfoVo"/>
-        <where>  
+        <where>
             <if test="province != null  and province != ''"> and province = #{province}</if>
             <if test="area != null  and area != ''"> and area = #{area}</if>
             <if test="confirm != null "> and confirm = #{confirm}</if>
@@ -31,12 +31,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lastupdatetime != null "> and lastUpdateTime = #{lastupdatetime}</if>
         </where>
     </select>
-    
+
+    <select id="selectTodayProvinceEpidemicInfoList" resultMap="TodayEpidemicInfoResult">
+        select province, confirm, storeConfirm, heal, dead, lastUpdateTime, todayEpidemicID
+        from todayEpidemic_table
+        where isNull(area)
+    </select>
+
     <select id="selectTodayEpidemicInfoByTodayepidemicid" parameterType="Long" resultMap="TodayEpidemicInfoResult">
         <include refid="selectTodayEpidemicInfoVo"/>
         where todayEpidemicID = #{todayepidemicid}
     </select>
-        
+
     <insert id="insertTodayEpidemicInfo" parameterType="TodayEpidemicInfo" useGeneratedKeys="true" keyProperty="todayepidemicid">
         insert into todayEpidemic_table
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -78,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteTodayEpidemicInfoByTodayepidemicids" parameterType="String">
-        delete from todayEpidemic_table where todayEpidemicID in 
+        delete from todayEpidemic_table where todayEpidemicID in
         <foreach item="todayepidemicid" collection="array" open="(" separator="," close=")">
             #{todayepidemicid}
         </foreach>
