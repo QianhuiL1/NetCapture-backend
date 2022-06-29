@@ -35,6 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where status = #{status}
     </select>
 
+    <select id="selectPersonInfoByPeopleId" parameterType="String" resultMap="PersonInfoResult">
+        <include refid="selectPersonInfoVo"/>
+        where people_id = #{peopleId}
+    </select>
 
     <update id="updateSecondContactStatusByContact" parameterType= "String">
         create temporary table contact_table as
