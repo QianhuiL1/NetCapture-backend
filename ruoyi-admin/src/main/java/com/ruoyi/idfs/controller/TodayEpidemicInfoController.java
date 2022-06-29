@@ -19,8 +19,8 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.system.domain.TodayEpidemicTable;
-import com.ruoyi.system.service.ITodayEpidemicTableService;
+import com.ruoyi.system.domain.TodayEpidemicInfo;
+import com.ruoyi.system.service.ITodayEpidemicInfoService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
@@ -33,10 +33,10 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RestController
 @RequestMapping("/todayEpidemic")
 @Api(tags = "当天疫情")
-public class TodayEpidemicTableController extends BaseController
+public class TodayEpidemicInfoController extends BaseController
 {
     @Autowired
-    private ITodayEpidemicTableService todayEpidemicTableService;
+    private ITodayEpidemicInfoService todayEpidemicInfoService;
 
     /**
      * 查询当天疫情列表
@@ -44,10 +44,10 @@ public class TodayEpidemicTableController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:todayEpidemic:list')")
     @GetMapping("/list")
     @ApiOperation("查询当天疫情列表")
-    public TableDataInfo list(TodayEpidemicTable todayEpidemicTable)
+    public TableDataInfo list(TodayEpidemicInfo todayEpidemicInfo)
     {
         startPage();
-        List<TodayEpidemicTable> list = todayEpidemicTableService.selectTodayEpidemicTableList(todayEpidemicTable);
+        List<TodayEpidemicInfo> list = todayEpidemicInfoService.selectTodayEpidemicInfoList(todayEpidemicInfo);
         return getDataTable(list);
     }
 
@@ -58,10 +58,10 @@ public class TodayEpidemicTableController extends BaseController
     @Log(title = "当天疫情", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ApiOperation("导出当天疫情列表")
-    public void export(HttpServletResponse response, TodayEpidemicTable todayEpidemicTable)
+    public void export(HttpServletResponse response, TodayEpidemicInfo todayEpidemicInfo)
     {
-        List<TodayEpidemicTable> list = todayEpidemicTableService.selectTodayEpidemicTableList(todayEpidemicTable);
-        ExcelUtil<TodayEpidemicTable> util = new ExcelUtil<TodayEpidemicTable>(TodayEpidemicTable.class);
+        List<TodayEpidemicInfo> list = todayEpidemicInfoService.selectTodayEpidemicInfoList(todayEpidemicInfo);
+        ExcelUtil<TodayEpidemicInfo> util = new ExcelUtil<TodayEpidemicInfo>(TodayEpidemicInfo.class);
         util.exportExcel(response, list, "当天疫情数据");
     }
 
@@ -73,7 +73,7 @@ public class TodayEpidemicTableController extends BaseController
     @ApiOperation("获取当天疫情详细信息")
     public AjaxResult getInfo(@PathVariable("todayepidemicid") Long todayepidemicid)
     {
-        return AjaxResult.success(todayEpidemicTableService.selectTodayEpidemicTableByTodayepidemicid(todayepidemicid));
+        return AjaxResult.success(todayEpidemicInfoService.selectTodayEpidemicInfoByTodayepidemicid(todayepidemicid));
     }
 
     /**
@@ -83,9 +83,9 @@ public class TodayEpidemicTableController extends BaseController
     @Log(title = "当天疫情", businessType = BusinessType.INSERT)
     @PostMapping
     @ApiOperation("新增当天疫情")
-    public AjaxResult add(@RequestBody TodayEpidemicTable todayEpidemicTable)
+    public AjaxResult add(@RequestBody TodayEpidemicInfo todayEpidemicInfo)
     {
-        return toAjax(todayEpidemicTableService.insertTodayEpidemicTable(todayEpidemicTable));
+        return toAjax(todayEpidemicInfoService.insertTodayEpidemicInfo(todayEpidemicInfo));
     }
 
     /**
@@ -95,9 +95,9 @@ public class TodayEpidemicTableController extends BaseController
     @Log(title = "当天疫情", businessType = BusinessType.UPDATE)
     @PutMapping
     @ApiOperation("修改当天疫情")
-    public AjaxResult edit(@RequestBody TodayEpidemicTable todayEpidemicTable)
+    public AjaxResult edit(@RequestBody TodayEpidemicInfo todayEpidemicInfo)
     {
-        return toAjax(todayEpidemicTableService.updateTodayEpidemicTable(todayEpidemicTable));
+        return toAjax(todayEpidemicInfoService.updateTodayEpidemicInfo(todayEpidemicInfo));
     }
 
     /**
@@ -109,6 +109,6 @@ public class TodayEpidemicTableController extends BaseController
     @ApiOperation("删除当天疫情")
     public AjaxResult remove(@PathVariable Long[] todayepidemicids)
     {
-        return toAjax(todayEpidemicTableService.deleteTodayEpidemicTableByTodayepidemicids(todayepidemicids));
+        return toAjax(todayEpidemicInfoService.deleteTodayEpidemicInfoByTodayepidemicids(todayepidemicids));
     }
 }

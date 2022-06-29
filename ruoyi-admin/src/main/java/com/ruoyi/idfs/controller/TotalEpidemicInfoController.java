@@ -19,8 +19,8 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.system.domain.TotalEpidemicTable;
-import com.ruoyi.system.service.ITotalEpidemicTableService;
+import com.ruoyi.system.domain.TotalEpidemicInfo;
+import com.ruoyi.system.service.ITotalEpidemicInfoService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
@@ -33,10 +33,10 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RestController
 @RequestMapping("/totalEpidemic")
 @Api(tags = "整体疫情")
-public class TotalEpidemicTableController extends BaseController
+public class TotalEpidemicInfoController extends BaseController
 {
     @Autowired
-    private ITotalEpidemicTableService totalEpidemicTableService;
+    private ITotalEpidemicInfoService totalEpidemicInfoService;
 
     /**
      * 查询整体疫情列表
@@ -44,10 +44,10 @@ public class TotalEpidemicTableController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:totalEpidemic:list')")
     @GetMapping("/list")
     @ApiOperation("查询整体疫情列表")
-    public TableDataInfo list(TotalEpidemicTable totalEpidemicTable)
+    public TableDataInfo list(TotalEpidemicInfo totalEpidemicInfo)
     {
         startPage();
-        List<TotalEpidemicTable> list = totalEpidemicTableService.selectTotalEpidemicTableList(totalEpidemicTable);
+        List<TotalEpidemicInfo> list = totalEpidemicInfoService.selectTotalEpidemicInfoList(totalEpidemicInfo);
         return getDataTable(list);
     }
 
@@ -58,10 +58,10 @@ public class TotalEpidemicTableController extends BaseController
     @Log(title = "整体疫情", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ApiOperation("导出整体疫情列表")
-    public void export(HttpServletResponse response, TotalEpidemicTable totalEpidemicTable)
+    public void export(HttpServletResponse response, TotalEpidemicInfo totalEpidemicInfo)
     {
-        List<TotalEpidemicTable> list = totalEpidemicTableService.selectTotalEpidemicTableList(totalEpidemicTable);
-        ExcelUtil<TotalEpidemicTable> util = new ExcelUtil<TotalEpidemicTable>(TotalEpidemicTable.class);
+        List<TotalEpidemicInfo> list = totalEpidemicInfoService.selectTotalEpidemicInfoList(totalEpidemicInfo);
+        ExcelUtil<TotalEpidemicInfo> util = new ExcelUtil<TotalEpidemicInfo>(TotalEpidemicInfo.class);
         util.exportExcel(response, list, "整体疫情数据");
     }
 
@@ -73,7 +73,7 @@ public class TotalEpidemicTableController extends BaseController
     @ApiOperation("获取整体疫情详细信息")
     public AjaxResult getInfo(@PathVariable("totalepidemicid") Long totalepidemicid)
     {
-        return AjaxResult.success(totalEpidemicTableService.selectTotalEpidemicTableByTotalepidemicid(totalepidemicid));
+        return AjaxResult.success(totalEpidemicInfoService.selectTotalEpidemicInfoByTotalepidemicid(totalepidemicid));
     }
 
     /**
@@ -83,9 +83,9 @@ public class TotalEpidemicTableController extends BaseController
     @Log(title = "整体疫情", businessType = BusinessType.INSERT)
     @PostMapping
     @ApiOperation("新增整体疫情")
-    public AjaxResult add(@RequestBody TotalEpidemicTable totalEpidemicTable)
+    public AjaxResult add(@RequestBody TotalEpidemicInfo totalEpidemicInfo)
     {
-        return toAjax(totalEpidemicTableService.insertTotalEpidemicTable(totalEpidemicTable));
+        return toAjax(totalEpidemicInfoService.insertTotalEpidemicInfo(totalEpidemicInfo));
     }
 
     /**
@@ -95,9 +95,9 @@ public class TotalEpidemicTableController extends BaseController
     @Log(title = "整体疫情", businessType = BusinessType.UPDATE)
     @PutMapping
     @ApiOperation("修改整体疫情")
-    public AjaxResult edit(@RequestBody TotalEpidemicTable totalEpidemicTable)
+    public AjaxResult edit(@RequestBody TotalEpidemicInfo totalEpidemicInfo)
     {
-        return toAjax(totalEpidemicTableService.updateTotalEpidemicTable(totalEpidemicTable));
+        return toAjax(totalEpidemicInfoService.updateTotalEpidemicInfo(totalEpidemicInfo));
     }
 
     /**
@@ -109,6 +109,6 @@ public class TotalEpidemicTableController extends BaseController
     @ApiOperation("删除整体疫情")
     public AjaxResult remove(@PathVariable Long[] totalepidemicids)
     {
-        return toAjax(totalEpidemicTableService.deleteTotalEpidemicTableByTotalepidemicids(totalepidemicids));
+        return toAjax(totalEpidemicInfoService.deleteTotalEpidemicInfoByTotalepidemicids(totalepidemicids));
     }
 }

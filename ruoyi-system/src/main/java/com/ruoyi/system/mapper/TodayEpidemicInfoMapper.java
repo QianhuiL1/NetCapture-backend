@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.TodayEpidemicTable;
+import com.ruoyi.system.domain.TodayEpidemicInfo;
 
 /**
  * 当天疫情Mapper接口
@@ -9,7 +9,7 @@ import com.ruoyi.system.domain.TodayEpidemicTable;
  * @author SoLam
  * @date 2022-06-29
  */
-public interface TodayEpidemicTableMapper 
+public interface TodayEpidemicInfoMapper 
 {
     /**
      * 查询当天疫情
@@ -17,31 +17,31 @@ public interface TodayEpidemicTableMapper
      * @param todayepidemicid 当天疫情主键
      * @return 当天疫情
      */
-    public TodayEpidemicTable selectTodayEpidemicTableByTodayepidemicid(Long todayepidemicid);
+    public TodayEpidemicInfo selectTodayEpidemicInfoByTodayepidemicid(Long todayepidemicid);
 
     /**
      * 查询当天疫情列表
      * 
-     * @param todayEpidemicTable 当天疫情
+     * @param todayEpidemicInfo 当天疫情
      * @return 当天疫情集合
      */
-    public List<TodayEpidemicTable> selectTodayEpidemicTableList(TodayEpidemicTable todayEpidemicTable);
+    public List<TodayEpidemicInfo> selectTodayEpidemicInfoList(TodayEpidemicInfo todayEpidemicInfo);
 
     /**
      * 新增当天疫情
      * 
-     * @param todayEpidemicTable 当天疫情
+     * @param todayEpidemicInfo 当天疫情
      * @return 结果
      */
-    public int insertTodayEpidemicTable(TodayEpidemicTable todayEpidemicTable);
+    public int insertTodayEpidemicInfo(TodayEpidemicInfo todayEpidemicInfo);
 
     /**
      * 修改当天疫情
      * 
-     * @param todayEpidemicTable 当天疫情
+     * @param todayEpidemicInfo 当天疫情
      * @return 结果
      */
-    public int updateTodayEpidemicTable(TodayEpidemicTable todayEpidemicTable);
+    public int updateTodayEpidemicInfo(TodayEpidemicInfo todayEpidemicInfo);
 
     /**
      * 删除当天疫情
@@ -49,7 +49,7 @@ public interface TodayEpidemicTableMapper
      * @param todayepidemicid 当天疫情主键
      * @return 结果
      */
-    public int deleteTodayEpidemicTableByTodayepidemicid(Long todayepidemicid);
+    public int deleteTodayEpidemicInfoByTodayepidemicid(Long todayepidemicid);
 
     /**
      * 批量删除当天疫情
@@ -57,5 +57,5 @@ public interface TodayEpidemicTableMapper
      * @param todayepidemicids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteTodayEpidemicTableByTodayepidemicids(Long[] todayepidemicids);
+    public int deleteTodayEpidemicInfoByTodayepidemicids(Long[] todayepidemicids);
 }

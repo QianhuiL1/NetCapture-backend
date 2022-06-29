@@ -18,14 +18,9 @@ public class TimerTaskUtil extends TimerTask {
         try {
             //在这里写你要执行的内容
             System.out.println("[CrawlTimerTaskUtil]" + "当前执行时间 "+formatter.format(Calendar.getInstance().getTime()));
-            CrawlProvinceEpidemicDataUtil.crawlDataSavedIntoDB();
         } catch (Exception e) {
             System.out.println("[CrawlTimerTaskUtil]-------------解析信息发生异常--------------");
         }
-    }
-
-    public static void main(String[] args) {
-        new TimerManagerUtil();
     }
 
 }

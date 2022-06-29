@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.system.mapper.TodayEpidemicTableMapper">
+<mapper namespace="com.ruoyi.system.mapper.TodayEpidemicInfoMapper">
     
-    <resultMap type="TodayEpidemicTable" id="TodayEpidemicTableResult">
+    <resultMap type="TodayEpidemicInfo" id="TodayEpidemicInfoResult">
         <result property="province"    column="province"    />
         <result property="area"    column="area"    />
         <result property="confirm"    column="confirm"    />
@@ -15,12 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="todayepidemicid"    column="todayEpidemicID"    />
     </resultMap>
 
-    <sql id="selectTodayEpidemicTableVo">
+    <sql id="selectTodayEpidemicInfoVo">
         select province, area, confirm, storeConfirm, heal, dead, lastUpdateTime, todayEpidemicID from todayEpidemic_table
     </sql>
 
-    <select id="selectTodayEpidemicTableList" parameterType="TodayEpidemicTable" resultMap="TodayEpidemicTableResult">
-        <include refid="selectTodayEpidemicTableVo"/>
+    <select id="selectTodayEpidemicInfoList" parameterType="TodayEpidemicInfo" resultMap="TodayEpidemicInfoResult">
+        <include refid="selectTodayEpidemicInfoVo"/>
         <where>  
             <if test="province != null  and province != ''"> and province = #{province}</if>
             <if test="area != null  and area != ''"> and area = #{area}</if>
@@ -32,12 +32,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectTodayEpidemicTableByTodayepidemicid" parameterType="Long" resultMap="TodayEpidemicTableResult">
-        <include refid="selectTodayEpidemicTableVo"/>
+    <select id="selectTodayEpidemicInfoByTodayepidemicid" parameterType="Long" resultMap="TodayEpidemicInfoResult">
+        <include refid="selectTodayEpidemicInfoVo"/>
         where todayEpidemicID = #{todayepidemicid}
     </select>
         
-    <insert id="insertTodayEpidemicTable" parameterType="TodayEpidemicTable" useGeneratedKeys="true" keyProperty="todayepidemicid">
+    <insert id="insertTodayEpidemicInfo" parameterType="TodayEpidemicInfo" useGeneratedKeys="true" keyProperty="todayepidemicid">
         insert into todayEpidemic_table
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="province != null and province != ''">province,</if>
@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateTodayEpidemicTable" parameterType="TodayEpidemicTable">
+    <update id="updateTodayEpidemicInfo" parameterType="TodayEpidemicInfo">
         update todayEpidemic_table
         <trim prefix="SET" suffixOverrides=",">
             <if test="province != null and province != ''">province = #{province},</if>
@@ -73,11 +73,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where todayEpidemicID = #{todayepidemicid}
     </update>
 
-    <delete id="deleteTodayEpidemicTableByTodayepidemicid" parameterType="Long">
+    <delete id="deleteTodayEpidemicInfoByTodayepidemicid" parameterType="Long">
         delete from todayEpidemic_table where todayEpidemicID = #{todayepidemicid}
     </delete>
 
-    <delete id="deleteTodayEpidemicTableByTodayepidemicids" parameterType="String">
+    <delete id="deleteTodayEpidemicInfoByTodayepidemicids" parameterType="String">
         delete from todayEpidemic_table where todayEpidemicID in 
         <foreach item="todayepidemicid" collection="array" open="(" separator="," close=")">
             #{todayepidemicid}

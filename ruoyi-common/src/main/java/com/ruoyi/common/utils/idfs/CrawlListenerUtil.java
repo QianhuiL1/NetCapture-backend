@@ -17,10 +17,10 @@ public class CrawlListenerUtil {
 
 
     //3.添加定时任务
-    @Scheduled(cron = "0 0 02 * * ?")
+    @Scheduled(cron = "0 31 15 * * ?")
     //每天凌晨两点更新数据
     private void configureTasks() {
-        System.out.println("执行静态定时任务时间: " + LocalDateTime.now());
+        CrawlProvinceEpidemicDataUtil.crawlDataSavedIntoDB();
     }
 
 }

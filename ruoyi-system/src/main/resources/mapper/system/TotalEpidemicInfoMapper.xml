@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.system.mapper.TotalEpidemicTableMapper">
+<mapper namespace="com.ruoyi.system.mapper.TotalEpidemicInfoMapper">
     
-    <resultMap type="TotalEpidemicTable" id="TotalEpidemicTableResult">
+    <resultMap type="TotalEpidemicInfo" id="TotalEpidemicInfoResult">
         <result property="province"    column="province"    />
         <result property="area"    column="area"    />
         <result property="confirm"    column="confirm"    />
@@ -15,12 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="totalepidemicid"    column="totalEpidemicID"    />
     </resultMap>
 
-    <sql id="selectTotalEpidemicTableVo">
+    <sql id="selectTotalEpidemicInfoVo">
         select province, area, confirm, heal, dead, input, lastUpdateTime, totalEpidemicID from totalEpidemic_table
     </sql>
 
-    <select id="selectTotalEpidemicTableList" parameterType="TotalEpidemicTable" resultMap="TotalEpidemicTableResult">
-        <include refid="selectTotalEpidemicTableVo"/>
+    <select id="selectTotalEpidemicInfoList" parameterType="TotalEpidemicInfo" resultMap="TotalEpidemicInfoResult">
+        <include refid="selectTotalEpidemicInfoVo"/>
         <where>  
             <if test="province != null  and province != ''"> and province = #{province}</if>
             <if test="area != null  and area != ''"> and area = #{area}</if>
@@ -32,12 +32,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectTotalEpidemicTableByTotalepidemicid" parameterType="Long" resultMap="TotalEpidemicTableResult">
-        <include refid="selectTotalEpidemicTableVo"/>
+    <select id="selectTotalEpidemicInfoByTotalepidemicid" parameterType="Long" resultMap="TotalEpidemicInfoResult">
+        <include refid="selectTotalEpidemicInfoVo"/>
         where totalEpidemicID = #{totalepidemicid}
     </select>
         
-    <insert id="insertTotalEpidemicTable" parameterType="TotalEpidemicTable" useGeneratedKeys="true" keyProperty="totalepidemicid">
+    <insert id="insertTotalEpidemicInfo" parameterType="TotalEpidemicInfo" useGeneratedKeys="true" keyProperty="totalepidemicid">
         insert into totalEpidemic_table
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="province != null and province != ''">province,</if>
@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateTotalEpidemicTable" parameterType="TotalEpidemicTable">
+    <update id="updateTotalEpidemicInfo" parameterType="TotalEpidemicInfo">
         update totalEpidemic_table
         <trim prefix="SET" suffixOverrides=",">
             <if test="province != null and province != ''">province = #{province},</if>
@@ -73,11 +73,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where totalEpidemicID = #{totalepidemicid}
     </update>
 
-    <delete id="deleteTotalEpidemicTableByTotalepidemicid" parameterType="Long">
+    <delete id="deleteTotalEpidemicInfoByTotalepidemicid" parameterType="Long">
         delete from totalEpidemic_table where totalEpidemicID = #{totalepidemicid}
     </delete>
 
-    <delete id="deleteTotalEpidemicTableByTotalepidemicids" parameterType="String">
+    <delete id="deleteTotalEpidemicInfoByTotalepidemicids" parameterType="String">
         delete from totalEpidemic_table where totalEpidemicID in 
         <foreach item="totalepidemicid" collection="array" open="(" separator="," close=")">
             #{totalepidemicid}

@@ -13,7 +13,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @author SoLam
  * @date 2022-06-29
  */
-public class TodayEpidemicTable extends BaseEntity
+public class TodayEpidemicInfo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
