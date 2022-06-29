@@ -9,24 +9,18 @@ import pandas as pd
 import pymysql
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, Column, Integer, String
+import sys
 from sqlalchemy.orm import *
+import io
 
 DB_URI = "mysql+pymysql://root:dozen233@122.112.140.161:3306/idfs"
-engine = create_engine(DB_URI,echo=True, pool_size=8, pool_recycle=60*30)
+engine = create_engine(DB_URI,echo=False, pool_size=8, pool_recycle=60*30)
 Base = declarative_base(engine)  # SQLORM基类
 session = Session(engine)  # 构建session对象
 
-class ChildMapper_table(Base):
-    __tablename__ = 'childMapper_table'  # 表名
-    mapperID = Column(Integer, primary_key=True, autoincrement=True)
-    province = Column(String(25))
-    area = Column(String(25))
-    def __init__(self, area, province):
-        self.area = area
-        self.province = province
-
 class TodayEpidemic_table(Base):
     __tablename__ = 'todayEpidemic_table'  # 表名
+    province = Column(String(10))
     confirm = Column(Integer)
     storeConfirm = Column(Integer)
     heal = Column(Integer)
@@ -37,6 +31,7 @@ class TodayEpidemic_table(Base):
 
 class TotalEpidemic_table(Base):
     __tablename__ = 'totalEpidemic_table'  # 表名
+    province = Column(String(10))
     confirm = Column(Integer)
     input = Column(Integer)
     heal = Column(Integer)
@@ -74,16 +69,15 @@ def saveDataToDB(data_province):
     dataObjectList = getEpidemicDataList(data_province)
     session.execute("delete from todayEpidemic_table")
     session.execute("delete from totalEpidemic_table")
-    session.execute("delete from childMapper_table")
     for dataObjParent in dataObjectList:
-        session.add(TodayEpidemic_table(confirm=dataObjParent.today.confirm,storeConfirm=dataObjParent.today.storeConfirm,heal=dataObjParent.today.heal,dead=dataObjParent.today.dead,area=dataObjParent.name,lastUpdateTime=dataObjParent.lastUpdateTime))
-        session.add(TotalEpidemic_table(area=dataObjParent.name,confirm=dataObjParent.total.confirm,input=dataObjParent.total.input,heal=dataObjParent.total.heal,dead=dataObjParent.total.dead,lastUpdateTime=dataObjParent.lastUpdateTime))
+        session.add(TodayEpidemic_table(province=dataObjParent.name,confirm=dataObjParent.today.confirm,storeConfirm=dataObjParent.today.storeConfirm,heal=dataObjParent.today.heal,dead=dataObjParent.today.dead,lastUpdateTime=dataObjParent.lastUpdateTime))
+        session.add(TotalEpidemic_table(province=dataObjParent.name,confirm=dataObjParent.total.confirm,input=dataObjParent.total.input,heal=dataObjParent.total.heal,dead=dataObjParent.total.dead,lastUpdateTime=dataObjParent.lastUpdateTime))
         for dataObjChildren in dataObjParent.Children:
-            session.add(ChildMapper_table(province=dataObjParent.name,area=dataObjChildren.name))
-            session.add(TotalEpidemic_table(area=dataObjChildren.name,confirm=dataObjChildren.total.confirm,input=None,heal=dataObjChildren.total.heal,dead=dataObjChildren.total.dead,lastUpdateTime=dataObjChildren.lastUpdateTime))
-            session.add(TodayEpidemic_table(confirm=dataObjChildren.today.confirm,storeConfirm=dataObjChildren.today.storeConfirm,heal=dataObjChildren.today.heal,dead=dataObjChildren.today.dead,area=dataObjChildren.name,lastUpdateTime=dataObjChildren.lastUpdateTime))
+            session.add(TotalEpidemic_table(province=dataObjParent.name,area=dataObjChildren.name,confirm=dataObjChildren.total.confirm,input=None,heal=dataObjChildren.total.heal,dead=dataObjChildren.total.dead,lastUpdateTime=dataObjChildren.lastUpdateTime))
+            session.add(TodayEpidemic_table(province=dataObjParent.name,area=dataObjChildren.name,confirm=dataObjChildren.today.confirm,storeConfirm=dataObjChildren.today.storeConfirm,heal=dataObjChildren.today.heal,dead=dataObjChildren.today.dead,lastUpdateTime=dataObjChildren.lastUpdateTime))
     session.commit()
     session.close()
+    print("数据持久化更新已执行")
 
 
 def get_html(Url, header):
@@ -93,7 +87,7 @@ def get_html(Url, header):
         status = r.status_code
         # 将原始数据类型转换为json类型，方便处理
         data_json = json.loads(r.text)
-        print(status)
+        print("网页响应状态码: {}".format(status))
         return data_json
     except:
         print("爬取失败")
@@ -196,6 +190,7 @@ class TotalEpidemic:
         self.dead = ""
 
 if __name__ == "__main__":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding="utf8")
     # 访问网易实时疫情播报平台网址
     url = "https://c.m.163.com/ug/api/wuhan/app/data/list-total"
     # 设置请求头，伪装为浏览器

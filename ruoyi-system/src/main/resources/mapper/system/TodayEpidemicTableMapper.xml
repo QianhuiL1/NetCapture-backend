@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TodayEpidemicTableMapper">
+    
+    <resultMap type="TodayEpidemicTable" id="TodayEpidemicTableResult">
+        <result property="province"    column="province"    />
+        <result property="area"    column="area"    />
+        <result property="confirm"    column="confirm"    />
+        <result property="storeconfirm"    column="storeConfirm"    />
+        <result property="heal"    column="heal"    />
+        <result property="dead"    column="dead"    />
+        <result property="lastupdatetime"    column="lastUpdateTime"    />
+        <result property="todayepidemicid"    column="todayEpidemicID"    />
+    </resultMap>
+
+    <sql id="selectTodayEpidemicTableVo">
+        select province, area, confirm, storeConfirm, heal, dead, lastUpdateTime, todayEpidemicID from todayEpidemic_table
+    </sql>
+
+    <select id="selectTodayEpidemicTableList" parameterType="TodayEpidemicTable" resultMap="TodayEpidemicTableResult">
+        <include refid="selectTodayEpidemicTableVo"/>
+        <where>  
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="confirm != null "> and confirm = #{confirm}</if>
+            <if test="storeconfirm != null "> and storeConfirm = #{storeconfirm}</if>
+            <if test="heal != null "> and heal = #{heal}</if>
+            <if test="dead != null "> and dead = #{dead}</if>
+            <if test="lastupdatetime != null "> and lastUpdateTime = #{lastupdatetime}</if>
+        </where>
+    </select>
+    
+    <select id="selectTodayEpidemicTableByTodayepidemicid" parameterType="Long" resultMap="TodayEpidemicTableResult">
+        <include refid="selectTodayEpidemicTableVo"/>
+        where todayEpidemicID = #{todayepidemicid}
+    </select>
+        
+    <insert id="insertTodayEpidemicTable" parameterType="TodayEpidemicTable" useGeneratedKeys="true" keyProperty="todayepidemicid">
+        insert into todayEpidemic_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="province != null and province != ''">province,</if>
+            <if test="area != null">area,</if>
+            <if test="confirm != null">confirm,</if>
+            <if test="storeconfirm != null">storeConfirm,</if>
+            <if test="heal != null">heal,</if>
+            <if test="dead != null">dead,</if>
+            <if test="lastupdatetime != null">lastUpdateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="province != null and province != ''">#{province},</if>
+            <if test="area != null">#{area},</if>
+            <if test="confirm != null">#{confirm},</if>
+            <if test="storeconfirm != null">#{storeconfirm},</if>
+            <if test="heal != null">#{heal},</if>
+            <if test="dead != null">#{dead},</if>
+            <if test="lastupdatetime != null">#{lastupdatetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTodayEpidemicTable" parameterType="TodayEpidemicTable">
+        update todayEpidemic_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="province != null and province != ''">province = #{province},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="confirm != null">confirm = #{confirm},</if>
+            <if test="storeconfirm != null">storeConfirm = #{storeconfirm},</if>
+            <if test="heal != null">heal = #{heal},</if>
+            <if test="dead != null">dead = #{dead},</if>
+            <if test="lastupdatetime != null">lastUpdateTime = #{lastupdatetime},</if>
+        </trim>
+        where todayEpidemicID = #{todayepidemicid}
+    </update>
+
+    <delete id="deleteTodayEpidemicTableByTodayepidemicid" parameterType="Long">
+        delete from todayEpidemic_table where todayEpidemicID = #{todayepidemicid}
+    </delete>
+
+    <delete id="deleteTodayEpidemicTableByTodayepidemicids" parameterType="String">
+        delete from todayEpidemic_table where todayEpidemicID in 
+        <foreach item="todayepidemicid" collection="array" open="(" separator="," close=")">
+            #{todayepidemicid}
+        </foreach>
+    </delete>
+</mapper>

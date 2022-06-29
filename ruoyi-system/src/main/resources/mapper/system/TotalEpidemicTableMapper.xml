@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TotalEpidemicTableMapper">
+    
+    <resultMap type="TotalEpidemicTable" id="TotalEpidemicTableResult">
+        <result property="province"    column="province"    />
+        <result property="area"    column="area"    />
+        <result property="confirm"    column="confirm"    />
+        <result property="heal"    column="heal"    />
+        <result property="dead"    column="dead"    />
+        <result property="input"    column="input"    />
+        <result property="lastupdatetime"    column="lastUpdateTime"    />
+        <result property="totalepidemicid"    column="totalEpidemicID"    />
+    </resultMap>
+
+    <sql id="selectTotalEpidemicTableVo">
+        select province, area, confirm, heal, dead, input, lastUpdateTime, totalEpidemicID from totalEpidemic_table
+    </sql>
+
+    <select id="selectTotalEpidemicTableList" parameterType="TotalEpidemicTable" resultMap="TotalEpidemicTableResult">
+        <include refid="selectTotalEpidemicTableVo"/>
+        <where>  
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="confirm != null "> and confirm = #{confirm}</if>
+            <if test="heal != null "> and heal = #{heal}</if>
+            <if test="dead != null "> and dead = #{dead}</if>
+            <if test="input != null "> and input = #{input}</if>
+            <if test="lastupdatetime != null "> and lastUpdateTime = #{lastupdatetime}</if>
+        </where>
+    </select>
+    
+    <select id="selectTotalEpidemicTableByTotalepidemicid" parameterType="Long" resultMap="TotalEpidemicTableResult">
+        <include refid="selectTotalEpidemicTableVo"/>
+        where totalEpidemicID = #{totalepidemicid}
+    </select>
+        
+    <insert id="insertTotalEpidemicTable" parameterType="TotalEpidemicTable" useGeneratedKeys="true" keyProperty="totalepidemicid">
+        insert into totalEpidemic_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="province != null and province != ''">province,</if>
+            <if test="area != null and area != ''">area,</if>
+            <if test="confirm != null">confirm,</if>
+            <if test="heal != null">heal,</if>
+            <if test="dead != null">dead,</if>
+            <if test="input != null">input,</if>
+            <if test="lastupdatetime != null">lastUpdateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="province != null and province != ''">#{province},</if>
+            <if test="area != null and area != ''">#{area},</if>
+            <if test="confirm != null">#{confirm},</if>
+            <if test="heal != null">#{heal},</if>
+            <if test="dead != null">#{dead},</if>
+            <if test="input != null">#{input},</if>
+            <if test="lastupdatetime != null">#{lastupdatetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTotalEpidemicTable" parameterType="TotalEpidemicTable">
+        update totalEpidemic_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="province != null and province != ''">province = #{province},</if>
+            <if test="area != null and area != ''">area = #{area},</if>
+            <if test="confirm != null">confirm = #{confirm},</if>
+            <if test="heal != null">heal = #{heal},</if>
+            <if test="dead != null">dead = #{dead},</if>
+            <if test="input != null">input = #{input},</if>
+            <if test="lastupdatetime != null">lastUpdateTime = #{lastupdatetime},</if>
+        </trim>
+        where totalEpidemicID = #{totalepidemicid}
+    </update>
+
+    <delete id="deleteTotalEpidemicTableByTotalepidemicid" parameterType="Long">
+        delete from totalEpidemic_table where totalEpidemicID = #{totalepidemicid}
+    </delete>
+
+    <delete id="deleteTotalEpidemicTableByTotalepidemicids" parameterType="String">
+        delete from totalEpidemic_table where totalEpidemicID in 
+        <foreach item="totalepidemicid" collection="array" open="(" separator="," close=")">
+            #{totalepidemicid}
+        </foreach>
+    </delete>
+</mapper>
