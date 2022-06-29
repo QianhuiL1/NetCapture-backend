@@ -5,10 +5,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
 public class CrawlProvinceEpidemicDataUtil {
 
-    public void crawlDataSavedAsCSV(){
+    public static void crawlDataSavedIntoDB(){
         try{
+            System.out.println("--------------自动更新数据--------------");
             File directory = new File("ruoyi-admin/src/main/resources/python/CrawlProvinceEpidemicData.py");
             //获取py文件路径
             String reportPath = directory.getCanonicalPath();
@@ -24,17 +26,11 @@ public class CrawlProvinceEpidemicDataUtil {
             }
             in.close();
             proc.waitFor();
+            System.out.println("---------------更新完毕----------------");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
-
-    public static void main(String args[]){
-        CrawlProvinceEpidemicDataUtil catcher = new CrawlProvinceEpidemicDataUtil();
-        catcher.crawlDataSavedAsCSV();
-    }
-
 }
