@@ -32,7 +32,7 @@ public class SecurityUtils
     /**
      * 获取部门ID
      **/
-    public static Long getDeptId()
+    public static String getDeptId()
     {
         try
         {

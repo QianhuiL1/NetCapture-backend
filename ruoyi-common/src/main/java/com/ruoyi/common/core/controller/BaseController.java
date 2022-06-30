@@ -171,7 +171,7 @@ public class BaseController
     /**
      * 获取登录部门id
      */
-    public Long getDeptId()
+    public String getDeptId()
     {
         return getLoginUser().getDeptId();
     }
