@@ -1,5 +1,6 @@
 package com.ruoyi.web.core.config;
 
+import com.ruoyi.common.utils.idfs.CrawlEpidemicEventUtil;
 import com.ruoyi.common.utils.idfs.CrawlEpidemicPredictionDataUtil;
 import com.ruoyi.common.utils.idfs.CrawlProvinceEpidemicDataUtil;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,9 @@ public class CrawlListenerConfig {
         System.out.println("----------自动更新预测疫情数据----------");
         CrawlEpidemicPredictionDataUtil.crawlDataSavedIntoDB();
         System.out.println("----------预测疫情数据更新完毕----------");
+        System.out.println("------------自动更新疫情新闻-----------");
+        CrawlEpidemicEventUtil.crawlEpidemicEventIntoDB();
+        System.out.println("------------疫情新闻更新完毕-----------");
         System.out.println("[CrawlListenerUtil " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "]" + "数据更新完毕");
     }
 }

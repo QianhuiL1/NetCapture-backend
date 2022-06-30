@@ -39,8 +39,8 @@ def getEpidemicDataList(dict):
 
 def saveDataToDB(data_province):
     dataObjectList = getEpidemicDataList(data_province)
-    session.execute("delete from todayEpidemic_table")
-    session.execute("delete from totalEpidemic_table")
+    # session.execute("delete from todayEpidemic_table")
+    # session.execute("delete from totalEpidemic_table")
     for dataObjParent in dataObjectList:
         session.add(TodayEpidemic_table(province=dataObjParent.name,confirm=dataObjParent.today.confirm,storeConfirm=dataObjParent.today.storeConfirm,heal=dataObjParent.today.heal,dead=dataObjParent.today.dead,lastUpdateTime=dataObjParent.lastUpdateTime))
         session.add(TotalEpidemic_table(province=dataObjParent.name,confirm=dataObjParent.total.confirm,input=dataObjParent.total.input,heal=dataObjParent.total.heal,dead=dataObjParent.total.dead,lastUpdateTime=dataObjParent.lastUpdateTime))

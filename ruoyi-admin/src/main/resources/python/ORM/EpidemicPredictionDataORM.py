@@ -2,7 +2,7 @@ from importlib.resources import Package
 
 
 Package
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import  Column, Integer, String
 import config.DBConfig as DB
 
 Base = DB.Base
