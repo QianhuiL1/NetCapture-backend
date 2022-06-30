@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.system;
 
+import com.ruoyi.system.service.ISysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,9 @@ public class SysRegisterController extends BaseController
 
     @Autowired
     private ISysConfigService configService;
+
+    @Autowired
+    private ISysRoleService roleService;
 
     @PostMapping("/register")
     public AjaxResult register(@RequestBody RegisterBody user)
