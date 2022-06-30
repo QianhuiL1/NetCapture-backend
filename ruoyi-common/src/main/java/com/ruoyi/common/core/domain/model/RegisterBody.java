@@ -12,9 +12,17 @@ public class RegisterBody extends LoginBody
     private String phonenumber;
     private String sex;
     private String deptId;
-
+    private Long RoleId;
     public String getDeptId() {
         return deptId;
+    }
+
+    public Long getRoleId() {
+        return RoleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        RoleId = roleId;
     }
 
     public void setDeptId(String deptId) {
