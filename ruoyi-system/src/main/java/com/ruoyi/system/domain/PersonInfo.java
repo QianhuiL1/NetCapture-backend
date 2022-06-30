@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import java.util.Date;
 
 /**
  * 存储普通人员的相关信息对象 people_table
@@ -44,6 +45,10 @@ public class PersonInfo extends BaseEntity
     /** 详细地址 */
     @Excel(name = "详细地址")
     private String address;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private Date positiveTime;
 
     public void setPeopleId(String peopleId)
     {
@@ -109,6 +114,18 @@ public class PersonInfo extends BaseEntity
         return address;
     }
 
+    public void setPositiveTime(Date positiveTime)
+    {
+        this.positiveTime = positiveTime;
+    }
+
+    public Date getPositiveTime()
+    {
+        return positiveTime;
+    }
+
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -119,6 +136,7 @@ public class PersonInfo extends BaseEntity
             .append("status", getStatus())
             .append("ancestors", getAncestors())
             .append("address", getAddress())
+            .append("positiveTime", getPositiveTime())
             .toString();
     }
 }

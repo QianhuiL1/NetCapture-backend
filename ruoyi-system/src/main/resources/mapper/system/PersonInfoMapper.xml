@@ -12,10 +12,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="status"    column="status"    />
         <result property="ancestors"    column="ancestors"    />
         <result property="address"    column="address"    />
+        <result property="positiveTime"    column="positive_time"    />
     </resultMap>
 
     <sql id="selectPersonInfoVo">
-        select people_id, name, sex, phonenumber, status, ancestors, address from people_table
+        select people_id, name, sex, phonenumber, status, ancestors, address, positive_time from people_table
     </sql>
 
     <select id="selectPersonInfoList" parameterType="PersonInfo" resultMap="PersonInfoResult">
@@ -27,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="ancestors != null  and ancestors != ''"> and ancestors = #{ancestors}</if>
             <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="positiveTime != null "> and positive_time = #{positiveTime}</if>
         </where>
     </select>
 
@@ -58,6 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">status,</if>
             <if test="ancestors != null and ancestors != ''">ancestors,</if>
             <if test="address != null">address,</if>
+            <if test="positiveTime != null">positive_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="peopleId != null">#{peopleId},</if>
@@ -67,6 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">#{status},</if>
             <if test="ancestors != null and ancestors != ''">#{ancestors},</if>
             <if test="address != null">#{address},</if>
+            <if test="positiveTime != null">#{positiveTime},</if>
          </trim>
     </insert>
 
@@ -79,6 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">status = #{status},</if>
             <if test="ancestors != null and ancestors != ''">ancestors = #{ancestors},</if>
             <if test="address != null">address = #{address},</if>
+            <if test="positiveTime != null">positive_time = #{positiveTime},</if>
         </trim>
         where people_id = #{peopleId}
     </update>
