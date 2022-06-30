@@ -32,7 +32,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @RestController
 @Api(tags = "行政区划代码与风险等级")
-@RequestMapping("/system/ancestor")
+@RequestMapping("/ancestor")
 public class AncestorsInfoController extends BaseController
 {
     @Autowired
@@ -46,7 +46,7 @@ public class AncestorsInfoController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(AncestorsInfo ancestorsInfo)
     {
-        startPage();
+        //startPage();
         List<AncestorsInfo> list = ancestorsInfoService.selectAncestorsInfoList(ancestorsInfo);
         return getDataTable(list);
     }
@@ -58,7 +58,7 @@ public class AncestorsInfoController extends BaseController
     {
         AncestorsInfo ancestorsInfo = new AncestorsInfo();
         ancestorsInfo.setName(name);
-        startPage();
+        //startPage();
         List<AncestorsInfo> list = ancestorsInfoService.selectAncestorsInfoList(ancestorsInfo);
         return getDataTable(list);
     }

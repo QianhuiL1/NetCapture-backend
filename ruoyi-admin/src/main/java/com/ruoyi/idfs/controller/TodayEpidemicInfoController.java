@@ -46,7 +46,7 @@ public class TodayEpidemicInfoController extends BaseController
     @ApiOperation("查询当天疫情列表")
     public TableDataInfo list(TodayEpidemicInfo todayEpidemicInfo)
     {
-        startPage();
+        //startPage();
         List<TodayEpidemicInfo> list = todayEpidemicInfoService.selectTodayEpidemicInfoList(todayEpidemicInfo);
         return getDataTable(list);
     }
@@ -120,7 +120,7 @@ public class TodayEpidemicInfoController extends BaseController
     @ApiOperation("查询当天省份疫情列表")
     public TableDataInfo provinceList()
     {
-        startPage();
+        //startPage();
         List<TodayEpidemicInfo> list = todayEpidemicInfoService.selectTodayProvinceEpidemicInfoList();
         return getDataTable(list);
     }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.EpedemicEventInfoMapper">
+
+    <resultMap type="EpedemicEventInfo" id="EpedemicEventInfoResult">
+        <result property="eventdescription"    column="eventDescription"    />
+        <result property="eventurl"    column="eventUrl"    />
+        <result property="eventtime"    column="eventTime"    />
+        <result property="eventid"    column="eventID"    />
+    </resultMap>
+
+    <sql id="selectEpedemicEventInfoVo">
+        select eventDescription, eventUrl, eventTime, eventID from epedemicEvent_table
+    </sql>
+
+    <select id="selectEpedemicEventInfoList" resultMap="EpedemicEventInfoResult">
+        select * from epedemicEvent_table
+    </select>
+
+    <select id="selectEpedemicEventInfoByEventid" parameterType="Long" resultMap="EpedemicEventInfoResult">
+        <include refid="selectEpedemicEventInfoVo"/>
+        where eventID = #{eventid}
+    </select>
+
+    <insert id="insertEpedemicEventInfo" parameterType="EpedemicEventInfo" useGeneratedKeys="true" keyProperty="eventid">
+        insert into epedemicEvent_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eventdescription != null">eventDescription,</if>
+            <if test="eventurl != null">eventUrl,</if>
+            <if test="eventtime != null">eventTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="eventdescription != null">#{eventdescription},</if>
+            <if test="eventurl != null">#{eventurl},</if>
+            <if test="eventtime != null">#{eventtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEpedemicEventInfo" parameterType="EpedemicEventInfo">
+        update epedemicEvent_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="eventdescription != null">eventDescription = #{eventdescription},</if>
+            <if test="eventurl != null">eventUrl = #{eventurl},</if>
+            <if test="eventtime != null">eventTime = #{eventtime},</if>
+        </trim>
+        where eventID = #{eventid}
+    </update>
+
+    <delete id="deleteEpedemicEventInfoByEventid" parameterType="Long">
+        delete from epedemicEvent_table where eventID = #{eventid}
+    </delete>
+
+    <delete id="deleteEpedemicEventInfoByEventids" parameterType="String">
+        delete from epedemicEvent_table where eventID in
+        <foreach item="eventid" collection="array" open="(" separator="," close=")">
+            #{eventid}
+        </foreach>
+    </delete>
+</mapper>

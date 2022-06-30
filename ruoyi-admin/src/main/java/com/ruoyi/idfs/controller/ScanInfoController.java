@@ -46,7 +46,7 @@ public class ScanInfoController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(ScanInfo scanInfo)
     {
-        startPage();
+        //startPage();
         List<ScanInfo> list = scanInfoService.selectScanInfoList(scanInfo);
         return getDataTable(list);
     }

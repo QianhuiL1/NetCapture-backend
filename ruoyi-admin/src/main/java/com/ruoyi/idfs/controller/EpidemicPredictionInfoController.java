@@ -46,7 +46,7 @@ public class EpidemicPredictionInfoController extends BaseController
     @ApiOperation("查询疫情预测列表")
     public TableDataInfo list(EpidemicPredictionInfo epidemicPredictionInfo)
     {
-        startPage();
+        //startPage();
         List<EpidemicPredictionInfo> list = epidemicPredictionInfoService.selectEpidemicPredictionInfoList(epidemicPredictionInfo);
         return getDataTable(list);
     }
