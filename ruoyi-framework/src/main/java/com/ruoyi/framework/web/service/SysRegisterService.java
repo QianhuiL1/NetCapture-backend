@@ -1,5 +1,10 @@
 package com.ruoyi.framework.web.service;
 
+import com.ruoyi.common.core.domain.entity.SysRole;
+import com.ruoyi.system.domain.SysUserRole;
+import com.ruoyi.system.mapper.SysUserMapper;
+import com.ruoyi.system.mapper.SysUserRoleMapper;
+import com.ruoyi.system.service.ISysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.constant.Constants;
@@ -16,6 +21,8 @@ import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysUserService;
+
+import java.util.*;
 
 /**
  * 注册校验方法
@@ -34,6 +41,11 @@ public class SysRegisterService
     @Autowired
     private RedisCache redisCache;
 
+    @Autowired
+    private SysUserMapper sysUserMapper;
+
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
     /**
      * 注册
      */
@@ -75,13 +87,18 @@ public class SysRegisterService
             SysUser sysUser = new SysUser();
             sysUser.setUserName(username);
             sysUser.setNickName(registerBody.getNickname());
-            sysUser.setPassword(registerBody.getPassword());
             sysUser.setEmail(registerBody.getEmail());
             sysUser.setPhonenumber(registerBody.getPhonenumber());
             sysUser.setDeptId(registerBody.getDeptId());
             sysUser.setSex(registerBody.getSex());
-            sysUser.setRoleId(2L);
             sysUser.setPassword(SecurityUtils.encryptPassword(registerBody.getPassword()));
+            SysUserRole userRole = new SysUserRole();
+            Long userid = sysUserMapper.selectMaxUserId();
+            userid ++;
+            userRole.setUserId(userid);
+            userRole.setRoleId(registerBody.getRoleId());
+            sysUserRoleMapper.insertRole(userRole);
+            sysUser.setUserId(userid);
             boolean regFlag = userService.registerUser(sysUser);
             if (!regFlag)
             {

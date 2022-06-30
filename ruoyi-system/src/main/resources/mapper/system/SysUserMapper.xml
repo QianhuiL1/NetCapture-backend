@@ -55,7 +55,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    left join sys_user_role ur on u.user_id = ur.user_id
 		    left join sys_role r on r.role_id = ur.role_id
     </sql>
-    
+
+	<select id="selectMaxUserId" resultType="Long">
+		select max(user_id) from sys_user
+	</select>
+
     <select id="selectUserList" parameterType="SysUser" resultMap="SysUserResult">
 		select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
 		left join sys_dept d on u.dept_id = d.dept_id
@@ -148,7 +152,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertUser" parameterType="SysUser" useGeneratedKeys="true" keyProperty="userId">
  		insert into sys_user(
  			<if test="userId != null and userId != 0">user_id,</if>
- 			<if test="deptId != null and deptId != 0">dept_id,</if>
+ 			<if test="deptId != null and deptId != ''">dept_id,</if>
  			<if test="userName != null and userName != ''">user_name,</if>
  			<if test="nickName != null and nickName != ''">nick_name,</if>
  			<if test="email != null and email != ''">email,</if>

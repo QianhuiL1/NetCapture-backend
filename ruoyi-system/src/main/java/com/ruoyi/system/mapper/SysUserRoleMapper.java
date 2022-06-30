@@ -1,6 +1,8 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import com.ruoyi.system.domain.SysUserRole;
 
@@ -9,6 +11,7 @@ import com.ruoyi.system.domain.SysUserRole;
  * 
  * @author ruoyi
  */
+@Mapper
 public interface SysUserRoleMapper
 {
     /**
@@ -43,7 +46,7 @@ public interface SysUserRoleMapper
      */
     public int batchUserRole(List<SysUserRole> userRoleList);
 
-    public int insertDefaultRole(Long userId);
+    public int insertRole(SysUserRole userRole);
 
     /**
      * 删除用户和角色关联信息
