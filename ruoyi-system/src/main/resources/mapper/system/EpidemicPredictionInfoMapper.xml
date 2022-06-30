@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.EpidemicPredictionInfoMapper">
+    
+    <resultMap type="EpidemicPredictionInfo" id="EpidemicPredictionInfoResult">
+        <result property="name"    column="name"    />
+        <result property="date"    column="date"    />
+        <result property="newDailyData"    column="new_daily_data"    />
+        <result property="newDailyHigh"    column="new_daily_high"    />
+        <result property="newDailyLow"    column="new_daily_low"    />
+        <result property="id"    column="id"    />
+    </resultMap>
+
+    <sql id="selectEpidemicPredictionInfoVo">
+        select name, date, new_daily_data, new_daily_high, new_daily_low, id from epidemicPrediction_table
+    </sql>
+
+    <select id="selectEpidemicPredictionInfoList" parameterType="EpidemicPredictionInfo" resultMap="EpidemicPredictionInfoResult">
+        <include refid="selectEpidemicPredictionInfoVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="date != null  and date != ''"> and date = #{date}</if>
+            <if test="newDailyData != null  and newDailyData != ''"> and new_daily_data = #{newDailyData}</if>
+            <if test="newDailyHigh != null  and newDailyHigh != ''"> and new_daily_high = #{newDailyHigh}</if>
+            <if test="newDailyLow != null  and newDailyLow != ''"> and new_daily_low = #{newDailyLow}</if>
+        </where>
+    </select>
+    
+    <select id="selectEpidemicPredictionInfoById" parameterType="Long" resultMap="EpidemicPredictionInfoResult">
+        <include refid="selectEpidemicPredictionInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertEpidemicPredictionInfo" parameterType="EpidemicPredictionInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into epidemicPrediction_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="date != null">date,</if>
+            <if test="newDailyData != null">new_daily_data,</if>
+            <if test="newDailyHigh != null">new_daily_high,</if>
+            <if test="newDailyLow != null">new_daily_low,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="date != null">#{date},</if>
+            <if test="newDailyData != null">#{newDailyData},</if>
+            <if test="newDailyHigh != null">#{newDailyHigh},</if>
+            <if test="newDailyLow != null">#{newDailyLow},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEpidemicPredictionInfo" parameterType="EpidemicPredictionInfo">
+        update epidemicPrediction_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="date != null">date = #{date},</if>
+            <if test="newDailyData != null">new_daily_data = #{newDailyData},</if>
+            <if test="newDailyHigh != null">new_daily_high = #{newDailyHigh},</if>
+            <if test="newDailyLow != null">new_daily_low = #{newDailyLow},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEpidemicPredictionInfoById" parameterType="Long">
+        delete from epidemicPrediction_table where id = #{id}
+    </delete>
+
+    <delete id="deleteEpidemicPredictionInfoByIds" parameterType="String">
+        delete from epidemicPrediction_table where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

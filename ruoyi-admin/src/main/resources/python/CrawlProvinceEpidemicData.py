@@ -1,44 +1,16 @@
 from asyncio.windows_events import NULL
-from datetime import datetime
 import json
-import time
-import os
 from xml.dom.pulldom import PROCESSING_INSTRUCTION
 import requests
 import pandas as pd
-import pymysql
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, Column, Integer, String
 import sys
-from sqlalchemy.orm import *
 import io
+import config.DBConfig as DB
+import ORM.ProvinceEpidemicDataORM as ORM
 
-DB_URI = "mysql+pymysql://root:dozen233@122.112.140.161:3306/idfs"
-engine = create_engine(DB_URI,echo=False, pool_size=8, pool_recycle=60*30)
-Base = declarative_base(engine)  # SQLORM基类
-session = Session(engine)  # 构建session对象
-
-class TodayEpidemic_table(Base):
-    __tablename__ = 'todayEpidemic_table'  # 表名
-    province = Column(String(10))
-    confirm = Column(Integer)
-    storeConfirm = Column(Integer)
-    heal = Column(Integer)
-    dead = Column(Integer)
-    lastUpdateTime = Column(String)
-    area = Column(String(25))
-    todayEpidemicID = Column(Integer, primary_key=True, autoincrement=True)
-
-class TotalEpidemic_table(Base):
-    __tablename__ = 'totalEpidemic_table'  # 表名
-    province = Column(String(10))
-    confirm = Column(Integer)
-    input = Column(Integer)
-    heal = Column(Integer)
-    dead = Column(Integer)
-    lastUpdateTime = Column(String)
-    area = Column(String(25))
-    totalEpidemicID = Column(Integer, primary_key=True, autoincrement=True)
+session = DB.session
+TodayEpidemic_table = ORM.TodayEpidemic_table
+TotalEpidemic_table = ORM.TotalEpidemic_table
 
 def getEpidemicData(dict,isChild):
     #初始化数据
