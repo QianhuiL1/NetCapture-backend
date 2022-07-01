@@ -47,7 +47,7 @@ public class TotalEpidemicInfoController extends BaseController
     @ApiOperation("查询整体疫情列表")
     public TableDataInfo list(TotalEpidemicInfo totalEpidemicInfo)
     {
-        startPage();
+        //startPage();
         List<TotalEpidemicInfo> list = totalEpidemicInfoService.selectTotalEpidemicInfoList(totalEpidemicInfo);
         return getDataTable(list);
     }
@@ -121,7 +121,7 @@ public class TotalEpidemicInfoController extends BaseController
     @ApiOperation("查询整体省份疫情列表")
     public TableDataInfo provinceList()
     {
-        startPage();
+        //startPage();
         List<TotalEpidemicInfo> list = totalEpidemicInfoService.selectTotalProvinceEpidemicInfoList();
         return getDataTable(list);
     }

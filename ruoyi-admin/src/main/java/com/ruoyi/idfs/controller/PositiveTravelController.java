@@ -48,7 +48,7 @@ public class PositiveTravelController extends BaseController
     @GetMapping("/positiveScanList/{recordId}")
     public TableDataInfo positiveScanList(@PathVariable("recordId") String recordId)
     {
-        startPage();
+        //startPage();
         List<ScanInfo> list = positiveTravelService.selectPositiveScanListByRecordId(recordId);
         return getDataTable(list);
     }
@@ -62,7 +62,7 @@ public class PositiveTravelController extends BaseController
     @ApiOperation("查询阳性人员途径地址信息列表")
     public TableDataInfo list(PositiveTravel positiveTravel)
     {
-        startPage();
+        //startPage();
         List<PositiveTravel> list = positiveTravelService.selectPositiveTravelList(positiveTravel);
         return getDataTable(list);
     }
@@ -76,7 +76,7 @@ public class PositiveTravelController extends BaseController
     {
         PositiveTravel positiveTravel = new PositiveTravel();
         positiveTravel.setPeopleId(peopleId);
-        startPage();
+        //startPage();
         List<PositiveTravel> list = positiveTravelService.selectPositiveTravelList(positiveTravel);
         return getDataTable(list);
     }

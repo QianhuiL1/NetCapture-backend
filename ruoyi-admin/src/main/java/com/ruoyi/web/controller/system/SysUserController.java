@@ -61,6 +61,17 @@ public class SysUserController extends BaseController
         return getDataTable(list);
     }
 
+    @PreAuthorize("@ss.hasPermi('system:user:list')")
+    @GetMapping("/list/listByUsername/{username}")
+    public TableDataInfo listByUsername(@PathVariable("username") String username)
+    {
+        startPage();
+        SysUser user = new SysUser();
+        user.setUserName(username);
+        List<SysUser> listByUsername = userService.selectUserList(user);
+        return getDataTable(listByUsername);
+    }
+
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:user:export')")
     @PostMapping("/export")

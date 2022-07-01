@@ -46,7 +46,7 @@ public class SojournInfoController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(SojournInfo sojournInfo)
     {
-        startPage();
+        //startPage();
         List<SojournInfo> list = sojournInfoService.selectSojournInfoList(sojournInfo);
         return getDataTable(list);
     }
@@ -59,7 +59,7 @@ public class SojournInfoController extends BaseController
     @GetMapping("/listByPeopleId/{peopleId}")
     public TableDataInfo listByPeopleId(@PathVariable("peopleId") String peopleId)
     {
-        startPage();
+        //startPage();
         List<SojournInfo> list = sojournInfoService.selectSojournInfoListByPeopleId(peopleId);
         return getDataTable(list);
     }

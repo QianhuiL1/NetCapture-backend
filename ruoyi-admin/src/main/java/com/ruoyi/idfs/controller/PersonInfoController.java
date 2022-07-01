@@ -50,7 +50,8 @@ public class PersonInfoController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(PersonInfo personInfo)
     {
-        startPage();
+        //分页
+        //startPage();
         List<PersonInfo> list = personInfoService.selectPersonInfoList(personInfo);
         return getDataTable(list);
     }
@@ -59,7 +60,7 @@ public class PersonInfoController extends BaseController
     @GetMapping("/listByAddress/{address}")
     public TableDataInfo listByAddress(@PathVariable("address") String address)
     {
-        startPage();
+        //startPage();
         PersonInfo personInfo = new PersonInfo();
         personInfo.setAddress(address);
         List<PersonInfo> list = personInfoService.selectPersonInfoList(personInfo);
@@ -70,7 +71,7 @@ public class PersonInfoController extends BaseController
     @GetMapping("/listByName/{name}")
     public TableDataInfo listByName(@PathVariable("name") String name)
     {
-        startPage();
+        //startPage();
         PersonInfo personInfo = new PersonInfo();
         personInfo.setName(name);
         List<PersonInfo> list = personInfoService.selectPersonInfoList(personInfo);
@@ -81,7 +82,7 @@ public class PersonInfoController extends BaseController
     @GetMapping("/listByAncestors/{ancestors}")
     public TableDataInfo listByAncestors(@PathVariable("ancestors") String ancestors)
     {
-        startPage();
+        //startPage();
         PersonInfo personInfo = new PersonInfo();
         personInfo.setAncestors(displayWithComma(ancestors));
         List<PersonInfo> list = personInfoService.selectPersonInfoList(personInfo);
@@ -143,7 +144,7 @@ public class PersonInfoController extends BaseController
     @GetMapping(value = "/statuslist/{status}")
     public TableDataInfo statuslist(@PathVariable("status") String status)
     {
-        startPage();
+        //startPage();
         return getDataTable(personInfoService.selectPersonInfoListByStatus(status));
     }
 
