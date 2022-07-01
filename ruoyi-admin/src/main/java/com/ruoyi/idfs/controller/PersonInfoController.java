@@ -89,7 +89,7 @@ public class PersonInfoController extends BaseController
         return getDataTable(list);
     }
     /**
-     * 整理传入的区号字符串方法
+     * 整理传入的区号字符串的方法
      * @param str1 传入的全为数字的字符串
      * @return
      */
