@@ -59,6 +59,10 @@ public class SysUser extends BaseEntity
     @Excel(name = "帐号状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
+    /** 帐号审核状态（0未审核 1已审核） */
+    @Excel(name = "帐号审核状态", readConverterExp = "0=未审核,1=已审核")
+    private String examine;
+
     /** 删除标志（0代表存在 2代表删除） */
     private String delFlag;
 
@@ -217,6 +221,16 @@ public class SysUser extends BaseEntity
         this.status = status;
     }
 
+    public String getExamine()
+    {
+        return examine;
+    }
+
+    public void setExamine(String examine)
+    {
+        this.examine = examine;
+    }
+
     public String getDelFlag()
     {
         return delFlag;
@@ -310,6 +324,7 @@ public class SysUser extends BaseEntity
             .append("avatar", getAvatar())
             .append("password", getPassword())
             .append("status", getStatus())
+            .append("examine", getExamine())
             .append("delFlag", getDelFlag())
             .append("loginIp", getLoginIp())
             .append("loginDate", getLoginDate())

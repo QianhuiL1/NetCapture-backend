@@ -219,6 +219,21 @@ public class SysUserController extends BaseController
     }
 
     /**
+     * 审核状态修改
+     */
+    @PreAuthorize("@ss.hasPermi('system:user:edit')")
+    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
+    @PutMapping("/changeExamine")
+    public AjaxResult changeExamine(@RequestBody SysUser user)
+    {
+        
+        userService.checkUserAllowed(user);
+        userService.checkUserDataScope(user.getUserId());
+        user.setUpdateBy(getUsername());
+        return toAjax(userService.updateUserExamine(user));
+    }
+
+    /**
      * 根据用户编号获取授权角色
      */
     @PreAuthorize("@ss.hasPermi('system:user:query')")

@@ -50,6 +50,11 @@ public class PersonInfo extends BaseEntity
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private Date positiveTime;
 
+    /** 是否审核（0：未审核，1：已审核） */
+    @Excel(name = "是否审核", readConverterExp = "0=：未审核，1：已审核")
+    private String examine;
+
+
     public void setPeopleId(String peopleId)
     {
         this.peopleId = peopleId;
@@ -124,6 +129,15 @@ public class PersonInfo extends BaseEntity
         return positiveTime;
     }
 
+    public String getExamine()
+    {
+        return examine;
+    }
+    public void setExamine(String examine)
+    {
+        this.examine = examine;
+    }
+
 
 
     @Override
@@ -137,6 +151,7 @@ public class PersonInfo extends BaseEntity
             .append("ancestors", getAncestors())
             .append("address", getAddress())
             .append("positiveTime", getPositiveTime())
+            .append("examine", getExamine())
             .toString();
     }
 }

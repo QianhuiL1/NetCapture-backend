@@ -2,6 +2,8 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.common.core.domain.entity.SysUser;
+import org.apache.ibatis.annotations.Mapper;
+
 
 /**
  * 用户 业务层
@@ -143,6 +145,13 @@ public interface ISysUserService
      * @return 结果
      */
     public int updateUserStatus(SysUser user);
+
+    /**
+     * 修改用户审核状态
+     * @param user
+     * @return
+     */
+    public int updateUserExamine(SysUser user);
 
     /**
      * 修改用户基本信息
