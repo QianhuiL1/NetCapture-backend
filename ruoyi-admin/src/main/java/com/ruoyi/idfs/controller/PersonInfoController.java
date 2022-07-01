@@ -1,10 +1,12 @@
 package com.ruoyi.idfs.controller;
 
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -81,10 +83,33 @@ public class PersonInfoController extends BaseController
     {
         startPage();
         PersonInfo personInfo = new PersonInfo();
-        personInfo.setAncestors(ancestors);
+        personInfo.setAncestors(displayWithComma(ancestors));
         List<PersonInfo> list = personInfoService.selectPersonInfoList(personInfo);
         return getDataTable(list);
     }
+    /**
+     * 整理传入的区号字符串方法
+     * @param str1 传入的全为数字的字符串
+     * @return
+     */
+    public static String displayWithComma(String str1){
+        str1 = new StringBuilder(str1).reverse().toString();
+        String str2 = "";
+        for(int i=0;i<str1.length();i++){
+            if(i*6+6>str1.length()){
+                str2 += str1.substring(i*6, str1.length()-1);
+                break;
+            }
+            str2 += str1.substring(i*6, i*6+6)+",";
+        }
+        if(str2.endsWith(",")){
+            str2 = str2.substring(0, str2.length()-1);
+        }
+
+        return new StringBuilder(str2).reverse().toString();
+    }
+
+
     /**
      * 导出存储普通人员的相关信息列表
      */
@@ -121,6 +146,25 @@ public class PersonInfoController extends BaseController
         startPage();
         return getDataTable(personInfoService.selectPersonInfoListByStatus(status));
     }
+
+    /**
+     * 获取某一时间段内的相关人员信息列表
+     * @param time1
+     * @param time2
+     * @return
+     */
+    @ApiOperation("根据时间段查询存储普通人员的相关信息列表")
+    @PreAuthorize("@ss.hasPermi('idfs:personInfo:list')")
+    @GetMapping(value = "/listByTime/{time1}&&{time2}")
+    public TableDataInfo listByTime(@PathVariable("time1") Date time1, @PathVariable("time2") Date time2)
+    {
+        startPage();
+        return getDataTable(personInfoService.selectPersonInfolist(time1,time2));
+    }
+
+
+
+
 
     /**
      * 新增存储普通人员的相关信息

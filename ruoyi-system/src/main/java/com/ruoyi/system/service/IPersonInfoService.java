@@ -1,5 +1,6 @@
 package com.ruoyi.system.service;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.system.domain.PersonInfo;
 
@@ -27,6 +28,9 @@ public interface IPersonInfoService
      */
     public List<PersonInfo> selectPersonInfoList(PersonInfo personInfo);
 
+
+
+
     /**
      * 根据某一特定健康类型查询存储普通人员的相关信息列表
      *
@@ -35,6 +39,13 @@ public interface IPersonInfoService
      */
     public List<PersonInfo> selectPersonInfoListByStatus(String status);
 
+    /**
+     * 根据时间段查询相关人员的信息列表
+     * @param time1
+     * @param time2
+     * @return
+     */
+    public List<PersonInfo> selectPersonInfolist(Date time1,Date time2);
 
     /**
      * 新增存储普通人员的相关信息

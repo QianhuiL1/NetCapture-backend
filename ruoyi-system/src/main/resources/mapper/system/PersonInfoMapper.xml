@@ -28,8 +28,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="ancestors != null  and ancestors != ''"> and ancestors = #{ancestors}</if>
             <if test="address != null  and address != ''"> and address = #{address}</if>
-            <if test="positiveTime != null "> and positive_time = #{positiveTime}</if>
+            <if test="positiveTime != null "> and positive_time = #{positivetime}</if>
         </where>
+    </select>
+
+    <select id="selectPersonInfolist" parameterType="PersonInfo" resultMap="PersonInfoResult">
+        <include refid="selectPersonInfoVo"/>
+        where positive_time >= #{arg0} and #{arg1} >= positive_time
     </select>
 
     <select id="selectPersonInfoListByStatus" parameterType="String" resultMap="PersonInfoResult">

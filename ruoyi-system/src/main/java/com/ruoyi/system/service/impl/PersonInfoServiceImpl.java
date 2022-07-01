@@ -1,5 +1,6 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.ast.Literal;
@@ -44,10 +45,16 @@ public class PersonInfoServiceImpl implements IPersonInfoService
         return personInfoMapper.selectPersonInfoList(personInfo);
     }
 
+
     @Override
     public List<PersonInfo> selectPersonInfoListByStatus(String status)
     {
         return personInfoMapper.selectPersonInfoListByStatus(status);
+    }
+
+    @Override
+    public List<PersonInfo> selectPersonInfolist(Date time1, Date time2) {
+        return personInfoMapper.selectPersonInfolist(time1,time2);
     }
 
 
