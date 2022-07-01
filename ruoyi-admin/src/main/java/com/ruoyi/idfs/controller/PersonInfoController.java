@@ -77,17 +77,6 @@ public class PersonInfoController extends BaseController
         List<PersonInfo> list = personInfoService.selectPersonInfoList(personInfo);
         return getDataTable(list);
     }
-    @ApiOperation("根据审核状态查询存储普通人员的相关信息列表")
-    @PreAuthorize("@ss.hasPermi('idfs:personInfo:list')")
-    @GetMapping("/listByExamine/{examine}")
-    public TableDataInfo listByExamine(@PathVariable("examine") String examine)
-    {
-        //startPage();
-        PersonInfo personInfo = new PersonInfo();
-        personInfo.setExamine(examine);
-        List<PersonInfo> list = personInfoService.selectPersonInfoList(personInfo);
-        return getDataTable(list);
-    }
     @ApiOperation("根据区号查询存储普通人员的相关信息列表")
     @PreAuthorize("@ss.hasPermi('idfs:personInfo:list')")
     @GetMapping("/listByAncestors/{ancestors}")
