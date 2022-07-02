@@ -96,4 +96,9 @@ public class TotalEpidemicInfoServiceImpl implements ITotalEpidemicInfoService
     public List<TotalEpidemicInfo> selectTotalProvinceEpidemicInfoList(String totalepidemicDate) {
         return totalEpidemicInfoMapper.selectTotalProvinceEpidemicInfoList(totalepidemicDate);
     }
+
+    @Override
+    public TotalEpidemicInfo selectTotalCountryEpidemicInfoByDate(String totalEpidemicDate) {
+        return totalEpidemicInfoMapper.selectTotalCountryEpidemicInfoByDate(totalEpidemicDate);
+    }
 }

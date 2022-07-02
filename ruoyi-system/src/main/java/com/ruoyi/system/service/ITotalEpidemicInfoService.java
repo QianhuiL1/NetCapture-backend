@@ -62,4 +62,7 @@ public interface ITotalEpidemicInfoService
     public int deleteTotalEpidemicInfoByTotalepidemicid(Long totalepidemicid);
 
     public List<TotalEpidemicInfo> selectTotalProvinceEpidemicInfoList(String totalepidemicDate);
+
+    public TotalEpidemicInfo selectTotalCountryEpidemicInfoByDate(String totalEpidemicDate);
+
 }

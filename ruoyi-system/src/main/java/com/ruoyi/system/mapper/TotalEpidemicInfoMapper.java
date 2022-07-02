@@ -62,4 +62,6 @@ public interface TotalEpidemicInfoMapper
     public int deleteTotalEpidemicInfoByTotalepidemicids(Long[] totalepidemicids);
 
     public List<TotalEpidemicInfo> selectTotalProvinceEpidemicInfoList(String totalepidemicDate);
+
+    public TotalEpidemicInfo selectTotalCountryEpidemicInfoByDate(String totalEpidemicDate);
 }

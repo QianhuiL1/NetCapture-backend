@@ -17,6 +17,10 @@ public class TotalEpidemicInfo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
+    /** 国家 */
+    @Excel(name = "国家")
+    private String country;
+
     /** 省份 */
     @Excel(name = "省份")
     private String province;
@@ -121,6 +125,14 @@ public class TotalEpidemicInfo extends BaseEntity
         return totalepidemicid;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -132,6 +144,7 @@ public class TotalEpidemicInfo extends BaseEntity
             .append("input", getInput())
             .append("lastupdatetime", getLastupdatetime())
             .append("totalepidemicid", getTotalepidemicid())
+                .append("country",getCountry())
             .toString();
     }
 }

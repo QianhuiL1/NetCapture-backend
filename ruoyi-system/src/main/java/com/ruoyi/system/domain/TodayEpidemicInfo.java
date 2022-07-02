@@ -54,6 +54,14 @@ public class TodayEpidemicInfo extends BaseEntity
     @Excel(name = "输入病例")
     private Long input;
 
+    /** 无症状感染者 */
+    @Excel(name = "无症状感染者")
+    private Long noSymptom;
+
+    /** 新增无症状感染者 */
+    @Excel(name = "新增无症状感染者")
+    private Long incrNoSymptom;
+
     /** 当天疫情序号 */
     private Long todayepidemicid;
 
@@ -146,6 +154,22 @@ public class TodayEpidemicInfo extends BaseEntity
         this.input = input;
     }
 
+    public Long getNoSymptom() {
+        return noSymptom;
+    }
+
+    public void setNoSymptom(Long noSymptom) {
+        this.noSymptom = noSymptom;
+    }
+
+    public Long getIncrNoSymptom() {
+        return incrNoSymptom;
+    }
+
+    public void setIncrNoSymptom(Long incrNoSymptom) {
+        this.incrNoSymptom = incrNoSymptom;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -159,6 +183,8 @@ public class TodayEpidemicInfo extends BaseEntity
             .append("todayepidemicid", getTodayepidemicid())
                 .append("input",getInput())
                 .append("country",getCountry())
+                .append("noSymptom",getNoSymptom())
+                .append("incrNoSymptom",getIncrNoSymptom())
             .toString();
     }
 }
