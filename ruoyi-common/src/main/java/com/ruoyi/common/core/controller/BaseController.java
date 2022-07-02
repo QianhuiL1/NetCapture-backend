@@ -132,6 +132,10 @@ public class BaseController
     {
         return rows > 0 ? AjaxResult.success() : AjaxResult.error();
     }
+    protected AjaxResult toAjax(int rows,String msg)
+    {
+        return rows > 0? AjaxResult.success():AjaxResult.error(msg);
+    }
 
     /**
      * 响应返回结果
