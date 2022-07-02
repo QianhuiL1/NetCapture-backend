@@ -32,7 +32,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @Api(tags="旅居信息登记表")
 @RestController
-@RequestMapping("/system/sojourn_table")
+@RequestMapping("/sojourn")
 public class SojournInfoController extends BaseController
 {
     @Autowired
