@@ -19,7 +19,6 @@ class TodayEpidemic_table(Base):
     lastUpdateTime = Column(String)
     area = Column(String(25))
     incrNoSymptom = Column(Integer)
-    noSymptom = Column(Integer)
     todayEpidemicID = Column(Integer, primary_key=True, autoincrement=True)
 
 class TotalEpidemic_table(Base):
@@ -32,4 +31,5 @@ class TotalEpidemic_table(Base):
     dead = Column(Integer)
     lastUpdateTime = Column(String)
     area = Column(String(25))
+    noSymptom = Column(Integer)
     totalEpidemicID = Column(Integer, primary_key=True, autoincrement=True)

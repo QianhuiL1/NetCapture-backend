@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="selectTodayCountryEpidemicInfo" parameterType="String" resultMap="TodayEpidemicInfoResult">
-        select country, confirm, storeConfirm, heal, dead, lastUpdateTime, input, incrNoSymptom, noSymptom, todayEpidemicID
+        select country, confirm, storeConfirm, heal, dead, lastUpdateTime, input, incrNoSymptom, todayEpidemicID
         from todayEpidemic_table
         where isNull(area) and isNull(province) and lastUpdateTime like #{todayepidemicDate} "%"
     </select>

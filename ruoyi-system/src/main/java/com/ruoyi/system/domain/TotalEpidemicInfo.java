@@ -49,6 +49,10 @@ public class TotalEpidemicInfo extends BaseEntity
     @Excel(name = "最近一次更新时间")
     private String lastupdatetime;
 
+    /** 无症状感染者人数 */
+    @Excel(name = "无症状感染者人数")
+    private String noSymptom;
+
     /** 总体疫情序号 */
     private Long totalepidemicid;
 
@@ -133,6 +137,14 @@ public class TotalEpidemicInfo extends BaseEntity
         this.country = country;
     }
 
+    public String getNoSymptom() {
+        return noSymptom;
+    }
+
+    public void setNoSymptom(String noSymptom) {
+        this.noSymptom = noSymptom;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -145,6 +157,7 @@ public class TotalEpidemicInfo extends BaseEntity
             .append("lastupdatetime", getLastupdatetime())
             .append("totalepidemicid", getTotalepidemicid())
                 .append("country",getCountry())
+                .append("noSymptom",getNoSymptom())
             .toString();
     }
 }

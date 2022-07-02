@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="selectTotalCountryEpidemicInfoByDate" parameterType="String" resultMap="TotalEpidemicInfoResult">
-        select country, confirm, heal, dead, input, lastUpdateTime, totalEpidemicID
+        select country, confirm, heal, dead, input, lastUpdateTime, totalEpidemicID, noSymptom
         from totalEpidemic_table
         where isNull(area) and isNull(province) and lastUpdateTime like #{totalepidemicDate} "%"
     </select>
