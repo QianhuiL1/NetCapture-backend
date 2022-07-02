@@ -96,4 +96,9 @@ public class TodayEpidemicInfoServiceImpl implements ITodayEpidemicInfoService
     public List<TodayEpidemicInfo> selectTodayProvinceEpidemicInfoList(String todayepidemicDate) {
         return todayEpidemicInfoMapper.selectTodayProvinceEpidemicInfoList(todayepidemicDate);
     }
+
+    @Override
+    public TodayEpidemicInfo selectTodayCountryEpidemicInfoByDate(String todayepidemicDate) {
+        return todayEpidemicInfoMapper.selectTodayCountryEpidemicInfo(todayepidemicDate);
+    }
 }

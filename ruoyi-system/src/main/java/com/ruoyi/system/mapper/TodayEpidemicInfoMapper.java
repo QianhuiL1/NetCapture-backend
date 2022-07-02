@@ -62,4 +62,7 @@ public interface TodayEpidemicInfoMapper
 
     //获取当天省份疫情信息
     public List<TodayEpidemicInfo> selectTodayProvinceEpidemicInfoList(String todayepidemicDate);
+
+    //获取当天全国疫情信息
+    public TodayEpidemicInfo selectTodayCountryEpidemicInfo(String todayepidemicDate);
 }

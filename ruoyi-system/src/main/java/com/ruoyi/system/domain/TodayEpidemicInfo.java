@@ -18,6 +18,10 @@ public class TodayEpidemicInfo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
+    /** 国家 */
+    @Excel(name = "国家")
+    private String country;
+
     /** 省份 */
     @Excel(name = "省份")
     private String province;
@@ -45,6 +49,10 @@ public class TodayEpidemicInfo extends BaseEntity
     /** 最近一次更新时间 */
     @Excel(name = "最近一次更新时间")
     private String lastupdatetime;
+
+    /** 输入病例 */
+    @Excel(name = "输入病例")
+    private Long input;
 
     /** 当天疫情序号 */
     private Long todayepidemicid;
@@ -122,6 +130,22 @@ public class TodayEpidemicInfo extends BaseEntity
         return todayepidemicid;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Long getInput() {
+        return input;
+    }
+
+    public void setInput(Long input) {
+        this.input = input;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -133,6 +157,8 @@ public class TodayEpidemicInfo extends BaseEntity
             .append("dead", getDead())
             .append("lastupdatetime", getLastupdatetime())
             .append("todayepidemicid", getTodayepidemicid())
+                .append("input",getInput())
+                .append("country",getCountry())
             .toString();
     }
 }

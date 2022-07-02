@@ -38,6 +38,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where isNull(area) and lastUpdateTime like #{todayepidemicDate} "%"
     </select>
 
+    <select id="selectTodayCountryEpidemicInfo" parameterType="String" resultMap="TodayEpidemicInfoResult">
+        select country, confirm, storeConfirm, heal, dead, lastUpdateTime, input, todayEpidemicID
+        from todayEpidemic_table
+        where isNull(area) and isNull(province) and lastUpdateTime like #{todayepidemicDate} "%"
+    </select>
+
     <select id="selectTodayEpidemicInfoByTodayepidemicid" parameterType="Long" resultMap="TodayEpidemicInfoResult">
         <include refid="selectTodayEpidemicInfoVo"/>
         where todayEpidemicID = #{todayepidemicid}

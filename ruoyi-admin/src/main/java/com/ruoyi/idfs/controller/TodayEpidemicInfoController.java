@@ -125,4 +125,16 @@ public class TodayEpidemicInfoController extends BaseController
         List<TodayEpidemicInfo> list = todayEpidemicInfoService.selectTodayProvinceEpidemicInfoList(todayepidemicDate);
         return getDataTable(list);
     }
+
+    /**
+     * 查询当天全国疫情信息
+     */
+    @PreAuthorize("@ss.hasPermi('system:todayEpidemic:provinceList')")
+    @GetMapping("/country/{todayepidemicDate}")
+    @ApiOperation("查询当天全国疫情信息")
+    public AjaxResult getCountryInfo(@PathVariable String todayepidemicDate)
+    {
+        //startPage();
+        return AjaxResult.success(todayEpidemicInfoService.selectTodayCountryEpidemicInfoByDate(todayepidemicDate));
+    }
 }
