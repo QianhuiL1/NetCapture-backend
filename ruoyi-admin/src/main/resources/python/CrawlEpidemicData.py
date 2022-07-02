@@ -6,7 +6,7 @@ import pandas as pd
 import sys
 import io
 import config.DBConfig as DB
-import ORM.ProvinceEpidemicDataORM as ORM
+import ORM.EpidemicDataORM as ORM
 
 session = DB.session
 TodayEpidemic_table = ORM.TodayEpidemic_table
@@ -37,16 +37,41 @@ def getEpidemicDataList(dict):
         dataArr.append(getEpidemicData(i,0))
     return dataArr
 
-def saveDataToDB(data_province):
+def getCountryDataList(data_China):
+    countryDataList = []
+    countryData = EpidemicData()
+    countryTodayData = TodayEpidemic()
+    countryTodayData.confirm = data_China["chinaTotal"]["today"]["confirm"]
+    countryTodayData.heal = data_China["chinaTotal"]["today"]["heal"]
+    countryTodayData.dead = data_China["chinaTotal"]["today"]["dead"]
+    countryTodayData.storeConfirm = data_China["chinaTotal"]["today"]["storeConfirm"]
+    countryTodayData.input = data_China["chinaTotal"]["today"]["input"]
+    countryData.today = countryTodayData
+    countryTotalData = TotalEpidemic()
+    countryTotalData.confirm = data_China["chinaTotal"]["total"]["confirm"]
+    countryTotalData.heal = data_China["chinaTotal"]["total"]["heal"]
+    countryTotalData.dead = data_China["chinaTotal"]["total"]["dead"]
+    countryTotalData.input = data_China["chinaTotal"]["total"]["input"]
+    countryData.total = countryTotalData
+    countryData.name = "中国"
+    countryData.lastUpdateTime = data_China["lastUpdateTime"]
+    countryDataList.append(countryData)
+    return countryDataList
+
+
+def saveDataToDB(data_province, data_China):
     dataObjectList = getEpidemicDataList(data_province)
+    countryDataObject = getCountryDataList(data_China)[0]
     # session.execute("delete from todayEpidemic_table")
     # session.execute("delete from totalEpidemic_table")
+    session.add(TodayEpidemic_table(country=countryDataObject.name,confirm=countryDataObject.today.confirm,heal=countryDataObject.today.heal,dead=countryDataObject.today.dead,storeConfirm=countryDataObject.today.storeConfirm,input=countryDataObject.today.input,lastUpdateTime=countryDataObject.lastUpdateTime))
+    session.add(TotalEpidemic_table(country=countryDataObject.name,confirm=countryDataObject.total.confirm,heal=countryDataObject.total.heal,dead=countryDataObject.total.dead,input=countryDataObject.total.input,lastUpdateTime=countryDataObject.lastUpdateTime))
     for dataObjParent in dataObjectList:
-        session.add(TodayEpidemic_table(province=dataObjParent.name,confirm=dataObjParent.today.confirm,storeConfirm=dataObjParent.today.storeConfirm,heal=dataObjParent.today.heal,dead=dataObjParent.today.dead,lastUpdateTime=dataObjParent.lastUpdateTime))
-        session.add(TotalEpidemic_table(province=dataObjParent.name,confirm=dataObjParent.total.confirm,input=dataObjParent.total.input,heal=dataObjParent.total.heal,dead=dataObjParent.total.dead,lastUpdateTime=dataObjParent.lastUpdateTime))
+        session.add(TodayEpidemic_table(country = "中国",province=dataObjParent.name,confirm=dataObjParent.today.confirm,storeConfirm=dataObjParent.today.storeConfirm,heal=dataObjParent.today.heal,dead=dataObjParent.today.dead,lastUpdateTime=dataObjParent.lastUpdateTime))
+        session.add(TotalEpidemic_table(country = "中国",province=dataObjParent.name,confirm=dataObjParent.total.confirm,input=dataObjParent.total.input,heal=dataObjParent.total.heal,dead=dataObjParent.total.dead,lastUpdateTime=dataObjParent.lastUpdateTime))
         for dataObjChildren in dataObjParent.Children:
-            session.add(TotalEpidemic_table(province=dataObjParent.name,area=dataObjChildren.name,confirm=dataObjChildren.total.confirm,input=None,heal=dataObjChildren.total.heal,dead=dataObjChildren.total.dead,lastUpdateTime=dataObjChildren.lastUpdateTime))
-            session.add(TodayEpidemic_table(province=dataObjParent.name,area=dataObjChildren.name,confirm=dataObjChildren.today.confirm,storeConfirm=dataObjChildren.today.storeConfirm,heal=dataObjChildren.today.heal,dead=dataObjChildren.today.dead,lastUpdateTime=dataObjChildren.lastUpdateTime))
+            session.add(TotalEpidemic_table(country = "中国",province=dataObjParent.name,area=dataObjChildren.name,confirm=dataObjChildren.total.confirm,input=None,heal=dataObjChildren.total.heal,dead=dataObjChildren.total.dead,lastUpdateTime=dataObjChildren.lastUpdateTime))
+            session.add(TodayEpidemic_table(country = "中国",province=dataObjParent.name,area=dataObjChildren.name,confirm=dataObjChildren.today.confirm,storeConfirm=dataObjChildren.today.storeConfirm,heal=dataObjChildren.today.heal,dead=dataObjChildren.today.dead,lastUpdateTime=dataObjChildren.lastUpdateTime))
     session.commit()
     session.close()
     print("数据持久化更新已执行")
@@ -129,11 +154,15 @@ class TodayEpidemic:
     storeConfirm = ""
     heal = ""
     dead = ""
+    storeConfirm = ""
+    input = ""
     def __init__(self):
         self.confirm = ""
         self.storeConfirm = ""
         self.heal = ""
         self.dead = ""
+        self.storeConfirm = ""
+        self.input = ""
 
 class TotalEpidemic:
     confirm = ""
@@ -161,12 +190,12 @@ if __name__ == "__main__":
     datas = get_html(url, headers)
 
     # 2.找到储存中国34省的数据所在
+    data_China = datas["data"]
     data_province = datas["data"]["areaTree"][2]["children"]
-
     # 3.提取34个省数据
     #all_data = get_data(data_province, ["id", "name", "lastUpdateTime"])
 
     # 4.持久化保存数据
     #save_data(all_data, "today_province")
 
-    saveDataToDB(data_province)
+    saveDataToDB(data_province,data_China)

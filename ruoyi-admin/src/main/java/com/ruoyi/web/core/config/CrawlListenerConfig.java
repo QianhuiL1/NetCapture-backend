@@ -2,7 +2,7 @@ package com.ruoyi.web.core.config;
 
 import com.ruoyi.common.utils.idfs.CrawlEpidemicEventUtil;
 import com.ruoyi.common.utils.idfs.CrawlEpidemicPredictionDataUtil;
-import com.ruoyi.common.utils.idfs.CrawlProvinceEpidemicDataUtil;
+import com.ruoyi.common.utils.idfs.CrawlEpidemicDataUtil;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,7 +18,7 @@ public class CrawlListenerConfig {
     private void configureTasks() {
         System.out.println("[CrawlListenerUtil " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "]" + "自动更新数据");
         System.out.println("----------自动更新全国疫情数据----------");
-        CrawlProvinceEpidemicDataUtil.crawlDataSavedIntoDB();
+        CrawlEpidemicDataUtil.crawlDataSavedIntoDB();
         System.out.println("----------全国疫情数据更新完毕----------");
         System.out.println("----------自动更新预测疫情数据----------");
         CrawlEpidemicPredictionDataUtil.crawlDataSavedIntoDB();
