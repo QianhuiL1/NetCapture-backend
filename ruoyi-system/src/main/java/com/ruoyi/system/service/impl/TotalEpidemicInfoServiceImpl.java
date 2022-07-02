@@ -93,7 +93,7 @@ public class TotalEpidemicInfoServiceImpl implements ITotalEpidemicInfoService
         return totalEpidemicInfoMapper.deleteTotalEpidemicInfoByTotalepidemicid(totalepidemicid);
     }
     @Override
-    public List<TotalEpidemicInfo> selectTotalProvinceEpidemicInfoList() {
-        return totalEpidemicInfoMapper.selectTotalProvinceEpidemicInfoList();
+    public List<TotalEpidemicInfo> selectTotalProvinceEpidemicInfoList(String totalepidemicDate) {
+        return totalEpidemicInfoMapper.selectTotalProvinceEpidemicInfoList(totalepidemicDate);
     }
 }

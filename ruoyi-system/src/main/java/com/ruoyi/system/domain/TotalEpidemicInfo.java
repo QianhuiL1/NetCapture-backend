@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 整体疫情对象 totalEpidemic_table
- * 
+ *
  * @author SoLam
  * @date 2022-06-29
  */
@@ -42,82 +42,81 @@ public class TotalEpidemicInfo extends BaseEntity
     private Long input;
 
     /** 最近一次更新时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "最近一次更新时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date lastupdatetime;
+    @Excel(name = "最近一次更新时间")
+    private String lastupdatetime;
 
     /** 总体疫情序号 */
     private Long totalepidemicid;
 
-    public void setProvince(String province) 
+    public void setProvince(String province)
     {
         this.province = province;
     }
 
-    public String getProvince() 
+    public String getProvince()
     {
         return province;
     }
-    public void setArea(String area) 
+    public void setArea(String area)
     {
         this.area = area;
     }
 
-    public String getArea() 
+    public String getArea()
     {
         return area;
     }
-    public void setConfirm(Long confirm) 
+    public void setConfirm(Long confirm)
     {
         this.confirm = confirm;
     }
 
-    public Long getConfirm() 
+    public Long getConfirm()
     {
         return confirm;
     }
-    public void setHeal(Long heal) 
+    public void setHeal(Long heal)
     {
         this.heal = heal;
     }
 
-    public Long getHeal() 
+    public Long getHeal()
     {
         return heal;
     }
-    public void setDead(Long dead) 
+    public void setDead(Long dead)
     {
         this.dead = dead;
     }
 
-    public Long getDead() 
+    public Long getDead()
     {
         return dead;
     }
-    public void setInput(Long input) 
+    public void setInput(Long input)
     {
         this.input = input;
     }
 
-    public Long getInput() 
+    public Long getInput()
     {
         return input;
     }
-    public void setLastupdatetime(Date lastupdatetime) 
+    public void setLastupdatetime(String lastupdatetime)
     {
         this.lastupdatetime = lastupdatetime;
     }
 
-    public Date getLastupdatetime() 
+    public String getLastupdatetime()
     {
         return lastupdatetime;
     }
-    public void setTotalepidemicid(Long totalepidemicid) 
+    public void setTotalepidemicid(Long totalepidemicid)
     {
         this.totalepidemicid = totalepidemicid;
     }
 
-    public Long getTotalepidemicid() 
+    public Long getTotalepidemicid()
     {
         return totalepidemicid;
     }

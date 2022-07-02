@@ -1,5 +1,6 @@
 package com.ruoyi.system.mapper;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.system.domain.TodayEpidemicInfo;
 
@@ -60,5 +61,5 @@ public interface TodayEpidemicInfoMapper
     public int deleteTodayEpidemicInfoByTodayepidemicids(Long[] todayepidemicids);
 
     //获取当天省份疫情信息
-    public List<TodayEpidemicInfo> selectTodayProvinceEpidemicInfoList();
+    public List<TodayEpidemicInfo> selectTodayProvinceEpidemicInfoList(String todayepidemicDate);
 }
