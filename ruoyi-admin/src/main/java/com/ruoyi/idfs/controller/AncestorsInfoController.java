@@ -82,7 +82,7 @@ public class AncestorsInfoController extends BaseController
      */
     @ApiOperation("获取行政区域详细信息")
     @PreAuthorize("@ss.hasPermi('system:ancestor:query')")
-    @GetMapping(value = "/list/{ancestorId}")
+    @GetMapping(value = "/list/listByID/{ancestorId}")
     public TableDataInfo listByAncestorId(@PathVariable("ancestorId") String ancestorId)
     {
         AncestorsInfo ancestorsInfo =new AncestorsInfo();
