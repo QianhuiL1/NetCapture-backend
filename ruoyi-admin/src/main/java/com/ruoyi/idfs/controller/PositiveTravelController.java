@@ -127,7 +127,7 @@ public class PositiveTravelController extends BaseController
     @PutMapping("updateContact/{recordId}")
     public AjaxResult updateContactStatusByPositiveTravel(@PathVariable String recordId)
     {
-        return toAjax(positiveTravelService.updateContactStatusByPositiveTravel(recordId),"经匹配，未查询到符合条件的数据");
+        return toAjax(positiveTravelService.updateContactStatusByPositiveTravel(recordId));
     }
 
     /**
