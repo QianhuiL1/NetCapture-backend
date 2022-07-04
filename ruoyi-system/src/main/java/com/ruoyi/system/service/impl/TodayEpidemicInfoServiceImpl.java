@@ -1,5 +1,6 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,7 +93,12 @@ public class TodayEpidemicInfoServiceImpl implements ITodayEpidemicInfoService
     }
 
     @Override
-    public List<TodayEpidemicInfo> selectTodayProvinceEpidemicInfoList() {
-        return todayEpidemicInfoMapper.selectTodayProvinceEpidemicInfoList();
+    public List<TodayEpidemicInfo> selectTodayProvinceEpidemicInfoList(String todayepidemicDate) {
+        return todayEpidemicInfoMapper.selectTodayProvinceEpidemicInfoList(todayepidemicDate);
+    }
+
+    @Override
+    public TodayEpidemicInfo selectTodayCountryEpidemicInfoByDate(String todayepidemicDate) {
+        return todayEpidemicInfoMapper.selectTodayCountryEpidemicInfo(todayepidemicDate);
     }
 }

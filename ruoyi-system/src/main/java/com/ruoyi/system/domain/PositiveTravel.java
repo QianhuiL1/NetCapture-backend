@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 阳性人员途径地址信息对象 positive_travel
- * 
+ *
  * @author SoLam
  * @date 2022-06-27
  */
@@ -25,14 +25,12 @@ public class PositiveTravel extends BaseEntity
     private Long recordId;
 
     /** 到达时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "到达时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date arriveTime;
+    @Excel(name = "到达时间")
+    private String arriveTime;
 
     /** 离开时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "离开时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date leftTime;
+    @Excel(name = "离开时间")
+    private String leftTime;
 
     /** 途径地址 */
     @Excel(name = "途径地址")
@@ -42,48 +40,48 @@ public class PositiveTravel extends BaseEntity
     @Excel(name = "身份证号")
     private String peopleId;
 
-    public void setTravelId(Long travelId) 
+    public void setTravelId(Long travelId)
     {
         this.travelId = travelId;
     }
 
-    public Long getTravelId() 
+    public Long getTravelId()
     {
         return travelId;
     }
-    public void setRecordId(Long recordId) 
+    public void setRecordId(Long recordId)
     {
         this.recordId = recordId;
     }
 
-    public Long getRecordId() 
+    public Long getRecordId()
     {
         return recordId;
     }
-    public void setArriveTime(Date arriveTime) 
+    public void setArriveTime(String arriveTime)
     {
         this.arriveTime = arriveTime;
     }
 
-    public Date getArriveTime() 
+    public String getArriveTime()
     {
         return arriveTime;
     }
-    public void setLeftTime(Date leftTime) 
+    public void setLeftTime(String leftTime)
     {
         this.leftTime = leftTime;
     }
 
-    public Date getLeftTime() 
+    public String getLeftTime()
     {
         return leftTime;
     }
-    public void setAddress(String address) 
+    public void setAddress(String address)
     {
         this.address = address;
     }
 
-    public String getAddress() 
+    public String getAddress()
     {
         return address;
     }

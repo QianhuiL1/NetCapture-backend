@@ -1,5 +1,6 @@
 package com.ruoyi.idfs.controller;
 
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
@@ -116,12 +117,24 @@ public class TodayEpidemicInfoController extends BaseController
      * 查询当天省份疫情列表
      */
     @PreAuthorize("@ss.hasPermi('system:todayEpidemic:provinceList')")
-    @GetMapping("/provinceList")
+    @GetMapping("/provinceList/{todayepidemicDate}")
     @ApiOperation("查询当天省份疫情列表")
-    public TableDataInfo provinceList()
+    public TableDataInfo provinceList(@PathVariable String todayepidemicDate)
     {
         //startPage();
-        List<TodayEpidemicInfo> list = todayEpidemicInfoService.selectTodayProvinceEpidemicInfoList();
+        List<TodayEpidemicInfo> list = todayEpidemicInfoService.selectTodayProvinceEpidemicInfoList(todayepidemicDate);
         return getDataTable(list);
+    }
+
+    /**
+     * 查询当天全国疫情信息
+     */
+    @PreAuthorize("@ss.hasPermi('system:todayEpidemic:provinceList')")
+    @GetMapping("/country/{todayepidemicDate}")
+    @ApiOperation("查询当天全国疫情信息")
+    public AjaxResult getCountryInfo(@PathVariable String todayepidemicDate)
+    {
+        //startPage();
+        return AjaxResult.success(todayEpidemicInfoService.selectTodayCountryEpidemicInfoByDate(todayepidemicDate));
     }
 }

@@ -1,5 +1,6 @@
 package com.ruoyi.system.service;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.system.domain.TodayEpidemicInfo;
 
@@ -60,6 +61,8 @@ public interface ITodayEpidemicInfoService
     public int deleteTodayEpidemicInfoByTodayepidemicid(Long todayepidemicid);
 
     //查询省份当天疫情信息列表
-    public List<TodayEpidemicInfo> selectTodayProvinceEpidemicInfoList();
+    public List<TodayEpidemicInfo> selectTodayProvinceEpidemicInfoList(String todayepidemicDate);
 
+    //查询全国当天疫情信息
+    public TodayEpidemicInfo selectTodayCountryEpidemicInfoByDate(String todayepidemicDate);
 }

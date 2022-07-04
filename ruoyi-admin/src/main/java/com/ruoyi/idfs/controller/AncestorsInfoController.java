@@ -82,11 +82,16 @@ public class AncestorsInfoController extends BaseController
      */
     @ApiOperation("获取行政区域详细信息")
     @PreAuthorize("@ss.hasPermi('system:ancestor:query')")
-    @GetMapping(value = "/{ancestorId}")
-    public AjaxResult getInfo(@PathVariable("ancestorId") String ancestorId)
+    @GetMapping(value = "/list/listByID/{ancestorId}")
+    public TableDataInfo listByAncestorId(@PathVariable("ancestorId") String ancestorId)
     {
-        return AjaxResult.success(ancestorsInfoService.selectAncestorsInfoByAncestorId(ancestorId));
+        AncestorsInfo ancestorsInfo =new AncestorsInfo();
+        ancestorsInfo.setAncestorId(ancestorId);
+        List<AncestorsInfo> list = ancestorsInfoService.selectAncestorsInfoList(ancestorsInfo);
+        return getDataTable(list);
     }
+
+
 
     /**
      * 新增行政区域

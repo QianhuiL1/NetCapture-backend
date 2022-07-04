@@ -45,7 +45,7 @@ public interface PositiveTravelMapper
      * @param recordId 某人次记录id
      * @return 结果
      */
-    public int updateContactStatusByPositiveTravel(String recordId);
+    public List<String>  selectContactStatusByPositiveTravel(String recordId);
 
     /**
      * 新增阳性人员途径地址信息

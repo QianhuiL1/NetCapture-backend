@@ -117,13 +117,24 @@ public class TotalEpidemicInfoController extends BaseController
      * 查询整体省份疫情列表
      */
     @PreAuthorize("@ss.hasPermi('system:todayEpidemic:provinceList')")
-    @GetMapping("/provinceList")
+    @GetMapping("/provinceList/{totalepidemicDate}")
     @ApiOperation("查询整体省份疫情列表")
-    public TableDataInfo provinceList()
+    public TableDataInfo provinceList(String totalepidemicDate)
     {
         //startPage();
-        List<TotalEpidemicInfo> list = totalEpidemicInfoService.selectTotalProvinceEpidemicInfoList();
+        List<TotalEpidemicInfo> list = totalEpidemicInfoService.selectTotalProvinceEpidemicInfoList(totalepidemicDate);
         return getDataTable(list);
+    }
+
+    /**
+     * 查询整体全国疫情信息
+     */
+    @PreAuthorize("@ss.hasPermi('system:todayEpidemic:provinceList')")
+    @GetMapping("/country/{totalepidemicDate}")
+    @ApiOperation("查询整体全国疫情信息")
+    public AjaxResult getCountryTotalInfo(String totalepidemicDate)
+    {
+        return AjaxResult.success(totalEpidemicInfoService.selectTotalCountryEpidemicInfoByDate(totalepidemicDate));
     }
 
 }

@@ -19,6 +19,7 @@
         <where>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="status != null "> and status = #{status}</if>
+            <if test="ancestorId!=null and ancestorId!=''">and ancestor_id = #{ancestorId}</if>
         </where>
     </select>
 
