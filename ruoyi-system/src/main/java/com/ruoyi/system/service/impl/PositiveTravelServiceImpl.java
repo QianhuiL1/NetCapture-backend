@@ -2,7 +2,11 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.system.domain.PersonInfo;
 import com.ruoyi.system.domain.ScanInfo;
+import com.ruoyi.system.domain.Spreadtree;
+import com.ruoyi.system.mapper.PersonInfoMapper;
+import com.ruoyi.system.mapper.SpreadtreeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.PositiveTravelMapper;
@@ -21,6 +25,11 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
     @Autowired
     private PositiveTravelMapper positiveTravelMapper;
 
+    @Autowired
+    private SpreadtreeMapper spreadtreeMapper;
+
+    @Autowired
+    private PersonInfoMapper personInfoMapper;
     /**
      * 查询阳性人员途径地址信息
      * 
@@ -76,7 +85,46 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
      */
     public int updateContactStatusByPositiveTravel(String recordId)
     {
-        return positiveTravelMapper.updateContactStatusByPositiveTravel(recordId);
+        List<String> peopleIds =  positiveTravelMapper.selectContactStatusByPositiveTravel(recordId);
+        PositiveTravel positiveTravel = new PositiveTravel();
+        positiveTravel.setRecordId(Long.parseLong(recordId));
+        List<PositiveTravel> positiveTravels = positiveTravelMapper.selectPositiveTravelList(positiveTravel);
+        if(peopleIds==null)
+            return -1;
+        else{
+            if(positiveTravels==null)
+                return 0;
+            else
+            {
+                String dadId = positiveTravels.get(0).getPeopleId();
+                for(String peopleId:peopleIds) {
+                    if(peopleId.equals(dadId))
+                    {
+                    }
+                    else{
+                        PersonInfo personInfo = personInfoMapper.selectPersonInfoByPeopleId(peopleId);
+                        if(personInfo.getStatus().equals("3"))
+                        {
+                        }
+                        else {
+                            personInfo.setStatus("2");
+                            personInfoMapper.updatePersonInfo(personInfo);
+                            Spreadtree spreadtree = new Spreadtree();
+                            spreadtree.setDadId(dadId);
+                            spreadtree.setSonId(peopleId);
+                            spreadtree.setRelationship(0L);
+                            spreadtreeMapper.insertSpreadtree(spreadtree);
+                        }
+
+                    }
+                }
+
+        }
+
+
+
+        }
+        return 1;
     }
 
     /**

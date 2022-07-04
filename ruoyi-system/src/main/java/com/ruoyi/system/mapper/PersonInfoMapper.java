@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
  * @date 2022-06-25
  */
 @Repository
+@Mapper
 public interface PersonInfoMapper 
 {
     /**

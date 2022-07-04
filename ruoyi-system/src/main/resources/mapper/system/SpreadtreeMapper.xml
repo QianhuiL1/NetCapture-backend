@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SpreadtreeMapper">
+
+    <resultMap type="Spreadtree" id="SpreadtreeResult">
+        <result property="spreadtreeId"    column="spreadtree_id"    />
+        <result property="sonId"    column="son_id"    />
+        <result property="dadId"    column="dad_id"    />
+        <result property="relationship"    column="relationship"    />
+    </resultMap>
+
+    <sql id="selectSpreadtreeVo">
+        select spreadtree_id, son_id, dad_id, relationship from spreadtree
+    </sql>
+
+    <select id="selectSpreadtreeList" parameterType="Spreadtree" resultMap="SpreadtreeResult">
+        <include refid="selectSpreadtreeVo"/>
+        <where>
+            <if test="spreadtreeId != null "> and spreadtree_id = #{spreadtreeId}</if>
+            <if test="sonId != null  and sonId != ''"> and son_id = #{sonId}</if>
+            <if test="dadId != null  and dadId != ''"> and dad_id = #{dadId}</if>
+            <if test="relationship != null "> and relationship = #{relationship}</if>
+        </where>
+    </select>
+
+    <select id="selectSpreadtreeBySpreadtreeId" parameterType="Long" resultMap="SpreadtreeResult">
+        <include refid="selectSpreadtreeVo"/>
+        where spreadtree_id = #{spreadtreeId}
+    </select>
+
+    <insert id="insertSpreadtree" parameterType="Spreadtree" useGeneratedKeys="true" keyProperty="spreadtreeId">
+        insert into spreadtree
+            set son_id = #{sonId},dad_id=#{dadId},relationship=#{relationship} ON DUPLICATE KEY
+            update son_id = #{sonId},dad_id=#{dadId},relationship=#{relationship}
+    </insert>
+
+    <update id="updateSpreadtree" parameterType="Spreadtree">
+        update spreadtree
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sonId != null and sonId != ''">son_id = #{sonId},</if>
+            <if test="dadId != null and dadId != ''">dad_id = #{dadId},</if>
+            <if test="relationship != null">relationship = #{relationship},</if>
+        </trim>
+        where spreadtree_id = #{spreadtreeId}
+    </update>
+
+    <delete id="deleteSpreadtreeBySpreadtreeId" parameterType="Long">
+        delete from spreadtree where spreadtree_id = #{spreadtreeId}
+    </delete>
+
+    <delete id="deleteSpreadtreeBySpreadtreeIds" parameterType="String">
+        delete from spreadtree where spreadtree_id in
+        <foreach item="spreadtreeId" collection="array" open="(" separator="," close=")">
+            #{spreadtreeId}
+        </foreach>
+    </delete>
+</mapper>
