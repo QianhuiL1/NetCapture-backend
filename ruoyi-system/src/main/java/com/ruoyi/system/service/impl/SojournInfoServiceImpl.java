@@ -10,6 +10,8 @@ import com.ruoyi.system.mapper.SojournInfoMapper;
 import com.ruoyi.system.domain.SojournInfo;
 import com.ruoyi.system.service.ISojournInfoService;
 
+import javax.annotation.Resource;
+
 /**
  * 旅居信息登记表Service业务层处理
  *
@@ -19,7 +21,7 @@ import com.ruoyi.system.service.ISojournInfoService;
 @Service
 public class SojournInfoServiceImpl implements ISojournInfoService
 {
-    @Autowired
+    @Resource
     private SojournInfoMapper sojournInfoMapper;
 
     @Autowired
@@ -50,7 +52,7 @@ public class SojournInfoServiceImpl implements ISojournInfoService
     }
 
     /**
-     * 根据身份证号查询旅居信息登记表列表
+     * 根据身份证号查询旅居人员的全部信息列表
      *
      * @param peopleId 旅居信息登记表
      * @return 旅居信息登记表
@@ -59,6 +61,18 @@ public class SojournInfoServiceImpl implements ISojournInfoService
     public List<SojournInfo> selectSojournInfoListByPeopleId(String peopleId)
     {
         return sojournInfoMapper.selectSojournInfoListByPeopleId(peopleId);
+    }
+
+    /**
+     * 根据区号查询旅居人员的全部信息列表
+     *
+     * @param ancestor 旅居信息登记表
+     * @return 旅居信息登记表
+     */
+    @Override
+    public List<SojournInfo> selectSojournInfoListByAncestor(String ancestor)
+    {
+        return sojournInfoMapper.selectSojournInfoListByAncestor(ancestor);
     }
 
     /**

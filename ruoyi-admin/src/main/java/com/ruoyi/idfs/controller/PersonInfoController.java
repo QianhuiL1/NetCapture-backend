@@ -98,7 +98,7 @@ public class PersonInfoController extends BaseController
         String str2 = "";
         for(int i=0;i<str1.length();i++){
             if(i*6+6>str1.length()){
-                str2 += str1.substring(i*6, str1.length()-1);
+                str2 += str1.substring(i*6);
                 break;
             }
             str2 += str1.substring(i*6, i*6+6)+",";

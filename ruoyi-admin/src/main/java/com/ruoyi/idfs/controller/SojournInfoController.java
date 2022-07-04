@@ -3,6 +3,7 @@ package com.ruoyi.idfs.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.system.domain.PositiveTravel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -52,17 +53,32 @@ public class SojournInfoController extends BaseController
     }
 
     /**
-     * 根据身份证号查询旅居信息登记表列表
+     * 根据身份证号查询旅居人员的全部信息列表
      */
-    @ApiOperation("根据身份证号查询旅居信息登记表列表")
+    @ApiOperation("根据身份证号查询旅居人员的全部信息列表")
     @PreAuthorize("@ss.hasPermi('system:sojourn_table:list')")
     @GetMapping("/listByPeopleId/{peopleId}")
-    public TableDataInfo listByPeopleId(@PathVariable("peopleId") String peopleId)
+    public TableDataInfo listByPeopleID(@PathVariable("peopleId") String peopleId)
     {
         //startPage();
         List<SojournInfo> list = sojournInfoService.selectSojournInfoListByPeopleId(peopleId);
         return getDataTable(list);
     }
+    /**
+     * 根据区号查询旅居人员的全部信息列表
+     */
+    @ApiOperation("根据区号查询旅居人员的全部信息列表")
+    @PreAuthorize("@ss.hasPermi('system:sojourn_table:list')")
+    @GetMapping("/listByAncestor/{ancestor}")
+    public TableDataInfo listByAncestor(@PathVariable("ancestor") String ancestor)
+    {
+        //startPage();
+        List<SojournInfo> list = sojournInfoService.selectSojournInfoListByAncestor(ancestor);
+        return getDataTable(list);
+    }
+
+
+
 
     /**
      * 导出旅居信息登记表列表
