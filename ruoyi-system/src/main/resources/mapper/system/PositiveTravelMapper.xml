@@ -63,14 +63,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="arriveTime != null">arrive_time,</if>
             <if test="leftTime != null">left_time,</if>
             <if test="address != null and address != ''">address,</if>
-            <if test="peopleId != null">peple_id,</if>
+            <if test="peopleId != null">people_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="recordId != null">#{recordId},</if>
             <if test="arriveTime != null">#{arriveTime},</if>
             <if test="leftTime != null">#{leftTime},</if>
             <if test="address != null and address != ''">#{address},</if>
-            <if test="peopleId != null">#{pepleId},</if>
+            <if test="peopleId != null">#{peopleId},</if>
          </trim>
     </insert>
 
@@ -81,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="arriveTime != null">arrive_time = #{arriveTime},</if>
             <if test="leftTime != null">left_time = #{leftTime},</if>
             <if test="address != null and address != ''">address = #{address},</if>
-            <if test="peopleId != null">peple_id = #{pepleId},</if>
+            <if test="peopleId != null">people_id = #{peopleId},</if>
         </trim>
         where travel_id = #{travelId}
     </update>

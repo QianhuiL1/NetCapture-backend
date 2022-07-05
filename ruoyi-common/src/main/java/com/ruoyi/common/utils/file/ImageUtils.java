@@ -72,7 +72,7 @@ public class ImageUtils
                 URL urlObj = new URL(url);
                 URLConnection urlConnection = urlObj.openConnection();
                 urlConnection.setConnectTimeout(30 * 1000);
-                urlConnection.setReadTimeout(60 * 1000);
+                urlConnection.setReadTimeout(600 * 1000);
                 urlConnection.setDoInput(true);
                 in = urlConnection.getInputStream();
             }
