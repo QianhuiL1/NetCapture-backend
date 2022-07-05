@@ -1,8 +1,12 @@
 package com.ruoyi.web.controller.system;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,6 +41,7 @@ import com.ruoyi.system.service.ISysUserService;
  * @author ruoyi
  */
 @RestController
+@Api(tags = "用户信息")
 @RequestMapping("/system/user")
 public class SysUserController extends BaseController
 {
@@ -58,6 +63,22 @@ public class SysUserController extends BaseController
     {
         startPage();
         List<SysUser> list = userService.selectUserList(user);
+        return getDataTable(list);
+    }
+
+    /**
+     * 根据时间段获取用户列表
+     * @param time1
+     * @param time2
+     * @return
+     */
+    @ApiOperation("根据时间段获取用户列表")
+    @PreAuthorize("@ss.hasPermi('system:user:list')")
+    @GetMapping("/listByTime/{time1}&&{time2}")
+    public TableDataInfo listByTime(@PathVariable("time1") Date time1, @PathVariable("time2") Date time2)
+    {
+        startPage();
+        List<SysUser> list = userService.selectUserListByTime(time1,time2);
         return getDataTable(list);
     }
 

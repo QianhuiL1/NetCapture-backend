@@ -62,6 +62,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
+	<select id="selectUserListByTime" resultMap="SysUserResult" parameterType="Date">
+		select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark,u.examine, d.dept_name, d.leader, ur.role_id from sys_user u
+	    left join sys_dept d on u.dept_id = d.dept_id
+	    left join sys_user_role ur on u.user_id = ur.user_id
+		where u.create_time >= #{arg0} and #{arg1} >= u.create_time
+	</select>
+
 
     <select id="selectUserList" parameterType="SysUser" resultMap="SysUserResult">
 		select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark,u.examine, d.dept_name, d.leader, ur.role_id from sys_user u
