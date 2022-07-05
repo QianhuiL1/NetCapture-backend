@@ -128,4 +128,17 @@ public class AncestorsInfoController extends BaseController
     {
         return toAjax(ancestorsInfoService.deleteAncestorsInfoByAncestorIds(ancestorIds));
     }
+
+    /**
+     * 更改行政区域状态
+     */
+    @ApiOperation("更改行政区域状态")
+    @PreAuthorize("@ss.hasPermi('system:ancestor:changeAncestorStatus')")
+    @Log(title = "行政区域状态", businessType = BusinessType.UPDATE)
+    @PostMapping("/changeAncestorStatus/{ancestorIds}")
+    public AjaxResult changeAncestorStatus(@PathVariable String ancestorIds)
+    {
+        return toAjax(ancestorsInfoService.changeAncestorStatus(ancestorIds));
+    }
+
 }

@@ -61,4 +61,6 @@ public interface AncestorsInfoMapper
      * @return 结果
      */
     public int deleteAncestorsInfoByAncestorIds(String[] ancestorIds);
+
+    public int changeAncestorStatus(String ancestorIds);
 }
