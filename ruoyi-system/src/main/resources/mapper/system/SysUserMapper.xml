@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <association property="dept"    column="dept_id" javaType="SysDept" resultMap="deptResult" />
         <collection  property="roles"   javaType="java.util.List"           resultMap="RoleResult" />
     </resultMap>
-	
+
     <resultMap id="deptResult" type="SysDept">
         <id     property="deptId"    column="dept_id"     />
         <result property="parentId"  column="parent_id"   />
@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="leader"    column="leader"      />
         <result property="status"    column="dept_status" />
     </resultMap>
-	
+
     <resultMap id="RoleResult" type="SysRole">
         <id     property="roleId"       column="role_id"        />
         <result property="roleName"     column="role_name"      />
@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="dataScope"     column="data_scope"    />
         <result property="status"       column="role_status"    />
     </resultMap>
-	
+
 	<sql id="selectUserVo">
         select u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark,u.examine,
         d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.order_num, d.leader, d.status as dept_status,
@@ -74,6 +74,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="status != null and status != ''">
 			AND u.status = #{status}
 		</if>
+		<if test="examine != null and examine != ''">
+			AND u.examine = #{examine}
+		</if>
 		<if test="phonenumber != null and phonenumber != ''">
 			AND u.phonenumber like concat('%', #{phonenumber}, '%')
 		</if>
@@ -89,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
 	</select>
-	
+
 	<select id="selectAllocatedList" parameterType="SysUser" resultMap="SysUserResult">
 	    select distinct u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.phonenumber, u.status, u.create_time
 	    from sys_user u
@@ -106,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
 	</select>
-	
+
 	<select id="selectUnallocatedList" parameterType="SysUser" resultMap="SysUserResult">
 	    select distinct u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.phonenumber, u.status, u.create_time
 	    from sys_user u
@@ -127,29 +130,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
 	</select>
-	
+
 	<select id="selectUserByUserName" parameterType="String" resultMap="SysUserResult">
 	    <include refid="selectUserVo"/>
 		where u.user_name = #{userName}
 	</select>
-	
+
 	<select id="selectUserById" parameterType="Long" resultMap="SysUserResult">
 		<include refid="selectUserVo"/>
 		where u.user_id = #{userId}
 	</select>
-	
+
 	<select id="checkUserNameUnique" parameterType="String" resultType="int">
 		select count(1) from sys_user where user_name = #{userName} limit 1
 	</select>
-	
+
 	<select id="checkPhoneUnique" parameterType="String" resultMap="SysUserResult">
 		select user_id, phonenumber from sys_user where phonenumber = #{phonenumber} limit 1
 	</select>
-	
+
 	<select id="checkEmailUnique" parameterType="String" resultMap="SysUserResult">
 		select user_id, email from sys_user where email = #{email} limit 1
 	</select>
-	
+
 	<insert id="insertUser" parameterType="SysUser" useGeneratedKeys="true" keyProperty="userId">
  		insert into sys_user(
  			<if test="userId != null and userId != 0">user_id,</if>
@@ -181,7 +184,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			sysdate()
  		)
 	</insert>
-	
+
 	<update id="updateUser" parameterType="SysUser">
  		update sys_user
  		<set>
@@ -203,7 +206,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</set>
  		where user_id = #{userId}
 	</update>
-	
+
 	<update id="updateUserStatus" parameterType="SysUser">
  		update sys_user set status = #{status} where user_id = #{userId}
 	</update>
@@ -211,24 +214,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateUserExamine" parameterType="SysUser">
 		update sys_user set examine = #{examine} where user_id = #{userId}
 	</update>
-	
+
 	<update id="updateUserAvatar" parameterType="SysUser">
  		update sys_user set avatar = #{avatar} where user_name = #{userName}
 	</update>
-	
+
 	<update id="resetUserPwd" parameterType="SysUser">
  		update sys_user set password = #{password} where user_name = #{userName}
 	</update>
-	
+
 	<delete id="deleteUserById" parameterType="Long">
 		update sys_user set del_flag = '2' where user_id = #{userId}
  	</delete>
- 	
+
  	<delete id="deleteUserByIds" parameterType="Long">
  		update sys_user set del_flag = '2' where user_id in
  		<foreach collection="array" item="userId" open="(" separator="," close=")">
  			#{userId}
-        </foreach> 
+        </foreach>
  	</delete>
-	
-</mapper> 
+
+</mapper>
