@@ -30,6 +30,9 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
 
     @Autowired
     private PersonInfoMapper personInfoMapper;
+
+    @Autowired
+    private PersonInfoServiceImpl personInfoService;
     /**
      * 查询阳性人员途径地址信息
      * 
@@ -114,6 +117,7 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
                             spreadtree.setSonId(peopleId);
                             spreadtree.setRelationship(0L);
                             spreadtreeMapper.insertSpreadtree(spreadtree);
+                            personInfoService.updateSecondContactStatusByContact(personInfo.getPeopleId());
                         }
 
                     }
