@@ -90,4 +90,14 @@ public class AncestorsInfoServiceImpl implements IAncestorsInfoService
     {
         return ancestorsInfoMapper.deleteAncestorsInfoByAncestorId(ancestorId);
     }
+
+    @Override
+    public int changeAncestorStatus(String ancestorIds) {
+        String[] ancestorAreaIdList = ancestorIds.split(",");
+        int total = 0;
+        for (String s:ancestorAreaIdList) {
+            total += ancestorsInfoMapper.changeAncestorStatus(s);
+        }
+        return total;
+    }
 }

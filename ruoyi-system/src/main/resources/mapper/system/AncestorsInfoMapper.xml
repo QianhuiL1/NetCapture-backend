@@ -55,10 +55,18 @@
         delete from ancestors_table where ancestor_id = #{ancestorId}
     </delete>
 
+
     <delete id="deleteAncestorsInfoByAncestorIds" parameterType="String">
         delete from ancestors_table where ancestor_id in
         <foreach item="ancestorId" collection="array" open="(" separator="," close=")">
             #{ancestorId}
         </foreach>
     </delete>
+
+    <update id="changeAncestorStatus" parameterType="String">
+        update ancestors_table
+        set status = 2
+        where ancestor_id like "%${ancestorId}"
+    </update>
+
 </mapper>

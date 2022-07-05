@@ -58,4 +58,6 @@ public interface IAncestorsInfoService
      * @return 结果
      */
     public int deleteAncestorsInfoByAncestorId(String ancestorId);
+
+    public int changeAncestorStatus(String ancestorIds);
 }
