@@ -58,10 +58,10 @@ public interface IPersonInfoService
 
     /**
      * 根据address更新数据库中次密接的健康状态
-     * @param address 家庭住址
+     * @param dadId 家庭住址
      * @return 结果
      */
-    public int updateSecondContactStatusByContact(String address);
+    public int updateSecondContactStatusByContact(String dadId);
 
 
     /**

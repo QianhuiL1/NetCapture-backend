@@ -9,14 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -182,12 +175,13 @@ public class PersonInfoController extends BaseController
      * 根据密接人员家庭地址修改次密接人员健康状态
      */
     @ApiOperation(value = "根据密切接触者人员家庭住址信息更新次密切接触者人员状态信息")
-    @PreAuthorize("@ss.hasPermi('idfs:personInfo:edit')")
+/*    @PreAuthorize("@ss.hasPermi('idfs:personInfo:edit')")*/
     @Log(title = "人员表", businessType = BusinessType.UPDATE)
-    @RequestMapping("/updateSecondContact/{address}")
-    public AjaxResult updateSecondContactStatusByContact(@PathVariable String address)
+    @PutMapping("/updateSecondContact/{peopleId}")
+    public AjaxResult updateSecondContactStatusByContact(@PathVariable String peopleId)
     {
-        return toAjax(personInfoService.updateSecondContactStatusByContact(address));
+        String a = peopleId;
+        return toAjax(personInfoService.updateSecondContactStatusByContact(peopleId));
     }
 
     /**

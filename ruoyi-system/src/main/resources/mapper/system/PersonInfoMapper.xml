@@ -13,7 +13,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="ancestors"    column="ancestors"    />
         <result property="address"    column="address"    />
         <result property="positiveTime"    column="positive_time"    />
-
     </resultMap>
 
     <sql id="selectPersonInfoVo">
@@ -49,12 +48,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
 
-    <update id="updateSecondContactStatusByContact" parameterType= "String" >
-        update people_table set status=1
-        where people_id in
-              (select people_id from (select t1.people_id from people_table t1,people_table t2 where t2.status = 2 and t1.address = t2.address and t1.status != 2 and t1.status != 3 )as T)
-    </update>
-
+    <select id="selectSecondContactByContact" parameterType="String" resultType="string">
+        select distinct people_id
+        from people_table
+        where address = #{address}
+    </select>
         
     <insert id="insertPersonInfo" parameterType="PersonInfo">
         insert into people_table

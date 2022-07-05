@@ -2,6 +2,9 @@ package com.ruoyi.system.service.impl;
 
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.system.domain.Spreadtree;
+import com.ruoyi.system.mapper.SpreadtreeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.ast.Literal;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,8 @@ public class PersonInfoServiceImpl implements IPersonInfoService
     @Autowired
     private PersonInfoMapper personInfoMapper;
 
+    @Autowired
+    private SpreadtreeMapper spreadtreeMapper;
     /**
      * 查询存储普通人员的相关信息
      * 
@@ -72,12 +77,40 @@ public class PersonInfoServiceImpl implements IPersonInfoService
 
     /**
      * 根据密接人员家庭地址更改次密接人员健康状况
-     * @param address 家庭住址
+     * @param dadId 父
      * @return
      */
     @Override
-    public int updateSecondContactStatusByContact(String address) {
-        return personInfoMapper.updateSecondContactStatusByContact(address);
+    public int updateSecondContactStatusByContact(String dadId) {
+        PersonInfo dadInfo = personInfoMapper.selectPersonInfoByPeopleId(dadId);
+        String address = dadInfo.getAddress();
+        List<String> sonIds = personInfoMapper.selectSecondContactByContact(address);
+        if(sonIds == null)
+            return -1;
+        else{
+            for(String sonId:sonIds)
+            {
+                if(sonId.equals(dadId))
+                {
+                }
+                else {
+                    PersonInfo sonInfo = personInfoMapper.selectPersonInfoByPeopleId(sonId);
+                    if(sonInfo.getStatus().equals("3")||sonInfo.getStatus().equals("2"))
+                    {
+                    }
+                    else {
+                        sonInfo.setStatus("1");
+                        personInfoMapper.updatePersonInfo(sonInfo);
+                        Spreadtree spreadtree = new Spreadtree();
+                        spreadtree.setDadId(dadId);
+                        spreadtree.setSonId(sonId);
+                        spreadtree.setRelationship(1L);
+                        spreadtreeMapper.insertSpreadtree(spreadtree);
+                    }
+                }
+            }
+            return 1;
+        }
     }
 
     /**

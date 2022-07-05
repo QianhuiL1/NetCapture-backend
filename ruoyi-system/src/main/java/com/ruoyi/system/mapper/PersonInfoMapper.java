@@ -72,8 +72,7 @@ public interface PersonInfoMapper
      * @param address 某人次记录id
      * @return 结果
      */
-    public int updateSecondContactStatusByContact(String address);
-
+    public List<String> selectSecondContactByContact(String address);
     /**
      * 删除存储普通人员的相关信息
      * 
