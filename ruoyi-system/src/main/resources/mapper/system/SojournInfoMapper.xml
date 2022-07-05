@@ -5,16 +5,39 @@
 <mapper namespace="com.ruoyi.system.mapper.SojournInfoMapper">
 
     <resultMap type="SojournInfo" id="SojournInfoResult">
-        <result property="sourjornId"    column="sourjorn_id"    />
+        <result property="sojournId"    column="sourjorn_id"    />
         <result property="peopleId"    column="people_id"    />
         <result property="fromAncestors"    column="from_ancestors"    />
         <result property="toAncestors"    column="to_ancestors"    />
         <result property="recordTime"    column="record_time"    />
         <result property="toAddress"    column="to_address"    />
+        <result property="transportation"    column="transportation"    />
     </resultMap>
 
+    <resultMap type="SojournInfo" id="SojournInfoResult2">
+        <result property="sojournId"    column="sourjorn_id"    />
+        <result property="peopleId"    column="people_id"    />
+        <result property="fromAncestors"    column="from_ancestors"    />
+        <result property="toAncestors"    column="to_ancestors"    />
+        <result property="recordTime"    column="record_time"    />
+        <result property="toAddress"    column="to_address"    />
+        <result property="transportation"    column="transportation"    />
+        <association property="personInfo" javaType="PersonInfo">
+            <result property="peopleId" column="people_id"/>
+            <result property="name" column="name"/>
+            <result property="sex" column="sex"/>
+            <result property="phonenumber" column="phonenumber"/>
+            <result property="status" column="status"/>
+            <result property="address" column="address"/>
+        </association>
+    </resultMap>
+
+    
+
     <sql id="selectSojournInfoVo">
-        select sourjorn_id, people_id, from_ancestors, to_ancestors, record_time, to_address from sojourn_table
+        select s.sourjorn_id, s.people_id, s.from_ancestors, s.to_ancestors, s.record_time, s.to_address,s.transportation,p.people_id,p.name,p.sex,p.status,p.phonenumber,p.ancestors,p.address,p.positive_time
+        from sojourn_table s
+            left outer join people_table p on s.people_id = p.people_id
     </sql>
 
     <select id="selectSojournInfoList" parameterType="SojournInfo" resultMap="SojournInfoResult">
@@ -25,12 +48,20 @@
             <if test="toAncestors != null  and toAncestors != ''"> and to_ancestors = #{toAncestors}</if>
             <if test="recordTime != null "> and record_time = #{recordTime}</if>
             <if test="toAddress != null  and toAddress != ''"> and to_address = #{toAddress}</if>
+            <if test="transportation != null  and transportation != ''"> and transportation = #{transportation}</if>
         </where>
     </select>
 
-    <select id="selectSojournInfoListByPeopleId" parameterType="String" resultMap="SojournInfoResult">
-        <include refid="selectSojournInfoVo"/>
-        where people_id = #{peopleId}
+    <select id="selectSojournInfoListByPeopleId" parameterType="SojournInfo" resultMap="SojournInfoResult2">
+        select p.name,p.sex,p.people_id,p.phonenumber,p.status,p.address,s.transportation,s.record_time,s.from_ancestors,s.to_ancestors
+        from sojourn_table s,people_table p
+        where s.people_id = #{peopleId} and s.people_id = p.people_id
+    </select>
+
+    <select id="selectSojournInfoListByAncestor" parameterType="String" resultMap="SojournInfoResult2">
+        select p.name,p.sex,p.people_id,p.phonenumber,p.status,p.address,s.transportation,s.record_time,s.from_ancestors,s.to_ancestors
+        from sojourn_table s,people_table p
+        where s.to_ancestors = #{ancestor} and s.people_id = p.people_id
     </select>
 
     <select id="selectSojournInfoBySourjornId" parameterType="Long" resultMap="SojournInfoResult">
@@ -47,6 +78,7 @@
             <if test="toAncestors != null and toAncestors != ''">to_ancestors,</if>
             <if test="recordTime != null">record_time,</if>
             <if test="toAddress != null and toAddress != ''">to_address,</if>
+            <if test="transportation != null and transportation != ''">transportation,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="sourjornId != null">#{sourjornId},</if>
@@ -55,6 +87,7 @@
             <if test="toAncestors != null and toAncestors != ''">#{toAncestors},</if>
             <if test="recordTime != null">#{recordTime},</if>
             <if test="toAddress != null and toAddress != ''">#{toAddress},</if>
+            <if test="transportation != null and transportation != ''">#{transportation},</if>
         </trim>
     </insert>
 
@@ -66,6 +99,7 @@
             <if test="toAncestors != null and toAncestors != ''">to_ancestors = #{toAncestors},</if>
             <if test="recordTime != null">record_time = #{recordTime},</if>
             <if test="toAddress != null and toAddress != ''">to_address = #{toAddress},</if>
+            <if test="transportation != null and transportation != ''">transportation = #{transportation},</if>
         </trim>
         where sourjorn_id = #{sourjornId}
     </update>

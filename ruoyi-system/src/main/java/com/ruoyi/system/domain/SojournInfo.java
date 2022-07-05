@@ -17,8 +17,18 @@ public class SojournInfo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
+    public PersonInfo getPersonInfo() {
+        return personInfo;
+    }
+
+    public void setPersonInfo(PersonInfo personInfo) {
+        this.personInfo = personInfo;
+    }
+
+    private PersonInfo personInfo;
+
     /** 旅居记录id */
-    private Long sourjornId;
+    private Long sojournId;
 
     /** 人员id */
     @Excel(name = "人员id")
@@ -43,14 +53,18 @@ public class SojournInfo extends BaseEntity
     @Excel(name = "目的地详细地址")
     private String toAddress;
 
+    /** 交通方式 */
+    @Excel(name = "交通方式")
+    private String transportation;
+
     public void setSourjornId(Long sourjornId)
     {
-        this.sourjornId = sourjornId;
+        this.sojournId = sourjornId;
     }
 
     public Long getSourjornId()
     {
-        return sourjornId;
+        return sojournId;
     }
     public void setPeopleId(String peopleId)
     {
@@ -99,6 +113,16 @@ public class SojournInfo extends BaseEntity
         return toAddress;
     }
 
+    public void setTransportation(String transportation)
+    {
+        this.transportation = transportation;
+    }
+
+    public String getTransportation()
+    {
+        return transportation;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -108,6 +132,7 @@ public class SojournInfo extends BaseEntity
                 .append("toAncestors", getToAncestors())
                 .append("recordTime", getRecordTime())
                 .append("toAddress", getToAddress())
+                .append("transportation",getTransportation())
                 .toString();
     }
 }

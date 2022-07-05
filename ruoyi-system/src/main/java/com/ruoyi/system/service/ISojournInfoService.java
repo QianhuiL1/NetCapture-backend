@@ -28,12 +28,20 @@ public interface ISojournInfoService
     public List<SojournInfo> selectSojournInfoList(SojournInfo sojournInfo);
 
     /**
-     * 根据身份证号查询旅居信息登记表列表
+     * 根据身份证号查询旅居人员的全部信息列表
      *
      * @param peopleId 旅居信息登记表
      * @return 旅居信息登记表集合
      */
     public List<SojournInfo> selectSojournInfoListByPeopleId(String peopleId);
+
+    /**
+     * 根据区号查询旅居人员的全部信息列表
+     *
+     * @param peopleId 旅居信息登记表
+     * @return 旅居信息登记表集合
+     */
+    public List<SojournInfo> selectSojournInfoListByAncestor(String peopleId);
 
     /**
      * 新增旅居信息登记表
