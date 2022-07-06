@@ -1,5 +1,6 @@
 package com.ruoyi.system.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -22,6 +23,14 @@ public interface SysUserMapper
      * @return 用户信息集合信息
      */
     public List<SysUser> selectUserList(SysUser sysUser);
+
+    /**
+     * 根据时间段查询相关用户列表
+     * @param time1
+     * @param time2
+     * @return
+     */
+    public List<SysUser> selectUserListByTime(Date time1,Date time2);
 
     /**
      * 根据条件分页查询已配用户角色列表

@@ -1,5 +1,6 @@
 package com.ruoyi.system.service;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,6 +20,14 @@ public interface ISysUserService
      * @return 用户信息集合信息
      */
     public List<SysUser> selectUserList(SysUser user);
+
+    /**
+     * 根据时间段查询相关用户信息列表
+     * @param time1
+     * @param time2
+     * @return
+     */
+    public List<SysUser> selectUserListByTime(Date time1,Date time2);
 
     /**
      * 根据条件分页查询已分配用户角色列表
