@@ -1,6 +1,7 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Validator;
@@ -75,6 +76,18 @@ public class SysUserServiceImpl implements ISysUserService
     public List<SysUser> selectUserList(SysUser user)
     {
         return userMapper.selectUserList(user);
+    }
+
+    /**
+     * 根据时间段查询相关用户列表
+     * @param time1
+     * @param time2
+     * @return
+     */
+    @Override
+    public List<SysUser> selectUserListByTime(Date time1, Date time2)
+    {
+        return userMapper.selectUserListByTime(time1, time2);
     }
 
     /**

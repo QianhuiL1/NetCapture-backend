@@ -1,6 +1,11 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.ruoyi.system.domain.PersonInfo;
+import com.ruoyi.system.domain.SpreadtreePersonInfo;
+import com.ruoyi.system.mapper.PersonInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.SpreadtreeMapper;
@@ -19,6 +24,8 @@ public class SpreadtreeServiceImpl implements ISpreadtreeService
     @Autowired
     private SpreadtreeMapper spreadtreeMapper;
 
+    @Autowired
+    private PersonInfoMapper personInfoMapper;
     /**
      * 查询传播链条
      *
@@ -41,6 +48,24 @@ public class SpreadtreeServiceImpl implements ISpreadtreeService
     public List<Spreadtree> selectSpreadtreeList(Spreadtree spreadtree)
     {
         return spreadtreeMapper.selectSpreadtreeList(spreadtree);
+    }
+
+    @Override
+    public List<SpreadtreePersonInfo> selectSpreadtreePersonInfoList(Spreadtree spreadtree) {
+        List<Spreadtree> list = spreadtreeMapper.selectSpreadtreeList(spreadtree);
+        List<SpreadtreePersonInfo> splist = new ArrayList<>();
+        for (Spreadtree spreadtree1 :list)
+        {
+            SpreadtreePersonInfo temp = new SpreadtreePersonInfo();
+            PersonInfo dadInfo = personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getDadId());
+            PersonInfo sonInfo = personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getSonId());
+            Long relationship = spreadtree1.getRelationship();
+            temp.setDadInfo(dadInfo);
+            temp.setSonInfo(sonInfo);
+            temp.setRelationship(relationship);
+            splist.add(temp);
+        }
+        return splist;
     }
 
     /**
