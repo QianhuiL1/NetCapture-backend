@@ -51,22 +51,10 @@ public class SpreadtreeServiceImpl implements ISpreadtreeService
     }
 
     @Override
-    public List<SpreadtreePersonInfo> selectSpreadtreePersonInfoList(Spreadtree spreadtree) {
-        List<Spreadtree> list = spreadtreeMapper.selectSpreadtreeList(spreadtree);
-        List<SpreadtreePersonInfo> splist = new ArrayList<>();
-        for (Spreadtree spreadtree1 :list)
-        {
-            SpreadtreePersonInfo temp = new SpreadtreePersonInfo();
-            PersonInfo dadInfo = personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getDadId());
-            PersonInfo sonInfo = personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getSonId());
-            Long relationship = spreadtree1.getRelationship();
-            temp.setDadInfo(dadInfo);
-            temp.setSonInfo(sonInfo);
-            temp.setRelationship(relationship);
-            splist.add(temp);
-        }
-        return splist;
+    public List<PersonInfo> selectDistinctPersonInfo(Spreadtree spreadtree) {
+        return spreadtreeMapper.selectDistinctPersonInfo(spreadtree);
     }
+
 
     /**
      * 新增传播链条

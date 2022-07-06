@@ -1,6 +1,8 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
+
+import com.ruoyi.system.domain.PersonInfo;
 import com.ruoyi.system.domain.Spreadtree;
 import com.ruoyi.system.domain.SpreadtreePersonInfo;
 
@@ -29,7 +31,8 @@ public interface ISpreadtreeService
 
     public List<Spreadtree> selectSpreadtreeList(Spreadtree spreadtree);
 
-    public List<SpreadtreePersonInfo> selectSpreadtreePersonInfoList(Spreadtree spreadtree);
+
+    public List<PersonInfo> selectDistinctPersonInfo(Spreadtree spreadtree);
     /**
      * 新增传播链条
      *

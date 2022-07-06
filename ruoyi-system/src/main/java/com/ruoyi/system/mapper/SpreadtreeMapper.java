@@ -1,6 +1,8 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
+
+import com.ruoyi.system.domain.PersonInfo;
 import com.ruoyi.system.domain.Spreadtree;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -37,6 +39,7 @@ public interface SpreadtreeMapper
      */
     public int insertSpreadtree(Spreadtree spreadtree);
 
+    public List<PersonInfo> selectDistinctPersonInfo(Spreadtree spreadtree);
     /**
      * 修改传播链条
      *
