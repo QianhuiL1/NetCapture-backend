@@ -38,6 +38,11 @@ public class SpreadtreeServiceImpl implements ISpreadtreeService
         return spreadtreeMapper.selectSpreadtreeBySpreadtreeId(spreadtreeId);
     }
 
+    @Override
+    public List<Spreadtree> selectSpreadtreeList(Spreadtree spreadtree) {
+        return spreadtreeMapper.selectSpreadtreeList(spreadtree);
+    }
+
     /**
      * 查询传播链条列表
      *
@@ -45,9 +50,18 @@ public class SpreadtreeServiceImpl implements ISpreadtreeService
      * @return 传播链条
      */
     @Override
-    public List<Spreadtree> selectSpreadtreeList(Spreadtree spreadtree)
+    public List<SpreadtreePersonInfo> selectSpreadtreePersonInfoList(Spreadtree spreadtree)
     {
-        return spreadtreeMapper.selectSpreadtreeList(spreadtree);
+        List<SpreadtreePersonInfo> splist = new ArrayList<>();
+        List<Spreadtree> slist = spreadtreeMapper.selectSpreadtreeList(spreadtree);
+        for(Spreadtree spreadtree1:slist){
+            SpreadtreePersonInfo spreadtreePersonInfo = new SpreadtreePersonInfo();
+            spreadtreePersonInfo.setDadname(personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getDadId()).getName());
+            spreadtreePersonInfo.setSonname(personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getSonId()).getName());
+            spreadtreePersonInfo.setRelationship(spreadtree1.getRelationship());
+            splist.add(spreadtreePersonInfo);
+        }
+        return splist;
     }
 
     @Override

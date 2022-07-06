@@ -56,6 +56,13 @@ public class SpreadtreeController extends BaseController
         return getDataTable(plist);
     }
 
+    @PreAuthorize("@ss.hasPermi('system:spreadtree:list')")
+    @GetMapping("/SpreadtreePersonInfolist")
+    public TableDataInfo splist(Spreadtree spreadtree)
+    {
+        List<SpreadtreePersonInfo> splist = spreadtreeService.selectSpreadtreePersonInfoList(spreadtree);
+        return getDataTable(splist);
+    }
     /**
      * 导出传播链条列表
      */

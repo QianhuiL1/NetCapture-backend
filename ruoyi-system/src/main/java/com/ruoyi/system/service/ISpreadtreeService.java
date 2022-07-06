@@ -32,6 +32,8 @@ public interface ISpreadtreeService
     public List<Spreadtree> selectSpreadtreeList(Spreadtree spreadtree);
 
 
+    List<SpreadtreePersonInfo> selectSpreadtreePersonInfoList(Spreadtree spreadtree);
+
     public List<PersonInfo> selectDistinctPersonInfo(Spreadtree spreadtree);
     /**
      * 新增传播链条
