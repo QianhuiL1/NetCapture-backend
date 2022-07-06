@@ -11,10 +11,22 @@
         <result property="relationship"    column="relationship"    />
     </resultMap>
 
+    <resultMap type="PersonInfo" id="PersonInfoResult">
+        <result property="peopleId"    column="people_id"    />
+        <result property="name"    column="name"    />
+        <result property="sex"    column="sex"    />
+        <result property="phonenumber"    column="phonenumber"    />
+        <result property="status"    column="status"    />
+        <result property="ancestors"    column="ancestors"    />
+        <result property="address"    column="address"    />
+        <result property="positiveTime"    column="positive_time"    />
+    </resultMap>
     <sql id="selectSpreadtreeVo">
         select spreadtree_id, son_id, dad_id, relationship from spreadtree
     </sql>
-
+    <sql id="selectPersonInfoVo">
+        select people_id, name, sex, phonenumber, status, ancestors, address, positive_time from people_table
+    </sql>
     <select id="selectSpreadtreeList" parameterType="Spreadtree" resultMap="SpreadtreeResult">
         <include refid="selectSpreadtreeVo"/>
         <where>
@@ -25,11 +37,16 @@
         </where>
     </select>
 
+    <select id="selectDistinctPersonInfo" parameterType="Spreadtree" resultType="PersonInfo">
+        <include refid="selectPersonInfoVo"/>
+        where people_id in(select distinct son_id from spreadtree UNION select dad_id from spreadtree as peoleId)
+    </select>
+
     <select id="selectSpreadtreeBySpreadtreeId" parameterType="Long" resultMap="SpreadtreeResult">
         <include refid="selectSpreadtreeVo"/>
         where spreadtree_id = #{spreadtreeId}
     </select>
-
+    
     <insert id="insertSpreadtree" parameterType="Spreadtree" useGeneratedKeys="true" keyProperty="spreadtreeId">
         insert into spreadtree
             set son_id = #{sonId},dad_id=#{dadId},relationship=#{relationship} ON DUPLICATE KEY

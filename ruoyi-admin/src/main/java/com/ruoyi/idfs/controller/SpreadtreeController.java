@@ -2,6 +2,8 @@ package com.ruoyi.idfs.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.system.domain.PersonInfo;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,14 +41,28 @@ public class SpreadtreeController extends BaseController
      * 查询传播链条列表
      */
     @PreAuthorize("@ss.hasPermi('system:spreadtree:list')")
-    @GetMapping("/list")
-    public TableDataInfo splist(Spreadtree spreadtree)
+    @GetMapping("/Spreadtreelist")
+    public TableDataInfo slist(Spreadtree spreadtree)
     {
-        startPage();
-        List<SpreadtreePersonInfo> list = spreadtreeService.selectSpreadtreePersonInfoList(spreadtree);
+        List<Spreadtree> list = spreadtreeService.selectSpreadtreeList(spreadtree);
         return getDataTable(list);
     }
 
+    @PreAuthorize("@ss.hasPermi('system:spreadtree:list')")
+    @GetMapping("/PersonInfolist")
+    public TableDataInfo plist(Spreadtree spreadtree)
+    {
+        List<PersonInfo> plist = spreadtreeService.selectDistinctPersonInfo(spreadtree);
+        return getDataTable(plist);
+    }
+
+    @PreAuthorize("@ss.hasPermi('system:spreadtree:list')")
+    @GetMapping("/SpreadtreePersonInfolist")
+    public TableDataInfo splist(Spreadtree spreadtree)
+    {
+        List<SpreadtreePersonInfo> splist = spreadtreeService.selectSpreadtreePersonInfoList(spreadtree);
+        return getDataTable(splist);
+    }
     /**
      * 导出传播链条列表
      */

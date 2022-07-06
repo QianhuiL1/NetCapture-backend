@@ -1,9 +1,17 @@
 package com.ruoyi.system.domain;
 
 public class SpreadtreePersonInfo {
-    private PersonInfo dadInfo;
+    private String dadname;
     private Long relationship;
-    private PersonInfo sonInfo;
+    private String sonname;
+
+    public String getDadname() {
+        return dadname;
+    }
+
+    public void setDadname(String dadname) {
+        this.dadname = dadname;
+    }
 
     public Long getRelationship() {
         return relationship;
@@ -13,21 +21,11 @@ public class SpreadtreePersonInfo {
         this.relationship = relationship;
     }
 
-    public PersonInfo getSonInfo() {
-        return sonInfo;
+    public String getSonname() {
+        return sonname;
     }
 
-    public void setSonInfo(PersonInfo sonInfo) {
-        this.sonInfo = sonInfo;
+    public void setSonname(String sonname) {
+        this.sonname = sonname;
     }
-
-    public PersonInfo getDadInfo() {
-        return dadInfo;
-    }
-
-    public void setDadInfo(PersonInfo dadInfo) {
-        this.dadInfo = dadInfo;
-    }
-
-
 }

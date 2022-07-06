@@ -38,6 +38,11 @@ public class SpreadtreeServiceImpl implements ISpreadtreeService
         return spreadtreeMapper.selectSpreadtreeBySpreadtreeId(spreadtreeId);
     }
 
+    @Override
+    public List<Spreadtree> selectSpreadtreeList(Spreadtree spreadtree) {
+        return spreadtreeMapper.selectSpreadtreeList(spreadtree);
+    }
+
     /**
      * 查询传播链条列表
      *
@@ -45,28 +50,25 @@ public class SpreadtreeServiceImpl implements ISpreadtreeService
      * @return 传播链条
      */
     @Override
-    public List<Spreadtree> selectSpreadtreeList(Spreadtree spreadtree)
+    public List<SpreadtreePersonInfo> selectSpreadtreePersonInfoList(Spreadtree spreadtree)
     {
-        return spreadtreeMapper.selectSpreadtreeList(spreadtree);
-    }
-
-    @Override
-    public List<SpreadtreePersonInfo> selectSpreadtreePersonInfoList(Spreadtree spreadtree) {
-        List<Spreadtree> list = spreadtreeMapper.selectSpreadtreeList(spreadtree);
         List<SpreadtreePersonInfo> splist = new ArrayList<>();
-        for (Spreadtree spreadtree1 :list)
-        {
-            SpreadtreePersonInfo temp = new SpreadtreePersonInfo();
-            PersonInfo dadInfo = personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getDadId());
-            PersonInfo sonInfo = personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getSonId());
-            Long relationship = spreadtree1.getRelationship();
-            temp.setDadInfo(dadInfo);
-            temp.setSonInfo(sonInfo);
-            temp.setRelationship(relationship);
-            splist.add(temp);
+        List<Spreadtree> slist = spreadtreeMapper.selectSpreadtreeList(spreadtree);
+        for(Spreadtree spreadtree1:slist){
+            SpreadtreePersonInfo spreadtreePersonInfo = new SpreadtreePersonInfo();
+            spreadtreePersonInfo.setDadname(personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getDadId()).getName());
+            spreadtreePersonInfo.setSonname(personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getSonId()).getName());
+            spreadtreePersonInfo.setRelationship(spreadtree1.getRelationship());
+            splist.add(spreadtreePersonInfo);
         }
         return splist;
     }
+
+    @Override
+    public List<PersonInfo> selectDistinctPersonInfo(Spreadtree spreadtree) {
+        return spreadtreeMapper.selectDistinctPersonInfo(spreadtree);
+    }
+
 
     /**
      * 新增传播链条
