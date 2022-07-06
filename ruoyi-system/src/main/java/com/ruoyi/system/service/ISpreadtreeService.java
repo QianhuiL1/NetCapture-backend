@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.Spreadtree;
+import com.ruoyi.system.domain.SpreadtreePersonInfo;
 
 /**
  * 传播链条Service接口
@@ -25,8 +26,10 @@ public interface ISpreadtreeService
      * @param spreadtree 传播链条
      * @return 传播链条集合
      */
+
     public List<Spreadtree> selectSpreadtreeList(Spreadtree spreadtree);
 
+    public List<SpreadtreePersonInfo> selectSpreadtreePersonInfoList(Spreadtree spreadtree);
     /**
      * 新增传播链条
      *

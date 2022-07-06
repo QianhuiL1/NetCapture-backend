@@ -20,6 +20,7 @@ import com.ruoyi.system.domain.Spreadtree;
 import com.ruoyi.system.service.ISpreadtreeService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.system.domain.SpreadtreePersonInfo;
 
 /**
  * 传播链条Controller
@@ -39,10 +40,10 @@ public class SpreadtreeController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:spreadtree:list')")
     @GetMapping("/list")
-    public TableDataInfo list(Spreadtree spreadtree)
+    public TableDataInfo splist(Spreadtree spreadtree)
     {
         startPage();
-        List<Spreadtree> list = spreadtreeService.selectSpreadtreeList(spreadtree);
+        List<SpreadtreePersonInfo> list = spreadtreeService.selectSpreadtreePersonInfoList(spreadtree);
         return getDataTable(list);
     }
 
