@@ -137,4 +137,5 @@ public class TodayEpidemicInfoController extends BaseController
         //startPage();
         return AjaxResult.success(todayEpidemicInfoService.selectTodayCountryEpidemicInfoByDate(todayepidemicDate));
     }
+
 }
