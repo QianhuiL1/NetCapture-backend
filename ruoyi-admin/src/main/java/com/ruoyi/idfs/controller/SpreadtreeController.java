@@ -44,7 +44,6 @@ public class SpreadtreeController extends BaseController
     @GetMapping("/Spreadtreelist")
     public TableDataInfo slist(Spreadtree spreadtree)
     {
-        startPage();
         List<Spreadtree> list = spreadtreeService.selectSpreadtreeList(spreadtree);
         return getDataTable(list);
     }
@@ -53,7 +52,6 @@ public class SpreadtreeController extends BaseController
     @GetMapping("/PersonInfolist")
     public TableDataInfo plist(Spreadtree spreadtree)
     {
-        startPage();
         List<PersonInfo> plist = spreadtreeService.selectDistinctPersonInfo(spreadtree);
         return getDataTable(plist);
     }
