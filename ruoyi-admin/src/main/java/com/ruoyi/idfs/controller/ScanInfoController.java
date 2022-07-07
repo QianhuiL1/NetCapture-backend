@@ -119,7 +119,7 @@ public class ScanInfoController extends BaseController
     @ApiOperation("获取二维码信息")
     @PreAuthorize("@ss.hasPermi('idfs:scanInfo:insert')")
     @Log(title = "二维码信息", businessType = BusinessType.INSERT)
-    @PostMapping("pushScanInfoByQRCode")
+    @PostMapping("/pushScanInfoByQRCode")
     public AjaxResult saveScanInfo(@RequestBody ScanFormVo scanForm)
     {
         return toAjax(scanInfoService.saveScanInfo(scanForm));
