@@ -46,7 +46,7 @@ public class RiskAreaInfoController extends BaseController
     @ApiOperation("查询风险地区列表")
     public TableDataInfo list(RiskAreaInfo riskAreaInfo)
     {
-        startPage();
+//        startPage();
         List<RiskAreaInfo> list = riskAreaInfoService.selectRiskAreaInfoList(riskAreaInfo);
         return getDataTable(list);
     }
