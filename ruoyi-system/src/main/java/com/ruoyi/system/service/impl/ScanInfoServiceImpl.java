@@ -101,7 +101,7 @@ public class ScanInfoServiceImpl implements IScanInfoService
     public int saveScanInfo(ScanFormVo scanForm) {
         PersonInfo personInfo = new PersonInfo();
         ScanInfo scanInfo = new ScanInfo();
-        personInfo.setPeopleId(scanForm.getPeopleId());
+        personInfo.setPeople_id(scanForm.getPeopleId());
         personInfo.setStatus("0");
         personInfo.setSex("0");
         personInfo.setAncestors("0,420000,420100");

@@ -15,12 +15,12 @@ import com.ruoyi.system.service.IPositiveTravelService;
 
 /**
  * 阳性人员途径地址信息Service业务层处理
- * 
+ *
  * @author SoLam
  * @date 2022-06-27
  */
 @Service
-public class PositiveTravelServiceImpl implements IPositiveTravelService 
+public class PositiveTravelServiceImpl implements IPositiveTravelService
 {
     @Autowired
     private PositiveTravelMapper positiveTravelMapper;
@@ -35,7 +35,7 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
     private PersonInfoServiceImpl personInfoService;
     /**
      * 查询阳性人员途径地址信息
-     * 
+     *
      * @param travelId 阳性人员途径地址信息主键
      * @return 阳性人员途径地址信息
      */
@@ -47,7 +47,7 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
 
     /**
      * 查询阳性人员途径地址信息列表
-     * 
+     *
      * @param positiveTravel 阳性人员途径地址信息
      * @return 阳性人员途径地址信息
      */
@@ -70,7 +70,7 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
 
     /**
      * 新增阳性人员途径地址信息
-     * 
+     *
      * @param positiveTravel 阳性人员途径地址信息
      * @return 结果
      */
@@ -117,7 +117,7 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
                             spreadtree.setSonId(peopleId);
                             spreadtree.setRelationship(0L);
                             spreadtreeMapper.insertSpreadtree(spreadtree);
-                            personInfoService.updateSecondContactStatusByContact(personInfo.getPeopleId());
+                            personInfoService.updateSecondContactStatusByContact(personInfo.getPeople_id());
                         }
 
                     }
@@ -133,7 +133,7 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
 
     /**
      * 修改阳性人员途径地址信息
-     * 
+     *
      * @param positiveTravel 阳性人员途径地址信息
      * @return 结果
      */
@@ -145,7 +145,7 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
 
     /**
      * 批量删除阳性人员途径地址信息
-     * 
+     *
      * @param travelIds 需要删除的阳性人员途径地址信息主键
      * @return 结果
      */
@@ -157,7 +157,7 @@ public class PositiveTravelServiceImpl implements IPositiveTravelService
 
     /**
      * 删除阳性人员途径地址信息信息
-     * 
+     *
      * @param travelId 阳性人员途径地址信息主键
      * @return 结果
      */
