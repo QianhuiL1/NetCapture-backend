@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.RiskAreaInfoMapper">
+    
+    <resultMap type="RiskAreaInfo" id="RiskAreaInfoResult">
+        <result property="area"    column="area"    />
+        <result property="address"    column="address"    />
+        <result property="risklevel"    column="riskLevel"    />
+        <result property="lastupdatetime"    column="lastUpdateTime"    />
+        <result property="riskareaid"    column="riskAreaId"    />
+    </resultMap>
+
+    <sql id="selectRiskAreaInfoVo">
+        select area, address, riskLevel, lastUpdateTime, riskAreaId from riskArea_table
+    </sql>
+
+    <select id="selectRiskAreaInfoList" parameterType="RiskAreaInfo" resultMap="RiskAreaInfoResult">
+        <include refid="selectRiskAreaInfoVo"/>
+        <where>  
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="risklevel != null  and risklevel != ''"> and riskLevel = #{risklevel}</if>
+            <if test="lastupdatetime != null  and lastupdatetime != ''"> and lastUpdateTime = #{lastupdatetime}</if>
+        </where>
+    </select>
+    
+    <select id="selectRiskAreaInfoByRiskareaid" parameterType="Long" resultMap="RiskAreaInfoResult">
+        <include refid="selectRiskAreaInfoVo"/>
+        where riskAreaId = #{riskareaid}
+    </select>
+        
+    <insert id="insertRiskAreaInfo" parameterType="RiskAreaInfo" useGeneratedKeys="true" keyProperty="riskareaid">
+        insert into riskArea_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="area != null">area,</if>
+            <if test="address != null">address,</if>
+            <if test="risklevel != null">riskLevel,</if>
+            <if test="lastupdatetime != null">lastUpdateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="area != null">#{area},</if>
+            <if test="address != null">#{address},</if>
+            <if test="risklevel != null">#{risklevel},</if>
+            <if test="lastupdatetime != null">#{lastupdatetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRiskAreaInfo" parameterType="RiskAreaInfo">
+        update riskArea_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="area != null">area = #{area},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="risklevel != null">riskLevel = #{risklevel},</if>
+            <if test="lastupdatetime != null">lastUpdateTime = #{lastupdatetime},</if>
+        </trim>
+        where riskAreaId = #{riskareaid}
+    </update>
+
+    <delete id="deleteRiskAreaInfoByRiskareaid" parameterType="Long">
+        delete from riskArea_table where riskAreaId = #{riskareaid}
+    </delete>
+
+    <delete id="deleteRiskAreaInfoByRiskareaids" parameterType="String">
+        delete from riskArea_table where riskAreaId in 
+        <foreach item="riskareaid" collection="array" open="(" separator="," close=")">
+            #{riskareaid}
+        </foreach>
+    </delete>
+</mapper>

@@ -5,15 +5,15 @@ import com.ruoyi.system.domain.ScanInfo;
 
 /**
  * 扫码记录Mapper接口
- * 
+ *
  * @author SoLam
  * @date 2022-06-25
  */
-public interface ScanInfoMapper 
+public interface ScanInfoMapper
 {
     /**
      * 查询扫码记录
-     * 
+     *
      * @param scanId 扫码记录主键
      * @return 扫码记录
      */
@@ -21,7 +21,7 @@ public interface ScanInfoMapper
 
     /**
      * 查询扫码记录列表
-     * 
+     *
      * @param scanInfo 扫码记录
      * @return 扫码记录集合
      */
@@ -29,7 +29,7 @@ public interface ScanInfoMapper
 
     /**
      * 新增扫码记录
-     * 
+     *
      * @param scanInfo 扫码记录
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface ScanInfoMapper
 
     /**
      * 修改扫码记录
-     * 
+     *
      * @param scanInfo 扫码记录
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface ScanInfoMapper
 
     /**
      * 删除扫码记录
-     * 
+     *
      * @param scanId 扫码记录主键
      * @return 结果
      */
@@ -53,9 +53,10 @@ public interface ScanInfoMapper
 
     /**
      * 批量删除扫码记录
-     * 
+     *
      * @param scanIds 需要删除的数据主键集合
      * @return 结果
      */
     public int deleteScanInfoByScanIds(Long[] scanIds);
+
 }

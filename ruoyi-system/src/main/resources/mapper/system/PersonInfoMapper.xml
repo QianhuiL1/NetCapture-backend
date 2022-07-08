@@ -3,9 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.PersonInfoMapper">
-    
+
     <resultMap type="PersonInfo" id="PersonInfoResult">
-        <result property="peopleId"    column="people_id"    />
+        <result property="people_id"    column="people_id"    />
         <result property="name"    column="name"    />
         <result property="sex"    column="sex"    />
         <result property="phonenumber"    column="phonenumber"    />
@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectPersonInfoList" parameterType="PersonInfo" resultMap="PersonInfoResult">
         <include refid="selectPersonInfoVo"/>
-        <where>  
+        <where>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
             <if test="phonenumber != null  and phonenumber != ''"> and phonenumber = #{phonenumber}</if>
@@ -29,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="ancestors != null  and ancestors != ''"> and ancestors = #{ancestors}</if>
             <if test="address != null  and address != ''"> and address = #{address}</if>
             <if test="positiveTime != null "> and positive_time = #{positivetime}</if>
+            <if test="people_id != null "> and people_id = #{people_id}</if>
         </where>
     </select>
 
@@ -44,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectPersonInfoByPeopleId" parameterType="String" resultMap="PersonInfoResult">
         <include refid="selectPersonInfoVo"/>
-        where people_id = #{peopleId}
+        where people_id = #{people_id}
     </select>
 
 
@@ -53,11 +54,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from people_table
         where address = #{address}
     </select>
-        
+
     <insert id="insertPersonInfo" parameterType="PersonInfo">
         insert into people_table
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="peopleId != null">people_id,</if>
+            <if test="people_id != null">people_id,</if>
             <if test="name != null and name != ''">name,</if>
             <if test="sex != null">sex,</if>
             <if test="phonenumber != null">phonenumber,</if>
@@ -67,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="positiveTime != null">positive_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="peopleId != null">#{peopleId},</if>
+            <if test="people_id != null">#{people_id},</if>
             <if test="name != null and name != ''">#{name},</if>
             <if test="sex != null">#{sex},</if>
             <if test="phonenumber != null">#{phonenumber},</if>
@@ -90,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="address != null">address = #{address},</if>
             <if test="positiveTime != null">positive_time = #{positiveTime},</if>
         </trim>
-        where people_id = #{peopleId}
+        where people_id = #{people_id}
     </update>
 
     <update id="statusEmpty" parameterType="PersonInfo">
@@ -98,13 +99,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deletePersonInfoByPeopleId" parameterType="String">
-        delete from people_table where people_id = #{peopleId}
+        delete from people_table where people_id = #{people_id}
     </delete>
 
     <delete id="deletePersonInfoByPeopleIds" parameterType="String">
-        delete from people_table where people_id in 
-        <foreach item="peopleId" collection="array" open="(" separator="," close=")">
-            #{peopleId}
+        delete from people_table where people_id in
+        <foreach item="people_id" collection="array" open="(" separator="," close=")">
+            #{people_id}
         </foreach>
     </delete>
 </mapper>

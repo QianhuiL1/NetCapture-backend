@@ -17,7 +17,7 @@ public class PersonInfo extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 身份证号码 */
-    private String peopleId;
+    private String people_id;
 
     /** 姓名 */
     @Excel(name = "姓名")
@@ -53,15 +53,16 @@ public class PersonInfo extends BaseEntity
 
 
 
-    public void setPeopleId(String peopleId)
+    public void setPeople_id(String people_id)
     {
-        this.peopleId = peopleId;
+        this.people_id = people_id;
     }
 
-    public String getPeopleId()
+    public String getPeople_id()
     {
-        return peopleId;
+        return people_id;
     }
+
     public void setName(String name)
     {
         this.name = name;
@@ -133,7 +134,7 @@ public class PersonInfo extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("peopleId", getPeopleId())
+            .append("people_id", getPeople_id())
             .append("name", getName())
             .append("sex", getSex())
             .append("phonenumber", getPhonenumber())

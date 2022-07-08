@@ -1,6 +1,11 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.ruoyi.system.domain.PersonInfo;
+import com.ruoyi.system.domain.SpreadtreePersonInfo;
+import com.ruoyi.system.mapper.PersonInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.SpreadtreeMapper;
@@ -19,6 +24,8 @@ public class SpreadtreeServiceImpl implements ISpreadtreeService
     @Autowired
     private SpreadtreeMapper spreadtreeMapper;
 
+    @Autowired
+    private PersonInfoMapper personInfoMapper;
     /**
      * 查询传播链条
      *
@@ -31,6 +38,11 @@ public class SpreadtreeServiceImpl implements ISpreadtreeService
         return spreadtreeMapper.selectSpreadtreeBySpreadtreeId(spreadtreeId);
     }
 
+    @Override
+    public List<Spreadtree> selectSpreadtreeList(Spreadtree spreadtree) {
+        return spreadtreeMapper.selectSpreadtreeList(spreadtree);
+    }
+
     /**
      * 查询传播链条列表
      *
@@ -38,10 +50,25 @@ public class SpreadtreeServiceImpl implements ISpreadtreeService
      * @return 传播链条
      */
     @Override
-    public List<Spreadtree> selectSpreadtreeList(Spreadtree spreadtree)
+    public List<SpreadtreePersonInfo> selectSpreadtreePersonInfoList(Spreadtree spreadtree)
     {
-        return spreadtreeMapper.selectSpreadtreeList(spreadtree);
+        List<SpreadtreePersonInfo> splist = new ArrayList<>();
+        List<Spreadtree> slist = spreadtreeMapper.selectSpreadtreeList(spreadtree);
+        for(Spreadtree spreadtree1:slist){
+            SpreadtreePersonInfo spreadtreePersonInfo = new SpreadtreePersonInfo();
+            spreadtreePersonInfo.setDadname(personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getDadId()).getName());
+            spreadtreePersonInfo.setSonname(personInfoMapper.selectPersonInfoByPeopleId(spreadtree1.getSonId()).getName());
+            spreadtreePersonInfo.setRelationship(spreadtree1.getRelationship());
+            splist.add(spreadtreePersonInfo);
+        }
+        return splist;
     }
+
+    @Override
+    public List<PersonInfo> selectDistinctPersonInfo(Spreadtree spreadtree) {
+        return spreadtreeMapper.selectDistinctPersonInfo(spreadtree);
+    }
+
 
     /**
      * 新增传播链条

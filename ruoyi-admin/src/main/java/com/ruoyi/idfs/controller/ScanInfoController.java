@@ -3,6 +3,7 @@ package com.ruoyi.idfs.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.system.domain.vo.ScanFormVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -110,5 +111,16 @@ public class ScanInfoController extends BaseController
     public AjaxResult remove(@PathVariable Long[] scanIds)
     {
         return toAjax(scanInfoService.deleteScanInfoByScanIds(scanIds));
+    }
+
+    /**
+     * 获取二维码信息
+     */
+    @ApiOperation("获取二维码信息")
+    @Log(title = "二维码信息", businessType = BusinessType.INSERT)
+    @PostMapping("/pushScanInfoByQRCode")
+    public AjaxResult saveScanInfo(@RequestBody ScanFormVo scanForm)
+    {
+        return toAjax(scanInfoService.saveScanInfo(scanForm));
     }
 }
