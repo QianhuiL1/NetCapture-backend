@@ -2,6 +2,8 @@ package com.ruoyi.system.service;
 
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.system.domain.PersonInfo;
 
 /**
@@ -71,6 +73,13 @@ public interface IPersonInfoService
      * @return 结果
      */
     public int updatePersonInfo(PersonInfo personInfo);
+
+
+    /**
+     * 重置所有人员的健康状态
+     * @return
+     */
+    public int statusEmpty();
 
     /**
      * 批量删除存储普通人员的相关信息

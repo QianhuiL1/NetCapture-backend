@@ -61,7 +61,7 @@ public class SysUserController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(SysUser user)
     {
-        startPage();
+        //startPage();
         List<SysUser> list = userService.selectUserList(user);
         return getDataTable(list);
     }
@@ -247,7 +247,6 @@ public class SysUserController extends BaseController
     @PutMapping("/changeExamine")
     public AjaxResult changeExamine(@RequestBody SysUser user)
     {
-
         userService.checkUserAllowed(user);
         userService.checkUserDataScope(user.getUserId());
         user.setUpdateBy(getUsername());

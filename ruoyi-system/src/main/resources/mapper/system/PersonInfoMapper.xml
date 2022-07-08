@@ -94,6 +94,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where people_id = #{people_id}
     </update>
 
+    <update id="statusEmpty" parameterType="PersonInfo">
+        update people_table set status = 0
+    </update>
+
     <delete id="deletePersonInfoByPeopleId" parameterType="String">
         delete from people_table where people_id = #{people_id}
     </delete>

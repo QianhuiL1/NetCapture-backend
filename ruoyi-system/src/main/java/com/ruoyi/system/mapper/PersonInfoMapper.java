@@ -66,6 +66,13 @@ public interface PersonInfoMapper
      */
     public int updatePersonInfo(PersonInfo personInfo);
 
+
+    /**
+     * 重置所有人员的健康状态
+     * @return
+     */
+    public int statusEmpty();
+
     /**
      * 根据recordId更新数据库中密切接触者的状态
      *

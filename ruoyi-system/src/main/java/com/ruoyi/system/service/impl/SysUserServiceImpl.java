@@ -152,6 +152,7 @@ public class SysUserServiceImpl implements ISysUserService
         List<SysRole> list = roleMapper.selectRolesByUserName(userName);
         if (CollectionUtils.isEmpty(list))
         {
+
             return StringUtils.EMPTY;
         }
         return list.stream().map(SysRole::getRoleName).collect(Collectors.joining(","));

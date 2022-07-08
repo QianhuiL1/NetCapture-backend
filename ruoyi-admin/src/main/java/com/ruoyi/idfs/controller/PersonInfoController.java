@@ -197,6 +197,17 @@ public class PersonInfoController extends BaseController
     }
 
     /**
+     * 重置所有人员的健康状态
+     */
+    @ApiOperation("重置所有人员的健康状态")
+    @PreAuthorize("@ss.hasPermi('idfs:personInfo:edit')")
+    @PutMapping("/statusEmpty")
+    public AjaxResult statusEmpty()
+    {
+        return toAjax(personInfoService.statusEmpty());
+    }
+
+    /**
      * 删除存储普通人员的相关信息
      */
     @ApiOperation("删除存储普通人员的相关信息")
