@@ -1,8 +1,4 @@
-from importlib.resources import Package
-from pymysql import Timestamp
 
-
-Package
 from sqlalchemy import TIMESTAMP, Column, Integer, String
 import config.DBConfig as DB
 
