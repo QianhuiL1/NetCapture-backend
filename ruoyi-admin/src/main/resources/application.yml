@@ -90,7 +90,7 @@ token:
     secret: abcdefghijklmnopqrstuvwxyz
     # 令牌有效期（默认30分钟）
     expireTime: 14400
-  
+
 # MyBatis配置
 mybatis:
     # 搜索指定包别名
