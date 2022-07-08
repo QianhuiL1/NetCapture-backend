@@ -247,7 +247,6 @@ public class SysUserController extends BaseController
     @PutMapping("/changeExamine")
     public AjaxResult changeExamine(@RequestBody SysUser user)
     {
-
         userService.checkUserAllowed(user);
         userService.checkUserDataScope(user.getUserId());
         user.setUpdateBy(getUsername());

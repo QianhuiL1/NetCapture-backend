@@ -3,6 +3,7 @@ package com.ruoyi.system.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.system.domain.Spreadtree;
 import com.ruoyi.system.mapper.SpreadtreeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,6 +135,16 @@ public class PersonInfoServiceImpl implements IPersonInfoService
             }
         }
         return personInfoMapper.updatePersonInfo(personInfo);
+    }
+
+    /**
+     * 重置所有人员的健康状态
+     * @return
+     */
+    @Override
+    public int statusEmpty()
+    {
+        return personInfoMapper.statusEmpty();
     }
 
     /**
